@@ -6,6 +6,7 @@ import Colors from '@/constants/Colors';
 import { useQuestContext } from '@/contexts/QuestContext';
 import { router } from 'expo-router';
 import { QuestBottomSheet } from '@/components/QuestBottomSheet';
+import { QuestSuccessAnimation } from '@/components/QuestSuccessAnimation';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const QuestItem = ({ quest, onPress }: { quest: any; onPress: () => void }) => {
@@ -65,6 +66,8 @@ export default function QuestsScreen() {
   const [currentQuest, setCurrentQuest] = useState<any>(null);
   const [solutionInput, setSolutionInput] = useState('');
   const [solutionError, setSolutionError] = useState('');
+  const [showSuccessAnimation, setShowSuccessAnimation] = useState(false);
+  const [successQuestData, setSuccessQuestData] = useState<{ title: string; reward: string } | null>(null);
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
 
@@ -101,13 +104,20 @@ export default function QuestsScreen() {
       // Correct solution - complete the quest
       if (currentQuest.isMainQuest) {
         completeMainQuest(currentQuest.areaId);
-        Alert.alert(
-          'Quest abgeschlossen!', 
-          'Die Area wurde freigeschaltet! Alle anderen Quests sind jetzt verfügbar.'
-        );
+        // Show success animation instead of alert
+        setSuccessQuestData({
+          title: currentQuest.title,
+          reward: currentQuest.reward
+        });
+        setShowSuccessAnimation(true);
       } else {
         completeSubQuest(currentQuest.areaId, currentQuest.id);
-        Alert.alert('Quest abgeschlossen!', 'Gut gemacht!');
+        // Show success animation instead of alert
+        setSuccessQuestData({
+          title: currentQuest.title,
+          reward: currentQuest.reward
+        });
+        setShowSuccessAnimation(true);
       }
       setBottomSheetVisible(false);
       setCurrentQuest(null);
@@ -116,6 +126,11 @@ export default function QuestsScreen() {
       // Wrong solution
       setSolutionError('Falsches Lösungswort. Versuche es nochmal!');
     }
+  };
+
+  const handleSuccessAnimationComplete = () => {
+    setShowSuccessAnimation(false);
+    setSuccessQuestData(null);
   };
 
   const handleBottomSheetClose = () => {
@@ -185,6 +200,16 @@ export default function QuestsScreen() {
           showSolutionInput={false}
           showCancelButton={false}
         />
+
+        {/* Success Animation */}
+        {showSuccessAnimation && successQuestData && (
+          <QuestSuccessAnimation
+            isVisible={showSuccessAnimation}
+            onAnimationComplete={handleSuccessAnimationComplete}
+            questTitle={successQuestData.title}
+            reward={successQuestData.reward}
+          />
+        )}
       </ThemedView>
     </GestureHandlerRootView>
   );

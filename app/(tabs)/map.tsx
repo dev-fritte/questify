@@ -8,6 +8,7 @@ import { useQuestContext } from '@/contexts/QuestContext';
 import { MapQuestMarker } from '@/types/QuestArea';
 import { QuestMarkerIcon } from '@/components/QuestMarkerIcons';
 import { QuestBottomSheet } from '@/components/QuestBottomSheet';
+import { QuestSuccessAnimation } from '@/components/QuestSuccessAnimation';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const { width, height } = Dimensions.get('window');
@@ -40,6 +41,8 @@ export default function MapScreen() {
   const [currentArea, setCurrentArea] = useState<any>(null);
   const [solutionInput, setSolutionInput] = useState('');
   const [solutionError, setSolutionError] = useState('');
+  const [showSuccessAnimation, setShowSuccessAnimation] = useState(false);
+  const [successQuestData, setSuccessQuestData] = useState<{ title: string; reward: string } | null>(null);
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
 
@@ -92,29 +95,60 @@ export default function MapScreen() {
   };
 
   const handleAreaPress = (area: any) => {
-    // Show bottom sheet for area details
-    setCurrentArea(area);
-    setCurrentQuest(null);
-    setSolutionInput('');
-    setSolutionError('');
-    setBottomSheetVisible(true);
-  };
+    // Calculate the center of the area's polygon
+    if (area.coordinates && area.coordinates.length > 0 && mapRef) {
+      const coordinates = area.coordinates;
+      
+      // Calculate the center point of the polygon
+      let centerLat = 0;
+      let centerLng = 0;
+      
+      coordinates.forEach((coord: any) => {
+        centerLat += coord.latitude;
+        centerLng += coord.longitude;
+      });
+      
+      centerLat /= coordinates.length;
+      centerLng /= coordinates.length;
+      
+      // Calculate the bounding box to determine appropriate zoom level
+      let minLat = coordinates[0].latitude;
+      let maxLat = coordinates[0].latitude;
+      let minLng = coordinates[0].longitude;
+      let maxLng = coordinates[0].longitude;
+      
+      coordinates.forEach((coord: any) => {
+        minLat = Math.min(minLat, coord.latitude);
+        maxLat = Math.max(maxLat, coord.latitude);
+        minLng = Math.min(minLng, coord.longitude);
+        maxLng = Math.max(maxLng, coord.longitude);
+      });
+      
+      // Calculate appropriate delta values for zoom
+      const latDelta = (maxLat - minLat) * 1.5; // Add some padding
+      const lngDelta = (maxLng - minLng) * 1.5;
+      
+      // Animate to the area
+      const region = {
+        latitude: centerLat,
+        longitude: centerLng,
+        latitudeDelta: Math.max(latDelta, 0.01), // Minimum zoom level
+        longitudeDelta: Math.max(lngDelta, 0.01),
+      };
+      
+      mapRef.animateToRegion(region, 1000);
 
-  const handleUnlockArea = () => {
-    if (!currentArea) return;
-    
-    // For now, just unlock the area directly
-    // In a real app, you might want to add some requirements or conditions
-    Alert.alert(
-      'Area freigeschaltet!',
-      `${currentArea.name} wurde erfolgreich freigeschaltet!`,
-      [
-        { text: 'OK', onPress: () => {
-          setBottomSheetVisible(false);
+      // After zoom, open the main quest's bottom sheet
+      setTimeout(() => {
+        if (area.mainQuest) {
+          setCurrentQuest({ ...area.mainQuest, isMainQuest: true, areaId: area.id });
           setCurrentArea(null);
-        }}
-      ]
-    );
+          setSolutionInput('');
+          setSolutionError('');
+          setBottomSheetVisible(true);
+        }
+      }, 1100); // Wait for the zoom animation to finish
+    }
   };
 
   const handleSolutionSubmit = () => {
@@ -130,13 +164,20 @@ export default function MapScreen() {
       // Correct solution - complete the quest
       if (currentQuest.isMainQuest) {
         completeMainQuest(currentQuest.areaId);
-        Alert.alert(
-          'Quest abgeschlossen!', 
-          'Die Area wurde freigeschaltet! Alle anderen Quests sind jetzt verfügbar.'
-        );
+        // Show success animation instead of alert
+        setSuccessQuestData({
+          title: currentQuest.title,
+          reward: currentQuest.reward
+        });
+        setShowSuccessAnimation(true);
       } else {
         completeSubQuest(currentQuest.areaId, currentQuest.id);
-        Alert.alert('Quest abgeschlossen!', 'Gut gemacht!');
+        // Show success animation instead of alert
+        setSuccessQuestData({
+          title: currentQuest.title,
+          reward: currentQuest.reward
+        });
+        setShowSuccessAnimation(true);
       }
       setBottomSheetVisible(false);
       setCurrentQuest(null);
@@ -145,6 +186,11 @@ export default function MapScreen() {
       // Wrong solution
       setSolutionError('Falsches Lösungswort. Versuche es nochmal!');
     }
+  };
+
+  const handleSuccessAnimationComplete = () => {
+    setShowSuccessAnimation(false);
+    setSuccessQuestData(null);
   };
 
   const handleBottomSheetClose = () => {
@@ -423,18 +469,26 @@ export default function MapScreen() {
           ))}
         </ScrollView>
 
-        {/* Quest/Area Bottom Sheet */}
+        {/* Quest Bottom Sheet */}
         <QuestBottomSheet
           isVisible={bottomSheetVisible}
           onClose={handleBottomSheetClose}
           quest={currentQuest}
-          area={currentArea}
           solutionInput={solutionInput}
           onSolutionInputChange={setSolutionInput}
           onSolutionSubmit={handleSolutionSubmit}
-          onUnlockArea={handleUnlockArea}
           solutionError={solutionError}
         />
+
+        {/* Success Animation */}
+        {showSuccessAnimation && successQuestData && (
+          <QuestSuccessAnimation
+            isVisible={showSuccessAnimation}
+            onAnimationComplete={handleSuccessAnimationComplete}
+            questTitle={successQuestData.title}
+            reward={successQuestData.reward}
+          />
+        )}
       </ThemedView>
     </GestureHandlerRootView>
   );

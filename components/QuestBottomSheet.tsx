@@ -61,20 +61,16 @@ export const QuestBottomSheet: React.FC<QuestBottomSheetProps> = ({
     []
   );
 
-  // Show bottom sheet when quest or area is available
+  // Show bottom sheet when quest is available
   React.useEffect(() => {
-    if (isVisible && (quest || area)) {
+    if (isVisible && quest) {
       bottomSheetRef.current?.expand();
     } else {
       bottomSheetRef.current?.close();
     }
-  }, [isVisible, quest, area]);
+  }, [isVisible, quest]);
 
-  // Determine if we're showing an area or a quest
-  const isAreaMode = !!area;
-  const displayData = isAreaMode ? area : quest;
-
-  if (!displayData) return null;
+  if (!quest) return null;
 
   return (
     <BottomSheet
@@ -88,25 +84,12 @@ export const QuestBottomSheet: React.FC<QuestBottomSheetProps> = ({
       backdropComponent={renderBackdrop}
     >
       <BottomSheetView style={styles.contentContainer}>
-        <ThemedText style={styles.title}>{displayData.title || displayData.name}</ThemedText>
-        <Text style={styles.description}>{displayData.description}</Text>
+        <ThemedText style={styles.title}>{quest.title}</ThemedText>
+        <Text style={styles.description}>{quest.description}</Text>
         
-        {!isAreaMode && (
-          <Text style={styles.reward}>Belohnung: {displayData.reward}</Text>
-        )}
+        <Text style={styles.reward}>Belohnung: {quest.reward}</Text>
         
-        {isAreaMode && (
-          <View style={styles.areaInfo}>
-            <Text style={styles.areaStatus}>
-              {displayData.unlocked ? '🔓 Freigeschaltet' : '🔒 Gesperrt'}
-            </Text>
-            <Text style={styles.areaProgress}>
-              {displayData.progress}/{displayData.totalQuests} Quests
-            </Text>
-          </View>
-        )}
-        
-        {!isAreaMode && showSolutionInput && (
+        {showSolutionInput && (
           <View style={styles.inputContainer}>
             <BottomSheetTextInput
               style={styles.input}
@@ -122,41 +105,22 @@ export const QuestBottomSheet: React.FC<QuestBottomSheetProps> = ({
         )}
         
         <View style={styles.buttonContainer}>
-          {isAreaMode ? (
-            // Area mode buttons
-            <>
-              {onUnlockArea && !displayData.unlocked && (
-                <TouchableOpacity style={[styles.button, styles.unlockButton]} onPress={onUnlockArea}>
-                  <Text style={styles.buttonText}>Freischalten</Text>
-                </TouchableOpacity>
-              )}
-              {showCancelButton && (
-                <TouchableOpacity style={[styles.button, styles.cancelButton]} onPress={handleClose}>
-                  <Text style={styles.buttonText}>Schließen</Text>
-                </TouchableOpacity>
-              )}
-            </>
-          ) : (
-            // Quest mode buttons
-            <>
-              {onSolutionSubmit && showSolutionInput && (
-                <TouchableOpacity style={styles.button} onPress={onSolutionSubmit}>
-                  <Text style={styles.buttonText}>Abschließen</Text>
-                </TouchableOpacity>
-              )}
-              
-              {onStartQuest && (
-                <TouchableOpacity style={[styles.button, styles.startButton]} onPress={onStartQuest}>
-                  <Text style={styles.buttonText}>Auf Karte starten</Text>
-                </TouchableOpacity>
-              )}
-              
-              {showCancelButton && (
-                <TouchableOpacity style={[styles.button, styles.cancelButton]} onPress={handleClose}>
-                  <Text style={styles.buttonText}>Abbrechen</Text>
-                </TouchableOpacity>
-              )}
-            </>
+          {onSolutionSubmit && showSolutionInput && (
+            <TouchableOpacity style={styles.button} onPress={onSolutionSubmit}>
+              <Text style={styles.buttonText}>Abschließen</Text>
+            </TouchableOpacity>
+          )}
+          
+          {onStartQuest && (
+            <TouchableOpacity style={[styles.button, styles.startButton]} onPress={onStartQuest}>
+              <Text style={styles.buttonText}>Auf Karte starten</Text>
+            </TouchableOpacity>
+          )}
+          
+          {showCancelButton && (
+            <TouchableOpacity style={[styles.button, styles.confirmButton]} onPress={onSolutionSubmit}>
+              <Text style={styles.buttonText}>Bestätigen</Text>
+            </TouchableOpacity>
           )}
         </View>
       </BottomSheetView>
@@ -195,21 +159,6 @@ const styles = StyleSheet.create({
     color: '#FF9800',
     marginBottom: 20,
   },
-  areaInfo: {
-    marginBottom: 20,
-    padding: 12,
-    backgroundColor: '#f8f8f8',
-    borderRadius: 8,
-  },
-  areaStatus: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 4,
-  },
-  areaProgress: {
-    fontSize: 14,
-    color: '#666666',
-  },
   inputContainer: {
     marginBottom: 20,
   },
@@ -244,11 +193,8 @@ const styles = StyleSheet.create({
   startButton: {
     backgroundColor: '#FF9800',
   },
-  unlockButton: {
+  confirmButton: {
     backgroundColor: '#4CAF50',
-  },
-  cancelButton: {
-    backgroundColor: '#f44336',
   },
   error: {
     color: '#f44336',
