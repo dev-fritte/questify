@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, Alert } from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, Alert, Animated } from 'react-native';
 import { Text as ThemedText, View as ThemedView } from '@/components/Themed';
 import { useColorScheme } from '@/components/useColorScheme';
 import Colors from '@/constants/Colors';
@@ -12,10 +12,22 @@ export default function ProfileScreen() {
     getTotalPoints,
     getCurrentLevel,
     getCurrentXP,
-    getXPToNextLevel
+    getXPToNextLevel,
+    hasNewAchievement,
+    clearNewAchievementBadge,
+    onAchievementUnlocked
   } = useQuestContext();
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
+  const scrollViewRef = useRef<ScrollView>(null);
+  const achievementsSectionRef = useRef<View>(null);
+
+  // Animation values for achievement icons
+  const [achievementAnimations] = useState({
+    first: new Animated.Value(1),
+    five: new Animated.Value(1),
+    all: new Animated.Value(1)
+  });
 
   // Real user data calculated from quest completion
   const totalPoints = getTotalPoints();
@@ -31,6 +43,70 @@ export default function ProfileScreen() {
   const hasCompletedFirstQuest = completedQuests >= 1;
   const hasCompletedFiveQuests = completedQuests >= 5;
   const hasCompletedAllQuests = completedQuests === totalQuests && totalQuests > 0;
+
+  // Set up achievement callback
+  useEffect(() => {
+    onAchievementUnlocked(() => {
+      // Small delay to ensure the screen is fully loaded
+      setTimeout(() => {
+        scrollToAchievements();
+      }, 100);
+    });
+  }, []);
+
+  // Animate achievement icons when they change state
+  useEffect(() => {
+    if (hasCompletedFirstQuest) {
+      animateAchievement('first');
+    }
+  }, [hasCompletedFirstQuest]);
+
+  useEffect(() => {
+    if (hasCompletedFiveQuests) {
+      animateAchievement('five');
+    }
+  }, [hasCompletedFiveQuests]);
+
+  useEffect(() => {
+    if (hasCompletedAllQuests) {
+      animateAchievement('all');
+    }
+  }, [hasCompletedAllQuests]);
+
+  const animateAchievement = (achievementKey: 'first' | 'five' | 'all') => {
+    const animation = achievementAnimations[achievementKey];
+    
+    Animated.sequence([
+      Animated.timing(animation, {
+        toValue: 1.2,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+      Animated.timing(animation, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  };
+
+  const scrollToAchievements = () => {
+    if (achievementsSectionRef.current && scrollViewRef.current) {
+      achievementsSectionRef.current.measureLayout(
+        scrollViewRef.current as any,
+        (x, y) => {
+          scrollViewRef.current?.scrollTo({
+            y: y - 100, // Offset to show some content above
+            animated: true,
+          });
+        },
+        () => {
+          // Fallback if measureLayout fails
+          scrollViewRef.current?.scrollToEnd({ animated: true });
+        }
+      );
+    }
+  };
 
   // Mock user data - in a real app this would come from a user context or API
   const [user] = useState({
@@ -50,7 +126,10 @@ export default function ProfileScreen() {
 
   return (
     <ThemedView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
+      <ScrollView 
+        ref={scrollViewRef}
+        contentContainerStyle={styles.scrollContent}
+      >
         {/* Header Section */}
         <View style={styles.header}>
           <View style={styles.avatarContainer}>
@@ -124,14 +203,22 @@ export default function ProfileScreen() {
         </View>
 
         {/* Achievements Section */}
-        <View style={styles.achievementsSection}>
+        <View ref={achievementsSectionRef} style={styles.achievementsSection}>
           <ThemedText style={styles.sectionTitle}>Erfolge</ThemedText>
           
           <View style={styles.achievementsList}>
             <View style={styles.achievementItem}>
-              <View style={[styles.achievementIcon, { backgroundColor: hasCompletedFirstQuest ? '#4CAF50' : '#9E9E9E' }]}>
+              <Animated.View 
+                style={[
+                  styles.achievementIcon, 
+                  { 
+                    backgroundColor: hasCompletedFirstQuest ? '#4CAF50' : '#9E9E9E',
+                    transform: [{ scale: achievementAnimations.first }]
+                  }
+                ]}
+              >
                 <Text style={styles.achievementText}>🏆</Text>
-              </View>
+              </Animated.View>
               <View style={styles.achievementInfo}>
                 <Text style={styles.achievementTitle}>Erste Schritte</Text>
                 <Text style={styles.achievementDesc}>Schließe deine erste Quest ab</Text>
@@ -142,9 +229,17 @@ export default function ProfileScreen() {
             </View>
             
             <View style={styles.achievementItem}>
-              <View style={[styles.achievementIcon, { backgroundColor: hasCompletedFiveQuests ? '#FF9800' : '#9E9E9E' }]}>
+              <Animated.View 
+                style={[
+                  styles.achievementIcon, 
+                  { 
+                    backgroundColor: hasCompletedFiveQuests ? '#FF9800' : '#9E9E9E',
+                    transform: [{ scale: achievementAnimations.five }]
+                  }
+                ]}
+              >
                 <Text style={styles.achievementText}>🗺️</Text>
-              </View>
+              </Animated.View>
               <View style={styles.achievementInfo}>
                 <Text style={styles.achievementTitle}>Entdecker</Text>
                 <Text style={styles.achievementDesc}>Schließe 5 Quests ab</Text>
@@ -155,9 +250,17 @@ export default function ProfileScreen() {
             </View>
             
             <View style={styles.achievementItem}>
-              <View style={[styles.achievementIcon, { backgroundColor: hasCompletedAllQuests ? '#4A90E2' : '#9E9E9E' }]}>
+              <Animated.View 
+                style={[
+                  styles.achievementIcon, 
+                  { 
+                    backgroundColor: hasCompletedAllQuests ? '#4A90E2' : '#9E9E9E',
+                    transform: [{ scale: achievementAnimations.all }]
+                  }
+                ]}
+              >
                 <Text style={styles.achievementText}>⭐</Text>
-              </View>
+              </Animated.View>
               <View style={styles.achievementInfo}>
                 <Text style={styles.achievementTitle}>Meister</Text>
                 <Text style={styles.achievementDesc}>Schließe alle Quests ab</Text>

@@ -20,6 +20,7 @@ interface QuestContextType {
   clearNewAchievementBadge: () => void;
   setSelectedQuest: (quest: any) => void;
   clearSelectedQuest: () => void;
+  onAchievementUnlocked: (callback: () => void) => void;
 }
 
 const QuestContext = createContext<QuestContextType | undefined>(undefined);
@@ -41,6 +42,7 @@ export const QuestProvider: React.FC<QuestProviderProps> = ({ children }) => {
   const [selectedQuest, setSelectedQuest] = useState<any | null>(null);
   const [hasNewAchievementBadge, setHasNewAchievementBadge] = useState(false);
   const [lastCompletedQuestsCount, setLastCompletedQuestsCount] = useState(0);
+  const [achievementCallback, setAchievementCallback] = useState<(() => void) | null>(null);
 
   // Check for new achievements whenever quests are completed
   const checkForNewAchievements = (completedQuestsCount: number) => {
@@ -57,6 +59,10 @@ export const QuestProvider: React.FC<QuestProviderProps> = ({ children }) => {
     for (const achievement of achievements) {
       if (completedQuestsCount >= achievement.milestone && previousCount < achievement.milestone) {
         setHasNewAchievementBadge(true);
+        // Call the achievement callback if it exists
+        if (achievementCallback) {
+          achievementCallback();
+        }
         break;
       }
     }
@@ -229,6 +235,9 @@ export const QuestProvider: React.FC<QuestProviderProps> = ({ children }) => {
     clearNewAchievementBadge,
     setSelectedQuest,
     clearSelectedQuest,
+    onAchievementUnlocked: (callback: () => void) => {
+      setAchievementCallback(callback);
+    },
   };
 
   return (

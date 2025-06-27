@@ -57,6 +57,7 @@ export default function TabLayout() {
         listeners={{
           focus: () => {
             // Clear the badge when the profile tab is focused
+            // The profile screen will handle scrolling to achievements if needed
             clearNewAchievementBadge();
           },
         }}
