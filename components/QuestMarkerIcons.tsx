@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-native';
 import Svg, { Circle, Path, Text as SvgText } from 'react-native-svg';
 
 interface QuestMarkerIconProps {
@@ -8,55 +9,29 @@ interface QuestMarkerIconProps {
 }
 
 export const MainQuestIcon: React.FC<QuestMarkerIconProps> = ({ 
-  size = 40, 
-  color = '#FF6B35' 
+  size = 40
 }) => (
-  <Svg width={size} height={size} viewBox="0 0 60 60" preserveAspectRatio="xMidYMid meet">
-    {/* Background circle */}
-    <Circle
-      cx="30"
-      cy="30"
-      r="25"
-      fill={color}
-      stroke="#FFFFFF"
-      strokeWidth="3"
-    />
-    {/* Question mark */}
-    <SvgText
-      x="30"
-      y="38"
-      fontSize="20"
-      fontWeight="bold"
-      fill="#FFFFFF"
-      textAnchor="middle"
-    >
-      ?
-    </SvgText>
-  </Svg>
+  <Image
+    source={require('@/assets/images/area-marker.png')}
+    style={{
+      width: size,
+      height: size,
+      resizeMode: 'contain',
+    }}
+  />
 );
 
 export const SubQuestIcon: React.FC<QuestMarkerIconProps> = ({ 
-  size = 30, 
-  color = '#4A90E2' 
+  size = 30
 }) => (
-  <Svg width={size} height={size} viewBox="0 0 50 50" preserveAspectRatio="xMidYMid meet">
-    {/* Background circle */}
-    <Circle
-      cx="25"
-      cy="25"
-      r="20"
-      fill={color}
-      stroke="#FFFFFF"
-      strokeWidth="2"
-    />
-    {/* Dot in center */}
-    <Circle
-      cx="25"
-      cy="25"
-      r="6"
-      fill="#FFFFFF"
-    />
-  </Svg>
+  <Image
+    source={require('@/assets/images/geschichte-marker.png')}
+    style={{
+      width: size,
+      height: size,
+      resizeMode: 'contain',
+    }}
+  />
 );
 
 export const CompletedQuestIcon: React.FC<QuestMarkerIconProps> = ({ 
@@ -92,12 +67,12 @@ export const QuestMarkerIcon: React.FC<QuestMarkerIconProps> = ({
 }) => {
   switch (type) {
     case 'main':
-      return <MainQuestIcon size={size} color={color} />;
+      return <MainQuestIcon size={size} />;
     case 'sub':
-      return <SubQuestIcon size={size} color={color} />;
+      return <SubQuestIcon size={size} />;
     case 'completed':
       return <CompletedQuestIcon size={size} color={color} />;
     default:
-      return <SubQuestIcon size={size} color={color} />;
+      return <SubQuestIcon size={size} />;
   }
 }; 

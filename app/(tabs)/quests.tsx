@@ -61,7 +61,7 @@ const QuestItem = ({ quest, onPress }: { quest: any; onPress: () => void }) => {
 };
 
 export default function QuestsScreen() {
-  const { areas, getCompletedQuestsCount, getTotalQuestsCount, setSelectedQuest, completeMainQuest, completeSubQuest } = useQuestContext();
+  const { areas, getCompletedUnlockedQuestsCount, getTotalUnlockedQuestsCount, setSelectedQuest, completeMainQuest, completeSubQuest } = useQuestContext();
   const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
   const [currentQuest, setCurrentQuest] = useState<any>(null);
   const [solutionInput, setSolutionInput] = useState('');
@@ -150,14 +150,13 @@ export default function QuestsScreen() {
     router.push('/(tabs)/map');
   };
 
-  const completedQuests = getCompletedQuestsCount();
-  const totalQuests = getTotalQuestsCount();
+  const completedQuests = getCompletedUnlockedQuestsCount();
+  const totalQuests = getTotalUnlockedQuestsCount();
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemedView style={styles.container}>
         <View style={styles.header}>
-          <ThemedText style={styles.headerTitle}>Quests</ThemedText>
           <View style={styles.statsContainer}>
             <Text style={styles.statsText}>
               {completedQuests}/{totalQuests} abgeschlossen
@@ -224,19 +223,16 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#e0e0e0',
-  },
-  headerTitle: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 8,
+    alignItems: 'center',
   },
   statsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   statsText: {
-    fontSize: 16,
+    fontSize: 18,
     color: '#666',
+    fontWeight: '600',
   },
   listContainer: {
     padding: 16,

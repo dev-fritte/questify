@@ -6,26 +6,39 @@ import Colors from '@/constants/Colors';
 import { useQuestContext } from '@/contexts/QuestContext';
 
 export default function ProfileScreen() {
-  const { getCompletedQuestsCount, getTotalQuestsCount } = useQuestContext();
+  const { 
+    getCompletedUnlockedQuestsCount, 
+    getTotalUnlockedQuestsCount,
+    getTotalPoints,
+    getCurrentLevel,
+    getCurrentXP,
+    getXPToNextLevel
+  } = useQuestContext();
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
+
+  // Real user data calculated from quest completion
+  const totalPoints = getTotalPoints();
+  const currentLevel = getCurrentLevel();
+  const currentXP = getCurrentXP();
+  const xpToNextLevel = getXPToNextLevel();
+  const completedQuests = getCompletedUnlockedQuestsCount();
+  const totalQuests = getTotalUnlockedQuestsCount();
+  const completionRate = totalQuests > 0 ? Math.round((completedQuests / totalQuests) * 100) : 0;
+  const experienceProgress = (currentXP / xpToNextLevel) * 100;
+
+  // Achievement calculations
+  const hasCompletedFirstQuest = completedQuests >= 1;
+  const hasCompletedFiveQuests = completedQuests >= 5;
+  const hasCompletedAllQuests = completedQuests === totalQuests && totalQuests > 0;
 
   // Mock user data - in a real app this would come from a user context or API
   const [user] = useState({
     name: 'Max Mustermann',
     email: 'max.mustermann@example.com',
     avatar: 'https://via.placeholder.com/150/4A90E2/FFFFFF?text=M',
-    level: 5,
-    experience: 1250,
-    experienceToNextLevel: 2000,
     joinDate: '15. März 2024',
-    totalPoints: 450
   });
-
-  const completedQuests = getCompletedQuestsCount();
-  const totalQuests = getTotalQuestsCount();
-  const completionRate = totalQuests > 0 ? Math.round((completedQuests / totalQuests) * 100) : 0;
-  const experienceProgress = (user.experience / user.experienceToNextLevel) * 100;
 
   const handleEditProfile = () => {
     Alert.alert('Profil bearbeiten', 'Diese Funktion wird in einer zukünftigen Version verfügbar sein.');
@@ -47,7 +60,7 @@ export default function ProfileScreen() {
               defaultSource={require('@/assets/images/icon.png')}
             />
             <View style={[styles.levelBadge, { backgroundColor: colors.tint }]}>
-              <Text style={styles.levelText}>{user.level}</Text>
+              <Text style={styles.levelText}>{currentLevel}</Text>
             </View>
           </View>
           
@@ -80,7 +93,7 @@ export default function ProfileScreen() {
             </View>
             
             <View style={styles.statCard}>
-              <Text style={styles.statNumber}>{user.totalPoints}</Text>
+              <Text style={styles.statNumber}>{totalPoints}</Text>
               <Text style={styles.statLabel}>Gesamtpunkte</Text>
             </View>
           </View>
@@ -93,7 +106,7 @@ export default function ProfileScreen() {
           <View style={styles.experienceBar}>
             <View style={styles.experienceInfo}>
               <Text style={styles.experienceText}>
-                Level {user.level} • {user.experience}/{user.experienceToNextLevel} XP
+                Level {currentLevel} • {currentXP}/{xpToNextLevel} XP
               </Text>
             </View>
             <View style={styles.progressBar}>
@@ -102,7 +115,7 @@ export default function ProfileScreen() {
                   styles.progressFill, 
                   { 
                     width: `${experienceProgress}%`,
-                    backgroundColor: colors.tint
+                    backgroundColor: '#4CAF50'
                   }
                 ]} 
               />
@@ -116,41 +129,41 @@ export default function ProfileScreen() {
           
           <View style={styles.achievementsList}>
             <View style={styles.achievementItem}>
-              <View style={[styles.achievementIcon, { backgroundColor: '#4CAF50' }]}>
+              <View style={[styles.achievementIcon, { backgroundColor: hasCompletedFirstQuest ? '#4CAF50' : '#9E9E9E' }]}>
                 <Text style={styles.achievementText}>🏆</Text>
               </View>
               <View style={styles.achievementInfo}>
                 <Text style={styles.achievementTitle}>Erste Schritte</Text>
                 <Text style={styles.achievementDesc}>Schließe deine erste Quest ab</Text>
               </View>
-              <View style={[styles.achievementStatus, { backgroundColor: '#4CAF50' }]}>
-                <Text style={styles.achievementStatusText}>✓</Text>
+              <View style={[styles.achievementStatus, { backgroundColor: hasCompletedFirstQuest ? '#4CAF50' : '#9E9E9E' }]}>
+                <Text style={styles.achievementStatusText}>{hasCompletedFirstQuest ? '✓' : '?'}</Text>
               </View>
             </View>
             
             <View style={styles.achievementItem}>
-              <View style={[styles.achievementIcon, { backgroundColor: '#FF9800' }]}>
+              <View style={[styles.achievementIcon, { backgroundColor: hasCompletedFiveQuests ? '#FF9800' : '#9E9E9E' }]}>
                 <Text style={styles.achievementText}>🗺️</Text>
               </View>
               <View style={styles.achievementInfo}>
                 <Text style={styles.achievementTitle}>Entdecker</Text>
                 <Text style={styles.achievementDesc}>Schließe 5 Quests ab</Text>
               </View>
-              <View style={[styles.achievementStatus, { backgroundColor: '#FF9800' }]}>
-                <Text style={styles.achievementStatusText}>✓</Text>
+              <View style={[styles.achievementStatus, { backgroundColor: hasCompletedFiveQuests ? '#FF9800' : '#9E9E9E' }]}>
+                <Text style={styles.achievementStatusText}>{hasCompletedFiveQuests ? '✓' : '?'}</Text>
               </View>
             </View>
             
             <View style={styles.achievementItem}>
-              <View style={[styles.achievementIcon, { backgroundColor: '#9E9E9E' }]}>
+              <View style={[styles.achievementIcon, { backgroundColor: hasCompletedAllQuests ? '#4A90E2' : '#9E9E9E' }]}>
                 <Text style={styles.achievementText}>⭐</Text>
               </View>
               <View style={styles.achievementInfo}>
                 <Text style={styles.achievementTitle}>Meister</Text>
                 <Text style={styles.achievementDesc}>Schließe alle Quests ab</Text>
               </View>
-              <View style={[styles.achievementStatus, { backgroundColor: '#9E9E9E' }]}>
-                <Text style={styles.achievementStatusText}>?</Text>
+              <View style={[styles.achievementStatus, { backgroundColor: hasCompletedAllQuests ? '#4A90E2' : '#9E9E9E' }]}>
+                <Text style={styles.achievementStatusText}>{hasCompletedAllQuests ? '✓' : '?'}</Text>
               </View>
             </View>
           </View>
@@ -315,10 +328,13 @@ const styles = StyleSheet.create({
     height: 8,
     backgroundColor: '#E0E0E0',
     borderRadius: 4,
+    borderWidth: 1,
+    borderColor: '#D0D0D0',
+    overflow: 'hidden',
   },
   progressFill: {
     height: '100%',
-    borderRadius: 4,
+    borderRadius: 3,
   },
   achievementsSection: {
     padding: 20,
@@ -339,8 +355,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#F0F0F0',
   },
   achievementIcon: {
     width: 40,
