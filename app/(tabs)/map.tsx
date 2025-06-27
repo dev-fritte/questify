@@ -6,39 +6,23 @@ import { useColorScheme } from '@/components/useColorScheme';
 import Colors from '@/constants/Colors';
 import { useQuestContext } from '@/contexts/QuestContext';
 import { MapQuestMarker } from '@/types/QuestArea';
+import { QuestMarkerIcon } from '@/components/QuestMarkerIcons';
 
 const { width, height } = Dimensions.get('window');
 
-// Quest marker component
+// Quest marker component using SVG icons
 const QuestMarker = ({ type, completed, title }: { type: 'main' | 'sub'; completed: boolean; title: string }) => {
-  const getMarkerContent = () => {
+  const getMarkerType = () => {
     if (completed) {
-      return '✓';
+      return 'completed';
     }
-    
-    if (type === 'main') {
-      return '?';
-    }
-    
-    return '●';
-  };
-
-  const getMarkerStyle = () => {
-    if (completed) {
-      return styles.completedMarker;
-    }
-    
-    if (type === 'main') {
-      return styles.mainQuestMarker;
-    }
-    
-    return styles.subQuestMarker;
+    return type;
   };
 
   return (
     <View style={styles.markerContainer}>
-      <View style={getMarkerStyle()}>
-        <Text style={styles.markerText}>{getMarkerContent()}</Text>
+      <View style={styles.markerIconContainer}>
+        <QuestMarkerIcon type={getMarkerType()} />
       </View>
       <ThemedText style={styles.markerTitle}>{title}</ThemedText>
     </View>
@@ -59,6 +43,8 @@ export default function MapScreen() {
     longitudeDelta: 0.02,
   };
 
+  const [currentRegion, setCurrentRegion] = useState(initialRegion);
+
   useEffect(() => {
     updateQuestMarkers();
   }, [areas]);
@@ -70,7 +56,7 @@ export default function MapScreen() {
       // Always show main quest marker
       if (area.mainQuest.coordinates) {
         markers.push({
-          id: area.mainQuest.id,
+          id: `main-${area.mainQuest.id}`,
           title: area.mainQuest.title,
           type: 'main',
           coordinates: area.mainQuest.coordinates,
@@ -84,7 +70,7 @@ export default function MapScreen() {
         area.questList.forEach(quest => {
           if (quest.coordinates) {
             markers.push({
-              id: quest.id,
+              id: `sub-${quest.id}`,
               title: quest.title,
               type: 'sub',
               coordinates: quest.coordinates,
@@ -97,6 +83,24 @@ export default function MapScreen() {
     });
     
     setQuestMarkers(markers);
+  };
+
+  const handleRegionChange = (region: any) => {
+    setCurrentRegion(region);
+  };
+
+  // Create dynamic Fog of War coordinates based on current map view
+  const getFogOfWarCoordinates = () => {
+    const { latitude, longitude, latitudeDelta, longitudeDelta } = currentRegion;
+    const latOffset = latitudeDelta * 0.6; // Extend beyond visible area
+    const lngOffset = longitudeDelta * 0.6;
+    
+    return [
+      { latitude: latitude + latOffset, longitude: longitude - lngOffset }, // Top-left
+      { latitude: latitude + latOffset, longitude: longitude + lngOffset }, // Top-right
+      { latitude: latitude - latOffset, longitude: longitude + lngOffset }, // Bottom-right
+      { latitude: latitude - latOffset, longitude: longitude - lngOffset }, // Bottom-left
+    ];
   };
 
   const handleQuestPress = (marker: MapQuestMarker) => {
@@ -153,9 +157,15 @@ export default function MapScreen() {
 
   const getAreaOverlayColor = (area: any) => {
     if (area.unlocked) {
-      return 'rgba(76, 175, 80, 0.1)'; // Green for unlocked
+      return 'rgba(255, 255, 255, 0.15)'; // Misty white overlay for unlocked
     }
     return 'rgba(0, 0, 0, 0.3)'; // Dark overlay for locked
+  };
+
+  // Create holes in the fog for unlocked areas
+  const createFogOfWarHoles = () => {
+    const unlockedAreas = areas.filter(area => area.unlocked);
+    return unlockedAreas.map(area => area.coordinates);
   };
 
   return (
@@ -165,7 +175,99 @@ export default function MapScreen() {
         initialRegion={initialRegion}
         showsUserLocation={true}
         showsMyLocationButton={true}
+        onRegionChange={handleRegionChange}
+        showsPointsOfInterest={false}
+        showsBuildings={false}
+        showsTraffic={false}
+        showsIndoors={false}
+        showsIndoorLevelPicker={false}
+        showsCompass={false}
+        showsScale={false}
+        mapType="standard"
+        customMapStyle={[
+          {
+            "featureType": "poi",
+            "elementType": "labels",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.business",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.attraction",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.government",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.medical",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.park",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.place_of_worship",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.school",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          },
+          {
+            "featureType": "poi.sports_complex",
+            "stylers": [
+              {
+                "visibility": "off"
+              }
+            ]
+          }
+        ]}
       >
+        {/* Fog of War Overlay */}
+        <Polygon
+          coordinates={getFogOfWarCoordinates()}
+          fillColor="rgba(0, 0, 0, 0.7)"
+          strokeColor="transparent"
+          holes={createFogOfWarHoles()}
+        />
+
         {/* Quest Area Overlays */}
         {areas.map(area => (
           <Polygon
@@ -197,21 +299,15 @@ export default function MapScreen() {
       <View style={styles.legend}>
         <ThemedText style={styles.legendTitle}>Legende</ThemedText>
         <View style={styles.legendItem}>
-          <View style={[styles.legendMarker, { backgroundColor: '#FF6B35' }]}>
-            <Text style={styles.legendText}>?</Text>
-          </View>
+          <QuestMarkerIcon type="main" size={20} />
           <ThemedText style={styles.legendLabel}>Hauptquest</ThemedText>
         </View>
         <View style={styles.legendItem}>
-          <View style={[styles.legendMarker, { backgroundColor: '#4A90E2' }]}>
-            <Text style={styles.legendText}>●</Text>
-          </View>
+          <QuestMarkerIcon type="sub" size={20} />
           <ThemedText style={styles.legendLabel}>Unterquest</ThemedText>
         </View>
         <View style={styles.legendItem}>
-          <View style={[styles.legendMarker, { backgroundColor: '#4CAF50' }]}>
-            <Text style={styles.legendText}>✓</Text>
-          </View>
+          <QuestMarkerIcon type="completed" size={20} />
           <ThemedText style={styles.legendLabel}>Abgeschlossen</ThemedText>
         </View>
       </View>
@@ -244,16 +340,13 @@ const styles = StyleSheet.create({
   },
   markerContainer: {
     alignItems: 'center',
-  },
-  mainQuestMarker: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#FF6B35',
     justifyContent: 'center',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+  },
+  markerIconContainer: {
     alignItems: 'center',
-    borderWidth: 3,
-    borderColor: '#FFFFFF',
+    justifyContent: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -263,57 +356,17 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  subQuestMarker: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    backgroundColor: '#4A90E2',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: '#FFFFFF',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 3,
-  },
-  completedMarker: {
-    width: 35,
-    height: 35,
-    borderRadius: 17.5,
-    backgroundColor: '#4CAF50',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: '#FFFFFF',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 3,
-  },
-  markerText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
   markerTitle: {
     fontSize: 10,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 2,
-    maxWidth: 60,
+    marginTop: 4,
+    maxWidth: 80,
+    color: '#000000',
   },
   legend: {
     position: 'absolute',
-    top: 50,
+    top: 20,
     right: 10,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
     padding: 10,
@@ -337,23 +390,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 6,
-  },
-  legendMarker: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
     marginRight: 8,
-  },
-  legendText: {
-    color: '#000000',
-    fontSize: 12,
-    fontWeight: 'bold',
   },
   legendLabel: {
     fontSize: 12,
     color: '#000000',
+    marginLeft: 4,
   },
   areaInfo: {
     position: 'absolute',
