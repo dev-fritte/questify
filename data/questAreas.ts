@@ -13,6 +13,7 @@ export const questAreas: QuestArea[] = [
       completed: false,
       progress: 0,
       totalSteps: 1,
+      solutionWord: 'altstadt',
       coordinates: {
         latitude: 47.6600,
         longitude: 9.1750
@@ -29,6 +30,7 @@ export const questAreas: QuestArea[] = [
         completed: false,
         progress: 0,
         totalSteps: 1,
+        solutionWord: 'münster',
         coordinates: {
           latitude: 47.6620,
           longitude: 9.1750
@@ -43,6 +45,7 @@ export const questAreas: QuestArea[] = [
         completed: false,
         progress: 0,
         totalSteps: 1,
+        solutionWord: 'imperia',
         coordinates: {
           latitude: 47.6580,
           longitude: 9.1780
@@ -57,6 +60,7 @@ export const questAreas: QuestArea[] = [
         completed: false,
         progress: 0,
         totalSteps: 1,
+        solutionWord: 'rathaus',
         coordinates: {
           latitude: 47.6610,
           longitude: 9.1760
@@ -84,6 +88,7 @@ export const questAreas: QuestArea[] = [
       completed: false,
       progress: 0,
       totalSteps: 1,
+      solutionWord: 'hafen',
       coordinates: {
         latitude: 47.6560,
         longitude: 9.1800
@@ -100,6 +105,7 @@ export const questAreas: QuestArea[] = [
         completed: false,
         progress: 0,
         totalSteps: 1,
+        solutionWord: 'promenade',
         coordinates: {
           latitude: 47.6550,
           longitude: 9.1820
@@ -114,6 +120,7 @@ export const questAreas: QuestArea[] = [
         completed: false,
         progress: 0,
         totalSteps: 1,
+        solutionWord: 'fähre',
         coordinates: {
           latitude: 47.6570,
           longitude: 9.1830
@@ -128,6 +135,7 @@ export const questAreas: QuestArea[] = [
         completed: false,
         progress: 0,
         totalSteps: 1,
+        solutionWord: 'yacht',
         coordinates: {
           latitude: 47.6540,
           longitude: 9.1850
@@ -155,6 +163,7 @@ export const questAreas: QuestArea[] = [
       completed: false,
       progress: 0,
       totalSteps: 1,
+      solutionWord: 'universität',
       coordinates: {
         latitude: 47.6680,
         longitude: 9.1700
@@ -171,6 +180,7 @@ export const questAreas: QuestArea[] = [
         completed: false,
         progress: 0,
         totalSteps: 1,
+        solutionWord: 'bibliothek',
         coordinates: {
           latitude: 47.6690,
           longitude: 9.1720
@@ -185,6 +195,7 @@ export const questAreas: QuestArea[] = [
         completed: false,
         progress: 0,
         totalSteps: 1,
+        solutionWord: 'campus',
         coordinates: {
           latitude: 47.6670,
           longitude: 9.1710
@@ -198,18 +209,94 @@ export const questAreas: QuestArea[] = [
         reward: '80 Punkte',
         completed: false,
         progress: 0,
-        totalSteps: 3,
+        totalSteps: 1,
+        solutionWord: 'studenten',
         coordinates: {
-          latitude: 47.6660,
+          latitude: 47.6680,
           longitude: 9.1690
         }
       }
     ],
     coordinates: [
-      { latitude: 47.6650, longitude: 9.1680 },
-      { latitude: 47.6710, longitude: 9.1680 },
-      { latitude: 47.6710, longitude: 9.1750 },
-      { latitude: 47.6650, longitude: 9.1750 }
+      { latitude: 47.6660, longitude: 9.1680 },
+      { latitude: 47.6700, longitude: 9.1680 },
+      { latitude: 47.6700, longitude: 9.1730 },
+      { latitude: 47.6660, longitude: 9.1730 }
+    ],
+    progress: 0,
+    totalQuests: 4
+  },
+  {
+    id: 'paradies',
+    name: 'Paradies & Insel Mainau',
+    mainQuest: {
+      id: 'paradies-main',
+      title: 'Entdecke das Paradies',
+      description: 'Erkunde das Paradies-Viertel und die Insel Mainau',
+      difficulty: 'Schwer',
+      reward: '250 Punkte',
+      completed: false,
+      progress: 0,
+      totalSteps: 1,
+      solutionWord: 'paradies',
+      coordinates: {
+        latitude: 47.6720,
+        longitude: 9.1850
+      }
+    },
+    unlocked: false,
+    questList: [
+      {
+        id: 'paradies-1',
+        title: 'Insel Mainau',
+        description: 'Besuche die Blumeninsel Mainau',
+        difficulty: 'Mittel',
+        reward: '100 Punkte',
+        completed: false,
+        progress: 0,
+        totalSteps: 1,
+        solutionWord: 'mainau',
+        coordinates: {
+          latitude: 47.7050,
+          longitude: 9.1950
+        }
+      },
+      {
+        id: 'paradies-2',
+        title: 'Paradies-Garten',
+        description: 'Spaziere durch die Gärten im Paradies-Viertel',
+        difficulty: 'Einfach',
+        reward: '35 Punkte',
+        completed: false,
+        progress: 0,
+        totalSteps: 1,
+        solutionWord: 'garten',
+        coordinates: {
+          latitude: 47.6730,
+          longitude: 9.1860
+        }
+      },
+      {
+        id: 'paradies-3',
+        title: 'Seeblick',
+        description: 'Genieße den Panoramablick auf den Bodensee',
+        difficulty: 'Einfach',
+        reward: '40 Punkte',
+        completed: false,
+        progress: 0,
+        totalSteps: 1,
+        solutionWord: 'seeblick',
+        coordinates: {
+          latitude: 47.6740,
+          longitude: 9.1870
+        }
+      }
+    ],
+    coordinates: [
+      { latitude: 47.6710, longitude: 9.1830 },
+      { latitude: 47.6750, longitude: 9.1830 },
+      { latitude: 47.6750, longitude: 9.1880 },
+      { latitude: 47.6710, longitude: 9.1880 }
     ],
     progress: 0,
     totalQuests: 4

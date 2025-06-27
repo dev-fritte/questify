@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Alert, Dimensions, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, Alert, Dimensions, Text, ScrollView, Modal, TextInput, TouchableOpacity } from 'react-native';
 import MapView, { Marker, Polygon } from 'react-native-maps';
 import { Text as ThemedText, View as ThemedView } from '@/components/Themed';
 import { useColorScheme } from '@/components/useColorScheme';
@@ -7,6 +7,8 @@ import Colors from '@/constants/Colors';
 import { useQuestContext } from '@/contexts/QuestContext';
 import { MapQuestMarker } from '@/types/QuestArea';
 import { QuestMarkerIcon } from '@/components/QuestMarkerIcons';
+import { QuestBottomSheet } from '@/components/QuestBottomSheet';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const { width, height } = Dimensions.get('window');
 
@@ -30,8 +32,14 @@ const QuestMarker = ({ type, completed, title }: { type: 'main' | 'sub'; complet
 };
 
 export default function MapScreen() {
-  const { areas, completeMainQuest, completeSubQuest } = useQuestContext();
+  const { areas, completeMainQuest, completeSubQuest, selectedQuest, clearSelectedQuest } = useQuestContext();
   const [questMarkers, setQuestMarkers] = useState<MapQuestMarker[]>([]);
+  const [mapRef, setMapRef] = useState<any>(null);
+  const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
+  const [currentQuest, setCurrentQuest] = useState<any>(null);
+  const [currentArea, setCurrentArea] = useState<any>(null);
+  const [solutionInput, setSolutionInput] = useState('');
+  const [solutionError, setSolutionError] = useState('');
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
 
@@ -48,6 +56,104 @@ export default function MapScreen() {
   useEffect(() => {
     updateQuestMarkers();
   }, [areas]);
+
+  // Handle selected quest from quest list
+  useEffect(() => {
+    if (selectedQuest && selectedQuest.coordinates && mapRef) {
+      // Zoom to the selected quest
+      const region = {
+        latitude: selectedQuest.coordinates.latitude,
+        longitude: selectedQuest.coordinates.longitude,
+        latitudeDelta: 0.005, // Closer zoom
+        longitudeDelta: 0.005,
+      };
+      
+      mapRef.animateToRegion(region, 1000);
+      
+      // Show quest details after a short delay
+      setTimeout(() => {
+        handleQuestDetails(selectedQuest);
+        clearSelectedQuest();
+      }, 1200);
+    }
+  }, [selectedQuest, mapRef]);
+
+  const handleQuestDetails = (quest: any) => {
+    if (quest.completed) {
+      Alert.alert('Quest abgeschlossen', 'Diese Quest wurde bereits erfolgreich abgeschlossen!');
+    } else {
+      // Show bottom sheet for quest details
+      setCurrentQuest(quest);
+      setCurrentArea(null);
+      setSolutionInput('');
+      setSolutionError('');
+      setBottomSheetVisible(true);
+    }
+  };
+
+  const handleAreaPress = (area: any) => {
+    // Show bottom sheet for area details
+    setCurrentArea(area);
+    setCurrentQuest(null);
+    setSolutionInput('');
+    setSolutionError('');
+    setBottomSheetVisible(true);
+  };
+
+  const handleUnlockArea = () => {
+    if (!currentArea) return;
+    
+    // For now, just unlock the area directly
+    // In a real app, you might want to add some requirements or conditions
+    Alert.alert(
+      'Area freigeschaltet!',
+      `${currentArea.name} wurde erfolgreich freigeschaltet!`,
+      [
+        { text: 'OK', onPress: () => {
+          setBottomSheetVisible(false);
+          setCurrentArea(null);
+        }}
+      ]
+    );
+  };
+
+  const handleSolutionSubmit = () => {
+    if (!currentQuest || !currentQuest.solutionWord) {
+      Alert.alert('Fehler', 'Kein Lösungswort für diese Quest verfügbar.');
+      return;
+    }
+
+    const userInput = solutionInput.trim().toLowerCase();
+    const correctSolution = currentQuest.solutionWord.toLowerCase();
+
+    if (userInput === correctSolution) {
+      // Correct solution - complete the quest
+      if (currentQuest.isMainQuest) {
+        completeMainQuest(currentQuest.areaId);
+        Alert.alert(
+          'Quest abgeschlossen!', 
+          'Die Area wurde freigeschaltet! Alle anderen Quests sind jetzt verfügbar.'
+        );
+      } else {
+        completeSubQuest(currentQuest.areaId, currentQuest.id);
+        Alert.alert('Quest abgeschlossen!', 'Gut gemacht!');
+      }
+      setBottomSheetVisible(false);
+      setCurrentQuest(null);
+      setSolutionInput('');
+    } else {
+      // Wrong solution
+      setSolutionError('Falsches Lösungswort. Versuche es nochmal!');
+    }
+  };
+
+  const handleBottomSheetClose = () => {
+    setBottomSheetVisible(false);
+    setCurrentQuest(null);
+    setCurrentArea(null);
+    setSolutionInput('');
+    setSolutionError('');
+  };
 
   const updateQuestMarkers = () => {
     const markers: MapQuestMarker[] = [];
@@ -112,45 +218,28 @@ export default function MapScreen() {
       if (quest.completed) {
         Alert.alert('Quest abgeschlossen', 'Diese Hauptquest wurde bereits erfolgreich abgeschlossen!');
       } else {
-        Alert.alert(
-          quest.title,
-          `${quest.description}\n\nSchwierigkeit: ${quest.difficulty}\nBelohnung: ${quest.reward}`,
-          [
-            { text: 'Abbrechen', style: 'cancel' },
-            { 
-              text: 'Abschließen', 
-              onPress: () => {
-                completeMainQuest(area.id);
-                Alert.alert(
-                  'Quest abgeschlossen!', 
-                  'Die Area wurde freigeschaltet! Alle anderen Quests sind jetzt verfügbar.'
-                );
-              }
-            }
-          ]
-        );
+        // Show bottom sheet for main quest
+        const questWithArea = { ...quest, isMainQuest: true, areaId: area.id };
+        setCurrentQuest(questWithArea);
+        setSolutionInput('');
+        setSolutionError('');
+        setBottomSheetVisible(true);
       }
     } else {
-      const quest = area.questList.find(q => q.id === marker.id);
+      // For sub quests, extract the quest ID from the marker ID (remove 'sub-' prefix)
+      const questId = marker.id.replace('sub-', '');
+      const quest = area.questList.find(q => q.id === questId);
       if (!quest) return;
 
       if (quest.completed) {
         Alert.alert('Quest abgeschlossen', 'Diese Quest wurde bereits erfolgreich abgeschlossen!');
       } else {
-        Alert.alert(
-          quest.title,
-          `${quest.description}\n\nSchwierigkeit: ${quest.difficulty}\nBelohnung: ${quest.reward}`,
-          [
-            { text: 'Abbrechen', style: 'cancel' },
-            { 
-              text: 'Abschließen', 
-              onPress: () => {
-                completeSubQuest(area.id, quest.id);
-                Alert.alert('Quest abgeschlossen!', 'Gut gemacht!');
-              }
-            }
-          ]
-        );
+        // Show bottom sheet for sub quest
+        const questWithArea = { ...quest, isMainQuest: false, areaId: area.id };
+        setCurrentQuest(questWithArea);
+        setSolutionInput('');
+        setSolutionError('');
+        setBottomSheetVisible(true);
       }
     }
   };
@@ -169,164 +258,185 @@ export default function MapScreen() {
   };
 
   return (
-    <ThemedView style={styles.container}>
-      <MapView
-        style={styles.map}
-        initialRegion={initialRegion}
-        showsUserLocation={true}
-        showsMyLocationButton={true}
-        onRegionChange={handleRegionChange}
-        showsPointsOfInterest={false}
-        showsBuildings={false}
-        showsTraffic={false}
-        showsIndoors={false}
-        showsIndoorLevelPicker={false}
-        showsCompass={false}
-        showsScale={false}
-        mapType="standard"
-        customMapStyle={[
-          {
-            "featureType": "poi",
-            "elementType": "labels",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "poi.business",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "poi.attraction",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "poi.government",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "poi.medical",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "poi.park",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "poi.place_of_worship",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "poi.school",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          },
-          {
-            "featureType": "poi.sports_complex",
-            "stylers": [
-              {
-                "visibility": "off"
-              }
-            ]
-          }
-        ]}
-      >
-        {/* Fog of War Overlay */}
-        <Polygon
-          coordinates={getFogOfWarCoordinates()}
-          fillColor="rgba(0, 0, 0, 0.7)"
-          strokeColor="transparent"
-          holes={createFogOfWarHoles()}
-        />
-
-        {/* Quest Area Overlays */}
-        {areas.map(area => (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemedView style={styles.container}>
+        <MapView
+          style={styles.map}
+          initialRegion={initialRegion}
+          showsUserLocation={true}
+          showsMyLocationButton={true}
+          onRegionChange={handleRegionChange}
+          showsPointsOfInterest={false}
+          showsBuildings={false}
+          showsTraffic={false}
+          showsIndoors={false}
+          showsIndoorLevelPicker={false}
+          showsCompass={false}
+          showsScale={false}
+          mapType="standard"
+          customMapStyle={[
+            {
+              "featureType": "poi",
+              "elementType": "labels",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.business",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.attraction",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.government",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.medical",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.park",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.place_of_worship",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.school",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            },
+            {
+              "featureType": "poi.sports_complex",
+              "stylers": [
+                {
+                  "visibility": "off"
+                }
+              ]
+            }
+          ]}
+          ref={(ref) => setMapRef(ref)}
+        >
+          {/* Fog of War Overlay */}
           <Polygon
-            key={area.id}
-            coordinates={area.coordinates}
-            fillColor={getAreaOverlayColor(area)}
-            strokeColor={area.unlocked ? '#4CAF50' : '#666'}
-            strokeWidth={2}
+            coordinates={getFogOfWarCoordinates()}
+            fillColor="rgba(0, 0, 0, 0.7)"
+            strokeColor="transparent"
+            holes={createFogOfWarHoles()}
           />
-        ))}
 
-        {/* Quest Markers */}
-        {questMarkers.map(marker => (
-          <Marker
-            key={marker.id}
-            coordinate={marker.coordinates}
-            onPress={() => handleQuestPress(marker)}
-          >
-            <QuestMarker
-              type={marker.type}
-              completed={marker.completed}
-              title={marker.title}
+          {/* Quest Area Overlays */}
+          {areas.map(area => (
+            <Polygon
+              key={area.id}
+              coordinates={area.coordinates}
+              fillColor={getAreaOverlayColor(area)}
+              strokeColor={area.unlocked ? '#4CAF50' : '#666'}
+              strokeWidth={2}
+              onPress={() => handleAreaPress(area)}
             />
-          </Marker>
-        ))}
-      </MapView>
+          ))}
 
-      {/* Legend */}
-      <View style={styles.legend}>
-        <ThemedText style={styles.legendTitle}>Legende</ThemedText>
-        <View style={styles.legendItem}>
-          <QuestMarkerIcon type="main" size={20} />
-          <ThemedText style={styles.legendLabel}>Hauptquest</ThemedText>
-        </View>
-        <View style={styles.legendItem}>
-          <QuestMarkerIcon type="sub" size={20} />
-          <ThemedText style={styles.legendLabel}>Unterquest</ThemedText>
-        </View>
-        <View style={styles.legendItem}>
-          <QuestMarkerIcon type="completed" size={20} />
-          <ThemedText style={styles.legendLabel}>Abgeschlossen</ThemedText>
-        </View>
-      </View>
+          {/* Quest Markers */}
+          {questMarkers.map(marker => (
+            <Marker
+              key={marker.id}
+              coordinate={marker.coordinates}
+              onPress={() => handleQuestPress(marker)}
+            >
+              <QuestMarker
+                type={marker.type}
+                completed={marker.completed}
+                title={marker.title}
+              />
+            </Marker>
+          ))}
+        </MapView>
 
-      {/* Area Info Panel */}
-      <ScrollView style={styles.areaInfo} horizontal showsHorizontalScrollIndicator={false}>
-        {areas.map(area => (
-          <View key={area.id} style={styles.areaCard}>
-            <ThemedText style={styles.areaName}>{area.name}</ThemedText>
-            <Text style={styles.areaStatus}>
-              {area.unlocked ? '🔓 Freigeschaltet' : '🔒 Gesperrt'}
-            </Text>
-            <Text style={styles.areaProgress}>
-              {area.progress}/{area.totalQuests} Quests
-            </Text>
+        {/* Legend */}
+        <View style={styles.legend}>
+          <ThemedText style={styles.legendTitle}>Legende</ThemedText>
+          <View style={styles.legendItem}>
+            <QuestMarkerIcon type="main" size={20} />
+            <ThemedText style={styles.legendLabel}>Hauptquest</ThemedText>
           </View>
-        ))}
-      </ScrollView>
-    </ThemedView>
+          <View style={styles.legendItem}>
+            <QuestMarkerIcon type="sub" size={20} />
+            <ThemedText style={styles.legendLabel}>Unterquest</ThemedText>
+          </View>
+          <View style={styles.legendItem}>
+            <QuestMarkerIcon type="completed" size={20} />
+            <ThemedText style={styles.legendLabel}>Abgeschlossen</ThemedText>
+          </View>
+        </View>
+
+        {/* Area Info Panel */}
+        <ScrollView style={styles.areaInfo} horizontal showsHorizontalScrollIndicator={false}>
+          {areas.map(area => (
+            <TouchableOpacity 
+              key={area.id} 
+              style={styles.areaCard}
+              onPress={() => handleAreaPress(area)}
+            >
+              <ThemedText style={styles.areaName}>{area.name}</ThemedText>
+              <Text style={styles.areaStatus}>
+                {area.unlocked ? '🔓 Freigeschaltet' : '🔒 Gesperrt'}
+              </Text>
+              <Text style={styles.areaProgress}>
+                {area.progress}/{area.totalQuests} Quests
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+
+        {/* Quest/Area Bottom Sheet */}
+        <QuestBottomSheet
+          isVisible={bottomSheetVisible}
+          onClose={handleBottomSheetClose}
+          quest={currentQuest}
+          area={currentArea}
+          solutionInput={solutionInput}
+          onSolutionInputChange={setSolutionInput}
+          onSolutionSubmit={handleSolutionSubmit}
+          onUnlockArea={handleUnlockArea}
+          solutionError={solutionError}
+        />
+      </ThemedView>
+    </GestureHandlerRootView>
   );
 }
 
@@ -431,5 +541,61 @@ const styles = StyleSheet.create({
   areaProgress: {
     fontSize: 12,
     color: '#666',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 20,
+    width: '80%',
+    alignItems: 'center',
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  modalDescription: {
+    fontSize: 14,
+    marginBottom: 10,
+  },
+  modalReward: {
+    fontSize: 14,
+    marginBottom: 10,
+  },
+  input: {
+    width: '100%',
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 10,
+    padding: 10,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  button: {
+    backgroundColor: '#4CAF50',
+    padding: 10,
+    borderRadius: 5,
+  },
+  cancelButton: {
+    backgroundColor: '#f44336',
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  error: {
+    color: 'red',
+    marginBottom: 10,
   },
 }); 

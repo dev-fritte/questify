@@ -1,33 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { Text as ThemedText, View as ThemedView } from '@/components/Themed';
 import { useColorScheme } from '@/components/useColorScheme';
 import Colors from '@/constants/Colors';
 import { useQuestContext } from '@/contexts/QuestContext';
+import { router } from 'expo-router';
+import { QuestBottomSheet } from '@/components/QuestBottomSheet';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const QuestItem = ({ quest, onPress }: { quest: any; onPress: () => void }) => {
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
 
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case 'Einfach': return '#4CAF50';
-      case 'Mittel': return '#FF9800';
-      case 'Schwer': return '#F44336';
-      default: return '#666';
-    }
-  };
-
+  // Calculate progress percentage based on actual progress data
   const progressPercentage = quest.totalSteps > 0 ? (quest.progress / quest.totalSteps) * 100 : 0;
+  
+  // For single-step quests, show 1/1 when completed, 0/1 when not
+  const displayProgress = quest.completed ? quest.totalSteps : quest.progress;
+  const displayTotal = quest.totalSteps;
 
   return (
     <TouchableOpacity onPress={onPress} style={styles.questItem}>
-      <ThemedView style={styles.questHeader}>
-        <ThemedText style={styles.questTitle}>{quest.title}</ThemedText>
-        <View style={[styles.difficultyBadge, { backgroundColor: getDifficultyColor(quest.difficulty) }]}>
-          <Text style={styles.difficultyText}>{quest.difficulty}</Text>
-        </View>
-      </ThemedView>
+      <View style={styles.questHeader}>
+        <Text style={styles.questTitle}>{quest.title}</Text>
+      </View>
       
       <ThemedText style={styles.questDescription}>{quest.description}</ThemedText>
       
@@ -45,7 +41,7 @@ const QuestItem = ({ quest, onPress }: { quest: any; onPress: () => void }) => {
             />
           </View>
           <Text style={styles.progressText}>
-            {quest.progress}/{quest.totalSteps}
+            {displayProgress}/{displayTotal}
           </Text>
         </View>
         
@@ -64,57 +60,133 @@ const QuestItem = ({ quest, onPress }: { quest: any; onPress: () => void }) => {
 };
 
 export default function QuestsScreen() {
-  const { areas, getCompletedQuestsCount, getTotalQuestsCount } = useQuestContext();
+  const { areas, getCompletedQuestsCount, getTotalQuestsCount, setSelectedQuest, completeMainQuest, completeSubQuest } = useQuestContext();
+  const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
+  const [currentQuest, setCurrentQuest] = useState<any>(null);
+  const [solutionInput, setSolutionInput] = useState('');
+  const [solutionError, setSolutionError] = useState('');
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? 'light'];
 
-  // Flatten all quests from all areas
-  const allQuests = areas.flatMap(area => [
-    { ...area.mainQuest, areaName: area.name, isMainQuest: true },
-    ...area.questList.map(quest => ({ ...quest, areaName: area.name, isMainQuest: false }))
-  ]);
+  // Flatten all quests from unlocked areas only
+  const unlockedQuests = areas
+    .filter(area => area.unlocked) // Only include unlocked areas
+    .flatMap(area => [
+      { ...area.mainQuest, areaName: area.name, isMainQuest: true, areaId: area.id },
+      ...area.questList.map(quest => ({ ...quest, areaName: area.name, isMainQuest: false, areaId: area.id }))
+    ]);
 
   const handleQuestPress = (quest: any) => {
     if (quest.completed) {
       Alert.alert('Quest abgeschlossen', 'Diese Quest wurde bereits erfolgreich abgeschlossen!');
     } else {
-      Alert.alert(
-        quest.title,
-        `Möchtest du diese Quest starten?\n\n${quest.description}\n\nBelohnung: ${quest.reward}`,
-        [
-          { text: 'Abbrechen', style: 'cancel' },
-          { text: 'Starten', onPress: () => {
-            Alert.alert('Quest gestartet', 'Viel Erfolg bei deiner Quest!');
-          }}
-        ]
-      );
+      // Show quest details with solution word input
+      setCurrentQuest(quest);
+      setSolutionInput('');
+      setSolutionError('');
+      setBottomSheetVisible(true);
     }
+  };
+
+  const handleSolutionSubmit = () => {
+    if (!currentQuest || !currentQuest.solutionWord) {
+      Alert.alert('Fehler', 'Kein Lösungswort für diese Quest verfügbar.');
+      return;
+    }
+
+    const userInput = solutionInput.trim().toLowerCase();
+    const correctSolution = currentQuest.solutionWord.toLowerCase();
+
+    if (userInput === correctSolution) {
+      // Correct solution - complete the quest
+      if (currentQuest.isMainQuest) {
+        completeMainQuest(currentQuest.areaId);
+        Alert.alert(
+          'Quest abgeschlossen!', 
+          'Die Area wurde freigeschaltet! Alle anderen Quests sind jetzt verfügbar.'
+        );
+      } else {
+        completeSubQuest(currentQuest.areaId, currentQuest.id);
+        Alert.alert('Quest abgeschlossen!', 'Gut gemacht!');
+      }
+      setBottomSheetVisible(false);
+      setCurrentQuest(null);
+      setSolutionInput('');
+    } else {
+      // Wrong solution
+      setSolutionError('Falsches Lösungswort. Versuche es nochmal!');
+    }
+  };
+
+  const handleBottomSheetClose = () => {
+    setBottomSheetVisible(false);
+    setCurrentQuest(null);
+    setSolutionInput('');
+    setSolutionError('');
+  };
+
+  const handleStartQuest = () => {
+    // Set the selected quest and navigate to map
+    setSelectedQuest(currentQuest);
+    setBottomSheetVisible(false);
+    setCurrentQuest(null);
+    setSolutionInput('');
+    setSolutionError('');
+    router.push('/(tabs)/map');
   };
 
   const completedQuests = getCompletedQuestsCount();
   const totalQuests = getTotalQuestsCount();
 
   return (
-    <ThemedView style={styles.container}>
-      <View style={styles.header}>
-        <ThemedText style={styles.headerTitle}>Quests</ThemedText>
-        <View style={styles.statsContainer}>
-          <Text style={styles.statsText}>
-            {completedQuests}/{totalQuests} abgeschlossen
-          </Text>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemedView style={styles.container}>
+        <View style={styles.header}>
+          <ThemedText style={styles.headerTitle}>Quests</ThemedText>
+          <View style={styles.statsContainer}>
+            <Text style={styles.statsText}>
+              {completedQuests}/{totalQuests} abgeschlossen
+            </Text>
+          </View>
         </View>
-      </View>
 
-      <FlatList
-        data={allQuests}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <QuestItem quest={item} onPress={() => handleQuestPress(item)} />
+        {unlockedQuests.length === 0 ? (
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>
+              🔒 Keine Quests verfügbar
+            </Text>
+            <Text style={styles.emptySubtext}>
+              Schalte zuerst eine Area auf der Karte frei!
+            </Text>
+          </View>
+        ) : (
+          <FlatList
+            data={unlockedQuests}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <QuestItem quest={item} onPress={() => handleQuestPress(item)} />
+            )}
+            contentContainerStyle={styles.listContainer}
+            showsVerticalScrollIndicator={false}
+          />
         )}
-        contentContainerStyle={styles.listContainer}
-        showsVerticalScrollIndicator={false}
-      />
-    </ThemedView>
+
+        {/* Quest Bottom Sheet */}
+        <QuestBottomSheet
+          isVisible={bottomSheetVisible}
+          onClose={handleBottomSheetClose}
+          quest={currentQuest}
+          area={null}
+          solutionInput={solutionInput}
+          onSolutionInputChange={setSolutionInput}
+          onSolutionSubmit={handleSolutionSubmit}
+          onStartQuest={handleStartQuest}
+          solutionError={solutionError}
+          showSolutionInput={false}
+          showCancelButton={false}
+        />
+      </ThemedView>
+    </GestureHandlerRootView>
   );
 }
 
@@ -163,22 +235,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     marginBottom: 8,
+    backgroundColor: 'transparent',
   },
   questTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     flex: 1,
-    marginRight: 8,
-  },
-  difficultyBadge: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
-  },
-  difficultyText: {
-    color: 'white',
-    fontSize: 12,
-    fontWeight: 'bold',
+    color: '#000000',
   },
   questDescription: {
     fontSize: 14,
@@ -230,5 +293,19 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 12,
     fontWeight: 'bold',
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  emptyText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 16,
+  },
+  emptySubtext: {
+    fontSize: 16,
+    color: '#666',
   },
 }); 

@@ -4,11 +4,14 @@ import { QuestArea } from '@/types/QuestArea';
 
 interface QuestContextType {
   areas: QuestArea[];
+  selectedQuest: any | null;
   updateArea: (areaId: string, updates: Partial<QuestArea>) => void;
   completeMainQuest: (areaId: string) => void;
   completeSubQuest: (areaId: string, questId: string) => void;
   getCompletedQuestsCount: () => number;
   getTotalQuestsCount: () => number;
+  setSelectedQuest: (quest: any) => void;
+  clearSelectedQuest: () => void;
 }
 
 const QuestContext = createContext<QuestContextType | undefined>(undefined);
@@ -27,6 +30,7 @@ interface QuestProviderProps {
 
 export const QuestProvider: React.FC<QuestProviderProps> = ({ children }) => {
   const [areas, setAreas] = useState<QuestArea[]>(questAreas);
+  const [selectedQuest, setSelectedQuest] = useState<any | null>(null);
 
   const updateArea = (areaId: string, updates: Partial<QuestArea>) => {
     setAreas(prevAreas =>
@@ -42,7 +46,11 @@ export const QuestProvider: React.FC<QuestProviderProps> = ({ children }) => {
         if (area.id === areaId) {
           return {
             ...area,
-            mainQuest: { ...area.mainQuest, completed: true },
+            mainQuest: { 
+              ...area.mainQuest, 
+              completed: true,
+              progress: area.mainQuest.totalSteps // Set progress to total steps when completed
+            },
             unlocked: true,
             progress: area.progress + 1
           };
@@ -57,7 +65,11 @@ export const QuestProvider: React.FC<QuestProviderProps> = ({ children }) => {
       prevAreas.map(area => {
         if (area.id === areaId) {
           const updatedQuestList = area.questList.map(quest =>
-            quest.id === questId ? { ...quest, completed: true } : quest
+            quest.id === questId ? { 
+              ...quest, 
+              completed: true,
+              progress: quest.totalSteps // Set progress to total steps when completed
+            } : quest
           );
           
           const completedQuests = updatedQuestList.filter(q => q.completed).length;
@@ -87,13 +99,20 @@ export const QuestProvider: React.FC<QuestProviderProps> = ({ children }) => {
     }, 0);
   };
 
+  const clearSelectedQuest = () => {
+    setSelectedQuest(null);
+  };
+
   const value: QuestContextType = {
     areas,
+    selectedQuest,
     updateArea,
     completeMainQuest,
     completeSubQuest,
     getCompletedQuestsCount,
     getTotalQuestsCount,
+    setSelectedQuest,
+    clearSelectedQuest,
   };
 
   return (

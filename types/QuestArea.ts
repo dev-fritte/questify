@@ -7,6 +7,7 @@ export interface Quest {
   completed: boolean;
   progress: number;
   totalSteps: number;
+  solutionWord?: string;
   coordinates?: {
     latitude: number;
     longitude: number;
