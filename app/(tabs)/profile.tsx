@@ -44,15 +44,38 @@ export default function ProfileScreen() {
   const hasCompletedFiveQuests = completedQuests >= 5;
   const hasCompletedAllQuests = completedQuests === totalQuests && totalQuests > 0;
 
+  // Track previous achievement states to detect new unlocks
+  const [previousAchievements, setPreviousAchievements] = useState({
+    first: false,
+    five: false,
+    all: false,
+  });
+
   // Set up achievement callback
   useEffect(() => {
     onAchievementUnlocked(() => {
-      // Small delay to ensure the screen is fully loaded
-      setTimeout(() => {
-        scrollToAchievements();
-      }, 100);
+      // Only scroll if we're on the profile page and a new achievement was just unlocked
+      const newFirstAchievement = hasCompletedFirstQuest && !previousAchievements.first;
+      const newFiveAchievement = hasCompletedFiveQuests && !previousAchievements.five;
+      const newAllAchievement = hasCompletedAllQuests && !previousAchievements.all;
+
+      if (newFirstAchievement || newFiveAchievement || newAllAchievement) {
+        // Small delay to ensure the screen is fully loaded
+        setTimeout(() => {
+          scrollToAchievements();
+        }, 100);
+      }
     });
-  }, []);
+  }, [hasCompletedFirstQuest, hasCompletedFiveQuests, hasCompletedAllQuests, previousAchievements]);
+
+  // Update previous achievement states
+  useEffect(() => {
+    setPreviousAchievements({
+      first: hasCompletedFirstQuest,
+      five: hasCompletedFiveQuests,
+      all: hasCompletedAllQuests,
+    });
+  }, [hasCompletedFirstQuest, hasCompletedFiveQuests, hasCompletedAllQuests]);
 
   // Animate achievement icons when they change state
   useEffect(() => {
@@ -241,7 +264,7 @@ export default function ProfileScreen() {
                 style={[
                   styles.achievementIcon, 
                   { 
-                    backgroundColor: hasCompletedFirstQuest ? '#4CAF50' : '#9E9E9E',
+                    backgroundColor: hasCompletedFirstQuest ? colors.successColor : '#9E9E9E',
                     transform: [{ scale: achievementAnimations.first }]
                   }
                 ]}
@@ -252,7 +275,7 @@ export default function ProfileScreen() {
                 <Text style={styles.achievementTitle}>Erste Schritte</Text>
                 <Text style={styles.achievementDesc}>Schließe deine erste Quest ab</Text>
               </View>
-              <View style={[styles.achievementStatus, { backgroundColor: hasCompletedFirstQuest ? '#4CAF50' : '#9E9E9E' }]}>
+              <View style={[styles.achievementStatus, { backgroundColor: hasCompletedFirstQuest ? colors.successColor : '#9E9E9E' }]}>
                 <Text style={styles.achievementStatusText}>{hasCompletedFirstQuest ? '✓' : '?'}</Text>
               </View>
             </View>
@@ -262,7 +285,7 @@ export default function ProfileScreen() {
                 style={[
                   styles.achievementIcon, 
                   { 
-                    backgroundColor: hasCompletedFiveQuests ? '#FF9800' : '#9E9E9E',
+                    backgroundColor: hasCompletedFiveQuests ? colors.successColor : '#9E9E9E',
                     transform: [{ scale: achievementAnimations.five }]
                   }
                 ]}
@@ -273,7 +296,7 @@ export default function ProfileScreen() {
                 <Text style={styles.achievementTitle}>Entdecker</Text>
                 <Text style={styles.achievementDesc}>Schließe 5 Quests ab</Text>
               </View>
-              <View style={[styles.achievementStatus, { backgroundColor: hasCompletedFiveQuests ? '#FF9800' : '#9E9E9E' }]}>
+              <View style={[styles.achievementStatus, { backgroundColor: hasCompletedFiveQuests ? colors.successColor : '#9E9E9E' }]}>
                 <Text style={styles.achievementStatusText}>{hasCompletedFiveQuests ? '✓' : '?'}</Text>
               </View>
             </View>
@@ -283,7 +306,7 @@ export default function ProfileScreen() {
                 style={[
                   styles.achievementIcon, 
                   { 
-                    backgroundColor: hasCompletedAllQuests ? '#4A90E2' : '#9E9E9E',
+                    backgroundColor: hasCompletedAllQuests ? colors.successColor : '#9E9E9E',
                     transform: [{ scale: achievementAnimations.all }]
                   }
                 ]}
@@ -294,7 +317,7 @@ export default function ProfileScreen() {
                 <Text style={styles.achievementTitle}>Meister</Text>
                 <Text style={styles.achievementDesc}>Schließe alle Quests ab</Text>
               </View>
-              <View style={[styles.achievementStatus, { backgroundColor: hasCompletedAllQuests ? '#4A90E2' : '#9E9E9E' }]}>
+              <View style={[styles.achievementStatus, { backgroundColor: hasCompletedAllQuests ? colors.successColor : '#9E9E9E' }]}>
                 <Text style={styles.achievementStatusText}>{hasCompletedAllQuests ? '✓' : '?'}</Text>
               </View>
             </View>

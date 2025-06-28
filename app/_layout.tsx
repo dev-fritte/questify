@@ -9,6 +9,7 @@ import AnimatedSplash from '../components/AnimatedSplash';
 
 import { useColorScheme } from '@/components/useColorScheme';
 import { QuestProvider } from '@/contexts/QuestContext';
+import Colors from '@/constants/Colors';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -54,10 +55,24 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme as keyof typeof Colors];
+
+  // Custom theme with our color scheme
+  const customTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: colors.background,
+      card: colors.cardBackground,
+      text: colors.text,
+      border: colors.borderColor,
+      primary: colors.tint,
+    },
+  };
 
   return (
     <QuestProvider>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <ThemeProvider value={customTheme}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="modal" options={{ presentation: 'modal' }} />

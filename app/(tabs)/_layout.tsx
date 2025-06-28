@@ -1,7 +1,7 @@
 import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Tabs } from 'expo-router';
-import { Pressable, View } from 'react-native';
+import { Pressable, View, StatusBar } from 'react-native';
 
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
@@ -23,52 +23,67 @@ export default function TabLayout() {
   const colors = Colors[colorScheme as keyof typeof Colors];
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: colors.tint,
-        tabBarInactiveTintColor: colors.tabIconDefault,
-        tabBarStyle: {
-          backgroundColor: colors.cardBackground,
-          borderTopColor: colors.borderColor,
-          borderTopWidth: 1,
-        },
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
-        headerShown: useClientOnlyValue(false, true),
-      }}>
-      <Tabs.Screen
-        name="map"
-        options={{
-          title: 'Karte',
-          tabBarIcon: ({ color }) => <TabBarIcon name="map" color={color} />,
-        }}
+    <>
+      <StatusBar
+        backgroundColor={colors.background}
+        barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'}
+        translucent={false}
       />
-      <Tabs.Screen
-        name="quests"
-        options={{
-          title: 'Quests',
-          tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: 'Profil',
-          tabBarIcon: ({ color }) => (
-            <View style={{ position: 'relative' }}>
-              <TabBarIcon name="user" color={color} />
-              <AchievementBadge visible={hasNewAchievement()} />
-            </View>
-          ),
-        }}
-        listeners={{
-          focus: () => {
-            // Clear the badge when the profile tab is focused
-            // The profile screen will handle scrolling to achievements if needed
-            clearNewAchievementBadge();
+      <Tabs
+        screenOptions={{
+          tabBarActiveTintColor: colors.tint,
+          tabBarInactiveTintColor: colors.tabIconDefault,
+          tabBarStyle: {
+            backgroundColor: colors.cardBackground,
+            borderTopColor: colors.borderColor,
+            borderTopWidth: 1,
           },
-        }}
-      />
-    </Tabs>
+          // Header styling
+          headerStyle: {
+            backgroundColor: colors.background,
+          },
+          headerTintColor: colors.text,
+          headerTitleStyle: {
+            color: colors.text,
+          },
+          // Disable the static render of the header on web
+          // to prevent a hydration error in React Navigation v6.
+          headerShown: useClientOnlyValue(false, true),
+        }}>
+        <Tabs.Screen
+          name="map"
+          options={{
+            title: 'Karte',
+            tabBarIcon: ({ color }) => <TabBarIcon name="map" color={color} />,
+          }}
+        />
+        <Tabs.Screen
+          name="quests"
+          options={{
+            title: 'Quests',
+            tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
+          }}
+        />
+        <Tabs.Screen
+          name="profile"
+          options={{
+            title: 'Profil',
+            tabBarIcon: ({ color }) => (
+              <View style={{ position: 'relative' }}>
+                <TabBarIcon name="user" color={color} />
+                <AchievementBadge visible={hasNewAchievement()} />
+              </View>
+            ),
+          }}
+          listeners={{
+            focus: () => {
+              // Clear the badge when the profile tab is focused
+              // The profile screen will handle scrolling to achievements if needed
+              clearNewAchievementBadge();
+            },
+          }}
+        />
+      </Tabs>
+    </>
   );
 }
