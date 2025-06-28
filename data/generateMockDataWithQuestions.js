@@ -66,7 +66,7 @@ function generateQuestAreaData(name, coordinates, quests, mainQuests) {
     id: `area_${name.toLowerCase().replace(/[^a-z0-9]/g, '_')}`,
     name: name,
     mainQuest: mainQuest || generateQuestData(`${name} Hauptquest`, 'MainQuest', coordinates[0]),
-    unlocked: Math.random() > 0.3, // 70% Wahrscheinlichkeit, dass Area freigeschaltet ist
+    unlocked: false, // Deaktiviere alle Areas standardmäßig
     questList: areaQuests,
     coordinates: coordinates,
     progress: Math.floor(Math.random() * 100),
@@ -77,12 +77,14 @@ function generateQuestAreaData(name, coordinates, quests, mainQuests) {
 // Hauptfunktion zum Generieren der Mockdaten
 function generateMockData() {
   try {
-    // CSV-Datei lesen
-    const csvPath = path.join(__dirname, 'questlist.csv');
+    // CSV-Datei mit Fragen und Passcodes lesen
+    const csvPath = path.join(__dirname, 'questlist_with_questions.csv');
     const csvContent = fs.readFileSync(csvPath, 'utf8');
     
     const lines = csvContent.split('\n').filter(line => line.trim());
     const headers = lines[0].split(',');
+    
+    console.log('CSV Headers:', headers);
     
     const questAreas = [];
     const quests = [];
@@ -102,6 +104,8 @@ function generateMockData() {
         // Neue Spalten: Question (index 4) und Passcode (index 5)
         const question = values.length > 4 ? cleanString(values[4]) : null;
         const passcode = values.length > 5 ? cleanString(values[5]) : null;
+        
+        console.log(`Processing: ${name} (${type}) - Question: "${question}" - Passcode: "${passcode}"`);
         
         const coordinates = parseWKT(wkt);
         
@@ -160,10 +164,10 @@ function generateMockData() {
     };
     
     // JSON-Datei schreiben
-    const outputPath = path.join(__dirname, 'mockData.json');
+    const outputPath = path.join(__dirname, 'mockDataWithQuestions.json');
     fs.writeFileSync(outputPath, JSON.stringify(mockData, null, 2), 'utf8');
     
-    console.log('Mockdaten erfolgreich generiert!');
+    console.log('Mockdaten mit Fragen erfolgreich generiert!');
     console.log(`- ${generatedQuestAreas.length} QuestAreas`);
     console.log(`- ${mainQuests.length} MainQuests`);
     console.log(`- ${quests.length} Quests`);

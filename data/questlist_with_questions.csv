@@ -1,0 +1,14 @@
+WKT,name,type,forArea,Question,Passcode
+POINT (9.1601481 47.6918365),Grillstelle,Quest,,Wie viele Bänke stehen an der Grillstelle?,grill3
+POLYGON ((9.1471085 47.6826233; 9.1498394 47.6864405; 9.1513766 47.6892734; 9.1541156 47.6892175; 9.154679 47.6890704; 9.1552478 47.6889376; 9.1560768 47.6887435; 9.1580496 47.6882727; 9.158735 47.688181; 9.1590629 47.688087; 9.1602409 47.6879622; 9.1608461 47.6879233; 9.1614405 47.6879711; 9.1666343 47.6891226; 9.1719355 47.689288; 9.1772618 47.696768; 9.1588182 47.7160558; 9.1423117 47.7196869; 9.1313394 47.7159308; 9.1227735 47.7106724; 9.115839 47.7055892; 9.1331908 47.6987149; 9.1363237 47.6911466; 9.1325901 47.6871603; 9.1471085 47.6826233)),Wollmatingen,QuestArea,,
+POINT (9.1461848 47.694714),geheimer Aussichtspunkt,MainQuest,Wollmatingen,Finde den versteckten Aussichtspunkt und zähle die Stufen zum Gipfel,aussicht42
+POINT (9.1446294 47.6934777),Kneipe,Quest,,Wie heißt die älteste Kneipe in der Gegend?,alte_kneipe
+POINT (9.1530709 47.7024472),Kampfmittel verseuchtes Sperrgebiet,Quest,,Warum ist dieses Gebiet abgesperrt?,kampfmittel
+POINT (9.1470063 47.6925896),Kirche,Quest,,Wann wurde diese Kirche erbaut?,kirche_1850
+POINT (9.1454798 47.6850221),Sportgeräte,Quest,,Wie viele verschiedene Sportgeräte findest du?,sport5
+POLYGON ((9.1888176 47.682854; 9.1915095 47.6830677; 9.1935695 47.6856679; 9.1931876 47.6895737; 9.1903552 47.6915958; 9.1880807 47.6938201; 9.1847397 47.696232; 9.1837098 47.6915236; 9.1822515 47.6913476; 9.1827665 47.6903943; 9.1846977 47.6896143; 9.1831528 47.689441; 9.1832386 47.6886899; 9.1839252 47.688401; 9.1838823 47.6877654; 9.1849123 47.6875921; 9.1855989 47.6870143; 9.1881309 47.6868698; 9.1887747 47.6855987; 9.1887244 47.6850958; 9.1895901 47.6838074; 9.1888176 47.682854)),Universität,QuestArea,,
+POINT (9.1855196 47.6881446),Ewiges Auto,Quest,,Warum steht dieses Auto schon so lange hier?,ewiges_auto
+POINT (9.189375 47.6904132),Aussicht bei der Mensa,MainQuest,Universität,Genieße die Aussicht von der Mensa und finde das versteckte Symbol,mensa_symbol
+POINT (9.1786306 47.6921162),Botanischer Garten,Quest,,Wie viele verschiedene Baumarten kannst du identifizieren?,baeume7
+POINT (9.1897472 47.6873954),Ist das Kunst oder kann das weg?,Quest,,Was denkst du - ist das Kunst oder kann das weg?,kunst_oder_weg
+POINT (9.1878361 47.6906521),Uni Zoo - SOS Affenalarm,Quest,,Finde alle Affen-Skulpturen auf dem Campus,affen3 

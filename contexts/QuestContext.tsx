@@ -38,23 +38,15 @@ interface QuestProviderProps {
   children: ReactNode;
 }
 
-const allowedDifficulties = ['Einfach', 'Mittel', 'Schwer'];
-
 function mapMockQuestAreas(areas: any[]): QuestArea[] {
   return areas.map(area => ({
     ...area,
-    unlocked: false,
+    unlocked: false, // Deaktiviere alle Areas standardmäßig
     mainQuest: {
       ...area.mainQuest,
-      difficulty: allowedDifficulties.includes(area.mainQuest.difficulty)
-        ? area.mainQuest.difficulty
-        : 'Einfach',
     },
     questList: area.questList.map((q: any) => ({
       ...q,
-      difficulty: allowedDifficulties.includes(q.difficulty)
-        ? q.difficulty
-        : 'Einfach',
     })),
   }));
 }

@@ -2,7 +2,6 @@ export interface Quest {
   id: string;
   title: string;
   description: string;
-  difficulty: 'Einfach' | 'Mittel' | 'Schwer';
   reward: string;
   completed: boolean;
   progress: number;
