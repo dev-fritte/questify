@@ -1,0 +1,2390 @@
+{
+  "questAreas": [
+    {
+      "id": "area_wollmatingen",
+      "name": "Wollmatingen",
+      "mainQuest": {
+        "id": "quest_geheimer_aussichtspunkt",
+        "title": "geheimer Aussichtspunkt",
+        "description": "Erkunde die historischen Stätten und sammle Hinweise.",
+        "difficulty": "Mittel",
+        "reward": "50 XP",
+        "completed": false,
+        "progress": 80,
+        "totalSteps": 1,
+        "solutionWord": "lösung_geheimer_aussichtspunkt",
+        "coordinates": {
+          "latitude": 47.694714,
+          "longitude": 9.1461848
+        },
+        "areaId": "Wollmatingen"
+      },
+      "unlocked": false,
+      "questList": [],
+      "coordinates": [
+        {
+          "latitude": 47.6826233,
+          "longitude": 9.1471085
+        },
+        {
+          "latitude": 47.6864405,
+          "longitude": 9.1498394
+        },
+        {
+          "latitude": 47.6892734,
+          "longitude": 9.1513766
+        },
+        {
+          "latitude": 47.6892175,
+          "longitude": 9.1541156
+        },
+        {
+          "latitude": 47.6890704,
+          "longitude": 9.154679
+        },
+        {
+          "latitude": 47.6889376,
+          "longitude": 9.1552478
+        },
+        {
+          "latitude": 47.6887435,
+          "longitude": 9.1560768
+        },
+        {
+          "latitude": 47.6882727,
+          "longitude": 9.1580496
+        },
+        {
+          "latitude": 47.688181,
+          "longitude": 9.158735
+        },
+        {
+          "latitude": 47.688087,
+          "longitude": 9.1590629
+        },
+        {
+          "latitude": 47.6879622,
+          "longitude": 9.1602409
+        },
+        {
+          "latitude": 47.6879233,
+          "longitude": 9.1608461
+        },
+        {
+          "latitude": 47.6879711,
+          "longitude": 9.1614405
+        },
+        {
+          "latitude": 47.6891226,
+          "longitude": 9.1666343
+        },
+        {
+          "latitude": 47.689288,
+          "longitude": 9.1719355
+        },
+        {
+          "latitude": 47.696768,
+          "longitude": 9.1772618
+        },
+        {
+          "latitude": 47.7160558,
+          "longitude": 9.1588182
+        },
+        {
+          "latitude": 47.7196869,
+          "longitude": 9.1423117
+        },
+        {
+          "latitude": 47.7159308,
+          "longitude": 9.1313394
+        },
+        {
+          "latitude": 47.7106724,
+          "longitude": 9.1227735
+        },
+        {
+          "latitude": 47.7055892,
+          "longitude": 9.115839
+        },
+        {
+          "latitude": 47.6987149,
+          "longitude": 9.1331908
+        },
+        {
+          "latitude": 47.6911466,
+          "longitude": 9.1363237
+        },
+        {
+          "latitude": 47.6871603,
+          "longitude": 9.1325901
+        },
+        {
+          "latitude": 47.6826233,
+          "longitude": 9.1471085
+        }
+      ],
+      "progress": 43,
+      "totalQuests": 1
+    },
+    {
+      "id": "area_universit_t",
+      "name": "Universität",
+      "mainQuest": {
+        "id": "quest_aussicht_bei_der_mensa",
+        "title": "Aussicht bei der Mensa",
+        "description": "Erkunde die historischen Stätten und sammle Hinweise.",
+        "difficulty": "Schwer",
+        "reward": "100 XP",
+        "completed": true,
+        "progress": 86,
+        "totalSteps": 5,
+        "coordinates": {
+          "latitude": 47.6904132,
+          "longitude": 9.189375
+        },
+        "areaId": "Universität"
+      },
+      "unlocked": true,
+      "questList": [],
+      "coordinates": [
+        {
+          "latitude": 47.682854,
+          "longitude": 9.1888176
+        },
+        {
+          "latitude": 47.6830677,
+          "longitude": 9.1915095
+        },
+        {
+          "latitude": 47.6856679,
+          "longitude": 9.1935695
+        },
+        {
+          "latitude": 47.6895737,
+          "longitude": 9.1931876
+        },
+        {
+          "latitude": 47.6915958,
+          "longitude": 9.1903552
+        },
+        {
+          "latitude": 47.6938201,
+          "longitude": 9.1880807
+        },
+        {
+          "latitude": 47.696232,
+          "longitude": 9.1847397
+        },
+        {
+          "latitude": 47.6915236,
+          "longitude": 9.1837098
+        },
+        {
+          "latitude": 47.6913476,
+          "longitude": 9.1822515
+        },
+        {
+          "latitude": 47.6903943,
+          "longitude": 9.1827665
+        },
+        {
+          "latitude": 47.6896143,
+          "longitude": 9.1846977
+        },
+        {
+          "latitude": 47.689441,
+          "longitude": 9.1831528
+        },
+        {
+          "latitude": 47.6886899,
+          "longitude": 9.1832386
+        },
+        {
+          "latitude": 47.688401,
+          "longitude": 9.1839252
+        },
+        {
+          "latitude": 47.6877654,
+          "longitude": 9.1838823
+        },
+        {
+          "latitude": 47.6875921,
+          "longitude": 9.1849123
+        },
+        {
+          "latitude": 47.6870143,
+          "longitude": 9.1855989
+        },
+        {
+          "latitude": 47.6868698,
+          "longitude": 9.1881309
+        },
+        {
+          "latitude": 47.6855987,
+          "longitude": 9.1887747
+        },
+        {
+          "latitude": 47.6850958,
+          "longitude": 9.1887244
+        },
+        {
+          "latitude": 47.6838074,
+          "longitude": 9.1895901
+        },
+        {
+          "latitude": 47.682854,
+          "longitude": 9.1888176
+        }
+      ],
+      "progress": 19,
+      "totalQuests": 1
+    },
+    {
+      "id": "area_staad",
+      "name": "Staad",
+      "mainQuest": {
+        "id": "quest_h_rnle",
+        "title": "Hörnle",
+        "description": "Finde die versteckten Symbole und entschlüssle die Botschaft.",
+        "difficulty": "Mittel",
+        "reward": "100 XP",
+        "completed": false,
+        "progress": 87,
+        "totalSteps": 3,
+        "coordinates": {
+          "latitude": 47.6666504,
+          "longitude": 9.2151988
+        },
+        "areaId": "Staad"
+      },
+      "unlocked": true,
+      "questList": [],
+      "coordinates": [
+        {
+          "latitude": 47.6732728,
+          "longitude": 9.1937955
+        },
+        {
+          "latitude": 47.6666982,
+          "longitude": 9.1912206
+        },
+        {
+          "latitude": 47.6650938,
+          "longitude": 9.1942561
+        },
+        {
+          "latitude": 47.664169,
+          "longitude": 9.2005218
+        },
+        {
+          "latitude": 47.6628972,
+          "longitude": 9.2053283
+        },
+        {
+          "latitude": 47.6628972,
+          "longitude": 9.2103065
+        },
+        {
+          "latitude": 47.6644002,
+          "longitude": 9.2124522
+        },
+        {
+          "latitude": 47.6651516,
+          "longitude": 9.2163146
+        },
+        {
+          "latitude": 47.6654407,
+          "longitude": 9.2189754
+        },
+        {
+          "latitude": 47.6683307,
+          "longitude": 9.2182029
+        },
+        {
+          "latitude": 47.6706427,
+          "longitude": 9.2154563
+        },
+        {
+          "latitude": 47.6726078,
+          "longitude": 9.2145122
+        },
+        {
+          "latitude": 47.6738215,
+          "longitude": 9.2134822
+        },
+        {
+          "latitude": 47.6788493,
+          "longitude": 9.2127097
+        },
+        {
+          "latitude": 47.6834144,
+          "longitude": 9.2153705
+        },
+        {
+          "latitude": 47.6841656,
+          "longitude": 9.2127097
+        },
+        {
+          "latitude": 47.6846876,
+          "longitude": 9.2100996
+        },
+        {
+          "latitude": 47.6850901,
+          "longitude": 9.2061866
+        },
+        {
+          "latitude": 47.68353,
+          "longitude": 9.2027534
+        },
+        {
+          "latitude": 47.6807294,
+          "longitude": 9.2019886
+        },
+        {
+          "latitude": 47.6793694,
+          "longitude": 9.2012084
+        },
+        {
+          "latitude": 47.6748618,
+          "longitude": 9.2041266
+        },
+        {
+          "latitude": 47.6737059,
+          "longitude": 9.2023242
+        },
+        {
+          "latitude": 47.6732728,
+          "longitude": 9.1937955
+        }
+      ],
+      "progress": 61,
+      "totalQuests": 1
+    },
+    {
+      "id": "area_petershausen",
+      "name": "Petershausen",
+      "mainQuest": {
+        "id": "quest_heros_",
+        "title": "Herosé",
+        "description": "Löse das Rätsel und finde den geheimen Pfad.",
+        "difficulty": "Mittel",
+        "reward": "200 XP",
+        "completed": false,
+        "progress": 95,
+        "totalSteps": 4,
+        "coordinates": {
+          "latitude": 47.6695712,
+          "longitude": 9.174059
+        },
+        "areaId": "Petershausen"
+      },
+      "unlocked": true,
+      "questList": [],
+      "coordinates": [
+        {
+          "latitude": 47.6746382,
+          "longitude": 9.1711573
+        },
+        {
+          "latitude": 47.6764479,
+          "longitude": 9.1656106
+        },
+        {
+          "latitude": 47.6717038,
+          "longitude": 9.1632765
+        },
+        {
+          "latitude": 47.6701593,
+          "longitude": 9.1629857
+        },
+        {
+          "latitude": 47.6702171,
+          "longitude": 9.1680497
+        },
+        {
+          "latitude": 47.6674885,
+          "longitude": 9.1756419
+        },
+        {
+          "latitude": 47.6647603,
+          "longitude": 9.1817909
+        },
+        {
+          "latitude": 47.6653833,
+          "longitude": 9.1913975
+        },
+        {
+          "latitude": 47.6666982,
+          "longitude": 9.1912206
+        },
+        {
+          "latitude": 47.6732728,
+          "longitude": 9.1937955
+        },
+        {
+          "latitude": 47.6741975,
+          "longitude": 9.1919931
+        },
+        {
+          "latitude": 47.6763936,
+          "longitude": 9.1890748
+        },
+        {
+          "latitude": 47.6826918,
+          "longitude": 9.1731486
+        },
+        {
+          "latitude": 47.6824387,
+          "longitude": 9.172406
+        },
+        {
+          "latitude": 47.68263,
+          "longitude": 9.1706829
+        },
+        {
+          "latitude": 47.681611,
+          "longitude": 9.1706257
+        },
+        {
+          "latitude": 47.680741,
+          "longitude": 9.1716634
+        },
+        {
+          "latitude": 47.6789357,
+          "longitude": 9.1754017
+        },
+        {
+          "latitude": 47.6746382,
+          "longitude": 9.1711573
+        }
+      ],
+      "progress": 69,
+      "totalQuests": 1
+    },
+    {
+      "id": "area_k_nigsbau",
+      "name": "Königsbau",
+      "mainQuest": {
+        "id": "quest_bismarkturm",
+        "title": "Bismarkturm",
+        "description": "Finde die versteckten Symbole und entschlüssle die Botschaft.",
+        "difficulty": "Einfach",
+        "reward": "100 XP",
+        "completed": false,
+        "progress": 38,
+        "totalSteps": 5,
+        "coordinates": {
+          "latitude": 47.6814337,
+          "longitude": 9.1743326
+        },
+        "areaId": "Königsbau"
+      },
+      "unlocked": false,
+      "questList": [],
+      "coordinates": [
+        {
+          "latitude": 47.6765682,
+          "longitude": 9.1891018
+        },
+        {
+          "latitude": 47.6778669,
+          "longitude": 9.1932261
+        },
+        {
+          "latitude": 47.679875,
+          "longitude": 9.1928185
+        },
+        {
+          "latitude": 47.6830677,
+          "longitude": 9.1915095
+        },
+        {
+          "latitude": 47.682854,
+          "longitude": 9.1888176
+        },
+        {
+          "latitude": 47.6825651,
+          "longitude": 9.1872726
+        },
+        {
+          "latitude": 47.6828251,
+          "longitude": 9.1841827
+        },
+        {
+          "latitude": 47.6826806,
+          "longitude": 9.1802345
+        },
+        {
+          "latitude": 47.6824206,
+          "longitude": 9.1796337
+        },
+        {
+          "latitude": 47.6828132,
+          "longitude": 9.1787955
+        },
+        {
+          "latitude": 47.6833083,
+          "longitude": 9.1778447
+        },
+        {
+          "latitude": 47.6841541,
+          "longitude": 9.1759001
+        },
+        {
+          "latitude": 47.6826918,
+          "longitude": 9.1731486
+        },
+        {
+          "latitude": 47.6810528,
+          "longitude": 9.1770192
+        },
+        {
+          "latitude": 47.6795003,
+          "longitude": 9.1810184
+        },
+        {
+          "latitude": 47.6765682,
+          "longitude": 9.1891018
+        }
+      ],
+      "progress": 43,
+      "totalQuests": 1
+    },
+    {
+      "id": "area_industriegebiet",
+      "name": "Industriegebiet",
+      "mainQuest": {
+        "id": "quest_europabr_cke",
+        "title": "Europabrücke",
+        "description": "Löse das Rätsel und finde den geheimen Pfad.",
+        "difficulty": "Schwer",
+        "reward": "100 XP",
+        "completed": false,
+        "progress": 81,
+        "totalSteps": 1,
+        "coordinates": {
+          "latitude": 47.6734055,
+          "longitude": 9.1580483
+        },
+        "areaId": "Industriegebiet"
+      },
+      "unlocked": false,
+      "questList": [],
+      "coordinates": [
+        {
+          "latitude": 47.6871603,
+          "longitude": 9.1325901
+        },
+        {
+          "latitude": 47.6844325,
+          "longitude": 9.1293132
+        },
+        {
+          "latitude": 47.6776138,
+          "longitude": 9.1198718
+        },
+        {
+          "latitude": 47.672528,
+          "longitude": 9.1193568
+        },
+        {
+          "latitude": 47.6693781,
+          "longitude": 9.1228761
+        },
+        {
+          "latitude": 47.667095,
+          "longitude": 9.1291415
+        },
+        {
+          "latitude": 47.6644938,
+          "longitude": 9.1393554
+        },
+        {
+          "latitude": 47.6664882,
+          "longitude": 9.1454062
+        },
+        {
+          "latitude": 47.6675141,
+          "longitude": 9.1477881
+        },
+        {
+          "latitude": 47.6679042,
+          "longitude": 9.1518008
+        },
+        {
+          "latitude": 47.6695226,
+          "longitude": 9.158324
+        },
+        {
+          "latitude": 47.6718345,
+          "longitude": 9.1611993
+        },
+        {
+          "latitude": 47.6712854,
+          "longitude": 9.1629159
+        },
+        {
+          "latitude": 47.6764479,
+          "longitude": 9.1656106
+        },
+        {
+          "latitude": 47.6871603,
+          "longitude": 9.1325901
+        }
+      ],
+      "progress": 5,
+      "totalQuests": 1
+    },
+    {
+      "id": "area_f_rstenberg",
+      "name": "Fürstenberg",
+      "mainQuest": {
+        "id": "quest_f_rstenberg___aussichtspunkt",
+        "title": "Fürstenberg - Aussichtspunkt",
+        "description": "Löse das Rätsel und finde den geheimen Pfad.",
+        "difficulty": "Mittel",
+        "reward": "50 XP",
+        "completed": false,
+        "progress": 20,
+        "totalSteps": 4,
+        "coordinates": {
+          "latitude": 47.6820375,
+          "longitude": 9.1608917
+        },
+        "areaId": "Fürstenberg"
+      },
+      "unlocked": true,
+      "questList": [],
+      "coordinates": [
+        {
+          "latitude": 47.6826233,
+          "longitude": 9.1471085
+        },
+        {
+          "latitude": 47.6796262,
+          "longitude": 9.1559097
+        },
+        {
+          "latitude": 47.6794817,
+          "longitude": 9.1564246
+        },
+        {
+          "latitude": 47.6791783,
+          "longitude": 9.1575404
+        },
+        {
+          "latitude": 47.6787593,
+          "longitude": 9.1588709
+        },
+        {
+          "latitude": 47.6780226,
+          "longitude": 9.161038
+        },
+        {
+          "latitude": 47.6771702,
+          "longitude": 9.1639992
+        },
+        {
+          "latitude": 47.6762771,
+          "longitude": 9.1665625
+        },
+        {
+          "latitude": 47.674844,
+          "longitude": 9.1711875
+        },
+        {
+          "latitude": 47.6788346,
+          "longitude": 9.1754017
+        },
+        {
+          "latitude": 47.680741,
+          "longitude": 9.1716634
+        },
+        {
+          "latitude": 47.681611,
+          "longitude": 9.1706257
+        },
+        {
+          "latitude": 47.6825389,
+          "longitude": 9.1706608
+        },
+        {
+          "latitude": 47.6832678,
+          "longitude": 9.1681991
+        },
+        {
+          "latitude": 47.6849822,
+          "longitude": 9.1654836
+        },
+        {
+          "latitude": 47.6852231,
+          "longitude": 9.1653
+        },
+        {
+          "latitude": 47.685353,
+          "longitude": 9.164794
+        },
+        {
+          "latitude": 47.6856372,
+          "longitude": 9.1639756
+        },
+        {
+          "latitude": 47.6862632,
+          "longitude": 9.1623388
+        },
+        {
+          "latitude": 47.6875921,
+          "longitude": 9.1630255
+        },
+        {
+          "latitude": 47.6881988,
+          "longitude": 9.162768
+        },
+        {
+          "latitude": 47.6878717,
+          "longitude": 9.1598017
+        },
+        {
+          "latitude": 47.6892175,
+          "longitude": 9.1541156
+        },
+        {
+          "latitude": 47.6892734,
+          "longitude": 9.1513766
+        },
+        {
+          "latitude": 47.6826233,
+          "longitude": 9.1471085
+        }
+      ],
+      "progress": 0,
+      "totalQuests": 1
+    },
+    {
+      "id": "area_egg",
+      "name": "Egg",
+      "mainQuest": {
+        "id": "quest_egg_hauptquest",
+        "title": "Egg Hauptquest",
+        "description": "Entdecke die versteckten Schätze dieser Gegend.",
+        "difficulty": "Einfach",
+        "reward": "150 XP",
+        "completed": false,
+        "progress": 99,
+        "totalSteps": 4,
+        "coordinates": {
+          "latitude": 47.6893118,
+          "longitude": 9.1933676
+        }
+      },
+      "unlocked": false,
+      "questList": [],
+      "coordinates": [
+        {
+          "latitude": 47.6893118,
+          "longitude": 9.1933676
+        },
+        {
+          "latitude": 47.6932405,
+          "longitude": 9.1985604
+        },
+        {
+          "latitude": 47.6963024,
+          "longitude": 9.1965433
+        },
+        {
+          "latitude": 47.6987864,
+          "longitude": 9.1877028
+        },
+        {
+          "latitude": 47.6974451,
+          "longitude": 9.1832377
+        },
+        {
+          "latitude": 47.6895737,
+          "longitude": 9.1931876
+        },
+        {
+          "latitude": 47.6893118,
+          "longitude": 9.1933676
+        }
+      ],
+      "progress": 95,
+      "totalQuests": 0
+    },
+    {
+      "id": "area_sch_nzle",
+      "name": "Schänzle",
+      "mainQuest": {
+        "id": "quest_paradieskapelle",
+        "title": "Paradieskapelle",
+        "description": "Entdecke die versteckten Schätze dieser Gegend.",
+        "difficulty": "Schwer",
+        "reward": "100 XP",
+        "completed": false,
+        "progress": 86,
+        "totalSteps": 4,
+        "coordinates": {
+          "latitude": 47.6656168,
+          "longitude": 9.1607992
+        },
+        "areaId": "Schänzle"
+      },
+      "unlocked": true,
+      "questList": [],
+      "coordinates": [
+        {
+          "latitude": 47.6660583,
+          "longitude": 9.1566504
+        },
+        {
+          "latitude": 47.6657404,
+          "longitude": 9.1578949
+        },
+        {
+          "latitude": 47.6642375,
+          "longitude": 9.1594614
+        },
+        {
+          "latitude": 47.663486,
+          "longitude": 9.1600408
+        },
+        {
+          "latitude": 47.6632945,
+          "longitude": 9.1600032
+        },
+        {
+          "latitude": 47.6631464,
+          "longitude": 9.1599227
+        },
+        {
+          "latitude": 47.6628502,
+          "longitude": 9.1600407
+        },
+        {
+          "latitude": 47.6622581,
+          "longitude": 9.1606729
+        },
+        {
+          "latitude": 47.66176,
+          "longitude": 9.1614659
+        },
+        {
+          "latitude": 47.6629667,
+          "longitude": 9.1617126
+        },
+        {
+          "latitude": 47.6630823,
+          "longitude": 9.1619058
+        },
+        {
+          "latitude": 47.667293,
+          "longitude": 9.1625373
+        },
+        {
+          "latitude": 47.6701593,
+          "longitude": 9.1629857
+        },
+        {
+          "latitude": 47.6702697,
+          "longitude": 9.1614644
+        },
+        {
+          "latitude": 47.6698796,
+          "longitude": 9.159662
+        },
+        {
+          "latitude": 47.6689548,
+          "longitude": 9.1569583
+        },
+        {
+          "latitude": 47.6684201,
+          "longitude": 9.15507
+        },
+        {
+          "latitude": 47.6682467,
+          "longitude": 9.1541688
+        },
+        {
+          "latitude": 47.6660583,
+          "longitude": 9.1566504
+        }
+      ],
+      "progress": 32,
+      "totalQuests": 1
+    },
+    {
+      "id": "area_paradies",
+      "name": "Paradies",
+      "mainQuest": {
+        "id": "quest_htwg",
+        "title": "HTWG",
+        "description": "Erkunde die historischen Stätten und sammle Hinweise.",
+        "difficulty": "Mittel",
+        "reward": "200 XP",
+        "completed": false,
+        "progress": 38,
+        "totalSteps": 2,
+        "solutionWord": "lösung_htwg",
+        "coordinates": {
+          "latitude": 47.668512,
+          "longitude": 9.1698093
+        },
+        "areaId": "Paradies"
+      },
+      "unlocked": true,
+      "questList": [],
+      "coordinates": [
+        {
+          "latitude": 47.6701593,
+          "longitude": 9.1629857
+        },
+        {
+          "latitude": 47.6630823,
+          "longitude": 9.1619058
+        },
+        {
+          "latitude": 47.661695,
+          "longitude": 9.1705103
+        },
+        {
+          "latitude": 47.6613481,
+          "longitude": 9.1708965
+        },
+        {
+          "latitude": 47.6611024,
+          "longitude": 9.171669
+        },
+        {
+          "latitude": 47.6649544,
+          "longitude": 9.1737342
+        },
+        {
+          "latitude": 47.6674885,
+          "longitude": 9.1756419
+        },
+        {
+          "latitude": 47.6702171,
+          "longitude": 9.1680497
+        },
+        {
+          "latitude": 47.6701593,
+          "longitude": 9.1629857
+        }
+      ],
+      "progress": 24,
+      "totalQuests": 1
+    },
+    {
+      "id": "area_stadelhofen",
+      "name": "Stadelhofen",
+      "mainQuest": {
+        "id": "quest_stadelhofen_hauptquest",
+        "title": "Stadelhofen Hauptquest",
+        "description": "Finde die versteckten Symbole und entschlüssle die Botschaft.",
+        "difficulty": "Mittel",
+        "reward": "200 XP",
+        "completed": true,
+        "progress": 95,
+        "totalSteps": 1,
+        "coordinates": {
+          "latitude": 47.6548622,
+          "longitude": 9.1706609
+        }
+      },
+      "unlocked": true,
+      "questList": [],
+      "coordinates": [
+        {
+          "latitude": 47.6548622,
+          "longitude": 9.1706609
+        },
+        {
+          "latitude": 47.655144,
+          "longitude": 9.1712966
+        },
+        {
+          "latitude": 47.6554295,
+          "longitude": 9.1719645
+        },
+        {
+          "latitude": 47.6554728,
+          "longitude": 9.1723024
+        },
+        {
+          "latitude": 47.6554728,
+          "longitude": 9.1724365
+        },
+        {
+          "latitude": 47.6553211,
+          "longitude": 9.1729247
+        },
+        {
+          "latitude": 47.6554656,
+          "longitude": 9.1739708
+        },
+        {
+          "latitude": 47.6557836,
+          "longitude": 9.1754996
+        },
+        {
+          "latitude": 47.6539805,
+          "longitude": 9.1759395
+        },
+        {
+          "latitude": 47.6544466,
+          "longitude": 9.1768729
+        },
+        {
+          "latitude": 47.6578089,
+          "longitude": 9.1765874
+        },
+        {
+          "latitude": 47.6584873,
+          "longitude": 9.1706901
+        },
+        {
+          "latitude": 47.6587467,
+          "longitude": 9.1703064
+        },
+        {
+          "latitude": 47.6584866,
+          "longitude": 9.1697485
+        },
+        {
+          "latitude": 47.657735,
+          "longitude": 9.1695339
+        },
+        {
+          "latitude": 47.6569835,
+          "longitude": 9.1685898
+        },
+        {
+          "latitude": 47.656445,
+          "longitude": 9.1691265
+        },
+        {
+          "latitude": 47.6560221,
+          "longitude": 9.1697704
+        },
+        {
+          "latitude": 47.6550103,
+          "longitude": 9.1703497
+        },
+        {
+          "latitude": 47.6548622,
+          "longitude": 9.1706609
+        }
+      ],
+      "progress": 44,
+      "totalQuests": 0
+    },
+    {
+      "id": "area_niederburg",
+      "name": "Niederburg",
+      "mainQuest": {
+        "id": "quest_niederburg_hauptquest",
+        "title": "Niederburg Hauptquest",
+        "description": "Erkunde die historischen Stätten und sammle Hinweise.",
+        "difficulty": "Einfach",
+        "reward": "250 XP",
+        "completed": false,
+        "progress": 98,
+        "totalSteps": 2,
+        "coordinates": {
+          "latitude": 47.6649544,
+          "longitude": 9.1737342
+        }
+      },
+      "unlocked": true,
+      "questList": [],
+      "coordinates": [
+        {
+          "latitude": 47.6649544,
+          "longitude": 9.1737342
+        },
+        {
+          "latitude": 47.66494,
+          "longitude": 9.1738308
+        },
+        {
+          "latitude": 47.6648171,
+          "longitude": 9.1745174
+        },
+        {
+          "latitude": 47.6648244,
+          "longitude": 9.174909
+        },
+        {
+          "latitude": 47.664781,
+          "longitude": 9.1752684
+        },
+        {
+          "latitude": 47.6646437,
+          "longitude": 9.1758263
+        },
+        {
+          "latitude": 47.6644992,
+          "longitude": 9.1763735
+        },
+        {
+          "latitude": 47.6643475,
+          "longitude": 9.1770494
+        },
+        {
+          "latitude": 47.6643257,
+          "longitude": 9.1776528
+        },
+        {
+          "latitude": 47.6646718,
+          "longitude": 9.1776066
+        },
+        {
+          "latitude": 47.6656527,
+          "longitude": 9.1781698
+        },
+        {
+          "latitude": 47.6661301,
+          "longitude": 9.1784421
+        },
+        {
+          "latitude": 47.6674885,
+          "longitude": 9.1756419
+        },
+        {
+          "latitude": 47.6670477,
+          "longitude": 9.17532
+        },
+        {
+          "latitude": 47.6664481,
+          "longitude": 9.1748801
+        },
+        {
+          "latitude": 47.6649544,
+          "longitude": 9.1737342
+        }
+      ],
+      "progress": 26,
+      "totalQuests": 0
+    },
+    {
+      "id": "area_altstadt",
+      "name": "Altstadt",
+      "mainQuest": {
+        "id": "quest_m_nster",
+        "title": "Münster",
+        "description": "Finde die versteckten Symbole und entschlüssle die Botschaft.",
+        "difficulty": "Schwer",
+        "reward": "100 XP",
+        "completed": false,
+        "progress": 2,
+        "totalSteps": 4,
+        "solutionWord": "lösung_m_nster",
+        "coordinates": {
+          "latitude": 47.6634334,
+          "longitude": 9.1755182
+        },
+        "areaId": "Altstadt"
+      },
+      "unlocked": true,
+      "questList": [],
+      "coordinates": [
+        {
+          "latitude": 47.6649544,
+          "longitude": 9.1737342
+        },
+        {
+          "latitude": 47.6611169,
+          "longitude": 9.171626
+        },
+        {
+          "latitude": 47.6611024,
+          "longitude": 9.171669
+        },
+        {
+          "latitude": 47.6609529,
+          "longitude": 9.1715905
+        },
+        {
+          "latitude": 47.6608034,
+          "longitude": 9.1714906
+        },
+        {
+          "latitude": 47.6604972,
+          "longitude": 9.1713283
+        },
+        {
+          "latitude": 47.6599137,
+          "longitude": 9.1709769
+        },
+        {
+          "latitude": 47.6587322,
+          "longitude": 9.1702957
+        },
+        {
+          "latitude": 47.6586052,
+          "longitude": 9.1704808
+        },
+        {
+          "latitude": 47.6584728,
+          "longitude": 9.1706794
+        },
+        {
+          "latitude": 47.6577944,
+          "longitude": 9.1765767
+        },
+        {
+          "latitude": 47.6601936,
+          "longitude": 9.1771989
+        },
+        {
+          "latitude": 47.6607428,
+          "longitude": 9.1777139
+        },
+        {
+          "latitude": 47.6612269,
+          "longitude": 9.1777836
+        },
+        {
+          "latitude": 47.6617689,
+          "longitude": 9.177392
+        },
+        {
+          "latitude": 47.6626215,
+          "longitude": 9.1777783
+        },
+        {
+          "latitude": 47.6643257,
+          "longitude": 9.1776528
+        },
+        {
+          "latitude": 47.6643475,
+          "longitude": 9.1770494
+        },
+        {
+          "latitude": 47.6645606,
+          "longitude": 9.1761589
+        },
+        {
+          "latitude": 47.664781,
+          "longitude": 9.1752684
+        },
+        {
+          "latitude": 47.6648244,
+          "longitude": 9.174909
+        },
+        {
+          "latitude": 47.6648171,
+          "longitude": 9.1745174
+        },
+        {
+          "latitude": 47.6649544,
+          "longitude": 9.1737342
+        }
+      ],
+      "progress": 71,
+      "totalQuests": 1
+    },
+    {
+      "id": "area_allmannsdorf",
+      "name": "Allmannsdorf",
+      "mainQuest": {
+        "id": "quest_katholische_kirche",
+        "title": "Katholische Kirche",
+        "description": "Erkunde die historischen Stätten und sammle Hinweise.",
+        "difficulty": "Einfach",
+        "reward": "150 XP",
+        "completed": false,
+        "progress": 89,
+        "totalSteps": 5,
+        "solutionWord": "lösung_katholische_kirche",
+        "coordinates": {
+          "latitude": 47.6745787,
+          "longitude": 9.1984314
+        },
+        "areaId": "Allmannsdorf"
+      },
+      "unlocked": true,
+      "questList": [],
+      "coordinates": [
+        {
+          "latitude": 47.6830677,
+          "longitude": 9.1915095
+        },
+        {
+          "latitude": 47.6797161,
+          "longitude": 9.1928828
+        },
+        {
+          "latitude": 47.6778669,
+          "longitude": 9.1932261
+        },
+        {
+          "latitude": 47.6763936,
+          "longitude": 9.1890748
+        },
+        {
+          "latitude": 47.6732728,
+          "longitude": 9.1937955
+        },
+        {
+          "latitude": 47.6737059,
+          "longitude": 9.2023242
+        },
+        {
+          "latitude": 47.6748618,
+          "longitude": 9.2041266
+        },
+        {
+          "latitude": 47.6793694,
+          "longitude": 9.2012084
+        },
+        {
+          "latitude": 47.68353,
+          "longitude": 9.2027534
+        },
+        {
+          "latitude": 47.6854368,
+          "longitude": 9.1974319
+        },
+        {
+          "latitude": 47.6856679,
+          "longitude": 9.1935695
+        },
+        {
+          "latitude": 47.6830677,
+          "longitude": 9.1915095
+        }
+      ],
+      "progress": 84,
+      "totalQuests": 1
+    }
+  ],
+  "mapQuestMarkers": [
+    {
+      "id": "quest_geheimer_aussichtspunkt",
+      "title": "geheimer Aussichtspunkt",
+      "type": "main",
+      "coordinates": {
+        "latitude": 47.694714,
+        "longitude": 9.1461848
+      },
+      "completed": false,
+      "areaId": "Wollmatingen"
+    },
+    {
+      "id": "quest_aussicht_bei_der_mensa",
+      "title": "Aussicht bei der Mensa",
+      "type": "main",
+      "coordinates": {
+        "latitude": 47.6904132,
+        "longitude": 9.189375
+      },
+      "completed": true,
+      "areaId": "Universität"
+    },
+    {
+      "id": "quest_h_rnle",
+      "title": "Hörnle",
+      "type": "main",
+      "coordinates": {
+        "latitude": 47.6666504,
+        "longitude": 9.2151988
+      },
+      "completed": false,
+      "areaId": "Staad"
+    },
+    {
+      "id": "quest_bismarkturm",
+      "title": "Bismarkturm",
+      "type": "main",
+      "coordinates": {
+        "latitude": 47.6814337,
+        "longitude": 9.1743326
+      },
+      "completed": false,
+      "areaId": "Königsbau"
+    },
+    {
+      "id": "quest_heros_",
+      "title": "Herosé",
+      "type": "main",
+      "coordinates": {
+        "latitude": 47.6695712,
+        "longitude": 9.174059
+      },
+      "completed": false,
+      "areaId": "Petershausen"
+    },
+    {
+      "id": "quest_f_rstenberg___aussichtspunkt",
+      "title": "Fürstenberg - Aussichtspunkt",
+      "type": "main",
+      "coordinates": {
+        "latitude": 47.6820375,
+        "longitude": 9.1608917
+      },
+      "completed": false,
+      "areaId": "Fürstenberg"
+    },
+    {
+      "id": "quest_paradieskapelle",
+      "title": "Paradieskapelle",
+      "type": "main",
+      "coordinates": {
+        "latitude": 47.6656168,
+        "longitude": 9.1607992
+      },
+      "completed": false,
+      "areaId": "Schänzle"
+    },
+    {
+      "id": "quest_htwg",
+      "title": "HTWG",
+      "type": "main",
+      "coordinates": {
+        "latitude": 47.668512,
+        "longitude": 9.1698093
+      },
+      "completed": false,
+      "areaId": "Paradies"
+    },
+    {
+      "id": "quest_m_nster",
+      "title": "Münster",
+      "type": "main",
+      "coordinates": {
+        "latitude": 47.6634334,
+        "longitude": 9.1755182
+      },
+      "completed": false,
+      "areaId": "Altstadt"
+    },
+    {
+      "id": "quest_katholische_kirche",
+      "title": "Katholische Kirche",
+      "type": "main",
+      "coordinates": {
+        "latitude": 47.6745787,
+        "longitude": 9.1984314
+      },
+      "completed": false,
+      "areaId": "Allmannsdorf"
+    },
+    {
+      "id": "quest_europabr_cke",
+      "title": "Europabrücke",
+      "type": "main",
+      "coordinates": {
+        "latitude": 47.6734055,
+        "longitude": 9.1580483
+      },
+      "completed": false,
+      "areaId": "Industriegebiet"
+    },
+    {
+      "id": "quest_grillstelle",
+      "title": "Grillstelle",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6918365,
+        "longitude": 9.1601481
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_kneipe",
+      "title": "Kneipe",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6934777,
+        "longitude": 9.1446294
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_kampfmittel_verseuchtes_sperrgebiet",
+      "title": "Kampfmittel verseuchtes Sperrgebiet",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.7024472,
+        "longitude": 9.1530709
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_kirche",
+      "title": "Kirche",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6925896,
+        "longitude": 9.1470063
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_sportger_te",
+      "title": "Sportgeräte",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6850221,
+        "longitude": 9.1454798
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_ewiges_auto",
+      "title": "Ewiges Auto",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6881446,
+        "longitude": 9.1855196
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_botanischer_garten",
+      "title": "Botanischer Garten",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6921162,
+        "longitude": 9.1786306
+      },
+      "completed": true,
+      "areaId": ""
+    },
+    {
+      "id": "quest_ist_das_kunst_oder_kann_das_weg_",
+      "title": "Ist das Kunst oder kann das weg?",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6873954,
+        "longitude": 9.1897472
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_uni_zoo___sos_affenalarm",
+      "title": "Uni Zoo - SOS Affenalarm",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6906521,
+        "longitude": 9.1878361
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_schmugglerbucht",
+      "title": "Schmugglerbucht",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6657401,
+        "longitude": 9.1965306
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_bodenseestadion",
+      "title": "Bodenseestadion",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6682544,
+        "longitude": 9.2133964
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_lorettowald",
+      "title": "Lorettowald",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6694682,
+        "longitude": 9.2036645
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_f_hre_konstanz_meersburg",
+      "title": "Fähre Konstanz-Meersburg",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6824091,
+        "longitude": 9.2113034
+      },
+      "completed": true,
+      "areaId": ""
+    },
+    {
+      "id": "quest_therme",
+      "title": "Therme",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6643193,
+        "longitude": 9.2085139
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_geheimes_schl_sschen",
+      "title": "Geheimes Schlösschen",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6657428,
+        "longitude": 9.2117781
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_taubenhaus",
+      "title": "Taubenhaus",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6689087,
+        "longitude": 9.1697241
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_bewegungspark",
+      "title": "Bewegungspark",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.668071,
+        "longitude": 9.1643228
+      },
+      "completed": true,
+      "areaId": ""
+    },
+    {
+      "id": "quest_seestra_e",
+      "title": "Seestraße",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6667012,
+        "longitude": 9.1843009
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_arch_ologisches_landesmuseum",
+      "title": "Archäologisches Landesmuseum",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6680595,
+        "longitude": 9.1792368
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_keira_knightley_spot",
+      "title": "Keira Knightley Spot",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6664834,
+        "longitude": 9.1831304
+      },
+      "completed": true,
+      "areaId": ""
+    },
+    {
+      "id": "quest_yachthafen",
+      "title": "Yachthafen",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6666976,
+        "longitude": 9.1895299
+      },
+      "completed": true,
+      "areaId": ""
+    },
+    {
+      "id": "quest_destille",
+      "title": "Destille",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6681597,
+        "longitude": 9.1808344
+      },
+      "completed": true,
+      "areaId": ""
+    },
+    {
+      "id": "quest_kreativ_werkst__tte",
+      "title": "Kreativ Werkst√§tte",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.669727,
+        "longitude": 9.1820354
+      },
+      "completed": true,
+      "areaId": ""
+    },
+    {
+      "id": "quest_moschee",
+      "title": "Moschee",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6717983,
+        "longitude": 9.1696927
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_constanzer_wirtshaus",
+      "title": "Constanzer Wirtshaus",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.667915,
+        "longitude": 9.1775631
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_bodensee_kebap",
+      "title": "Bodensee Kebap",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6713184,
+        "longitude": 9.175722
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_fahrradbr_cke",
+      "title": "Fahrradbrücke",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6686175,
+        "longitude": 9.1741877
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_grey___club",
+      "title": "Grey - Club",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6762114,
+        "longitude": 9.1579554
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_geheimtipp",
+      "title": "Geheimtipp",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6658901,
+        "longitude": 9.135363
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_segelflugplatz",
+      "title": "Segelflugplatz",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6818168,
+        "longitude": 9.1383216
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_sch_ne_badestelle",
+      "title": "schöne Badestelle",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.669867,
+        "longitude": 9.153701
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_naturschutzgebiet___sch_ne_aussicht",
+      "title": "Naturschutzgebiet - schöne Aussicht",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6722769,
+        "longitude": 9.1402124
+      },
+      "completed": true,
+      "areaId": ""
+    },
+    {
+      "id": "quest_bouldern",
+      "title": "Bouldern",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6752171,
+        "longitude": 9.143687
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_heimathafen",
+      "title": "Heimathafen",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6788099,
+        "longitude": 9.1626903
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_urige_bikerkneipe",
+      "title": "Urige Bikerkneipe",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6808781,
+        "longitude": 9.1629248
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_contrast___jk_e_v_",
+      "title": "contrast - JK e.V.",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6791674,
+        "longitude": 9.1634934
+      },
+      "completed": true,
+      "areaId": ""
+    },
+    {
+      "id": "quest_kula",
+      "title": "KuLa",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.678999,
+        "longitude": 9.1632598
+      },
+      "completed": true,
+      "areaId": ""
+    },
+    {
+      "id": "quest_j_discher_friedhof",
+      "title": "Jüdischer Friedhof",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6807402,
+        "longitude": 9.1720151
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_hillsong_church",
+      "title": "Hillsong Church",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6759842,
+        "longitude": 9.1717989
+      },
+      "completed": true,
+      "areaId": ""
+    },
+    {
+      "id": "quest_kleingartensiedlung",
+      "title": "Kleingartensiedlung",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6822508,
+        "longitude": 9.166413
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_zebra_kino",
+      "title": "Zebra Kino",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6788749,
+        "longitude": 9.1630218
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_hackathon",
+      "title": "Hackathon",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6764861,
+        "longitude": 9.169071
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_skatepark___fun_fun_fun",
+      "title": "Skatepark - Fun Fun Fun",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6826681,
+        "longitude": 9.1479716
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_kunstgrenze",
+      "title": "Kunstgrenze",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6552957,
+        "longitude": 9.1792725
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_zoll",
+      "title": "Zoll",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6561775,
+        "longitude": 9.1695218
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_hafen",
+      "title": "Hafen",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6571999,
+        "longitude": 9.1790016
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_schnetztoor",
+      "title": "Schnetztoor",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6587246,
+        "longitude": 9.1709458
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_zoll",
+      "title": "Zoll",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6617848,
+        "longitude": 9.1613817
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_rathaus",
+      "title": "Rathaus",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6605035,
+        "longitude": 9.1736475
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_zoll",
+      "title": "Zoll",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6556289,
+        "longitude": 9.1734221
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_vogelfoliere",
+      "title": "Vogelfoliere",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6629564,
+        "longitude": 9.179164
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_gradmann_caf_",
+      "title": "Gradmann Café",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6604439,
+        "longitude": 9.1725934
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_kaiserbrunnen",
+      "title": "Kaiserbrunnen",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6603535,
+        "longitude": 9.1749135
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_konzertmusche",
+      "title": "Konzertmusche",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6624072,
+        "longitude": 9.1789581
+      },
+      "completed": true,
+      "areaId": ""
+    },
+    {
+      "id": "quest_point_47",
+      "title": "Point 47",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6599814,
+        "longitude": 9.1732856
+      },
+      "completed": true,
+      "areaId": ""
+    },
+    {
+      "id": "quest_konzilgeb_ude",
+      "title": "Konzilgebäude",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6610278,
+        "longitude": 9.1782306
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_graf_zeppelin_denkmal",
+      "title": "Graf Zeppelin Denkmal",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6611362,
+        "longitude": 9.1793679
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_palmenhaus",
+      "title": "Palmenhaus",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6604898,
+        "longitude": 9.1645943
+      },
+      "completed": true,
+      "areaId": ""
+    },
+    {
+      "id": "quest_ziegen",
+      "title": "Ziegen",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6626936,
+        "longitude": 9.1619796
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_d_beleplatzumgebung",
+      "title": "Döbeleplatzumgebung",
+      "type": "sub",
+      "coordinates": [
+        {
+          "latitude": 47.6630823,
+          "longitude": 9.1619058
+        },
+        {
+          "latitude": 47.6629667,
+          "longitude": 9.1617126
+        },
+        {
+          "latitude": 47.66176,
+          "longitude": 9.1614659
+        },
+        {
+          "latitude": 47.6594838,
+          "longitude": 9.1646953
+        },
+        {
+          "latitude": 47.656969,
+          "longitude": 9.1685791
+        },
+        {
+          "latitude": 47.6577205,
+          "longitude": 9.1695232
+        },
+        {
+          "latitude": 47.6584721,
+          "longitude": 9.1697378
+        },
+        {
+          "latitude": 47.6587322,
+          "longitude": 9.1702957
+        },
+        {
+          "latitude": 47.6592002,
+          "longitude": 9.1705613
+        },
+        {
+          "latitude": 47.6611024,
+          "longitude": 9.171669
+        },
+        {
+          "latitude": 47.6613481,
+          "longitude": 9.1708965
+        },
+        {
+          "latitude": 47.661695,
+          "longitude": 9.1705103
+        },
+        {
+          "latitude": 47.6619262,
+          "longitude": 9.1692657
+        },
+        {
+          "latitude": 47.6622875,
+          "longitude": 9.1667767
+        },
+        {
+          "latitude": 47.6630823,
+          "longitude": 9.1619058
+        }
+      ],
+      "completed": true,
+      "areaId": ""
+    },
+    {
+      "id": "quest_hafenareal",
+      "title": "Hafenareal",
+      "type": "sub",
+      "coordinates": [
+        {
+          "latitude": 47.6661391,
+          "longitude": 9.1784421
+        },
+        {
+          "latitude": 47.6647025,
+          "longitude": 9.1776281
+        },
+        {
+          "latitude": 47.6626215,
+          "longitude": 9.1777783
+        },
+        {
+          "latitude": 47.6617689,
+          "longitude": 9.177392
+        },
+        {
+          "latitude": 47.6612486,
+          "longitude": 9.1777783
+        },
+        {
+          "latitude": 47.6607428,
+          "longitude": 9.1777139
+        },
+        {
+          "latitude": 47.6601936,
+          "longitude": 9.1771989
+        },
+        {
+          "latitude": 47.6577944,
+          "longitude": 9.1765767
+        },
+        {
+          "latitude": 47.6566057,
+          "longitude": 9.176684
+        },
+        {
+          "latitude": 47.6540943,
+          "longitude": 9.17692
+        },
+        {
+          "latitude": 47.6522442,
+          "longitude": 9.1775422
+        },
+        {
+          "latitude": 47.651601,
+          "longitude": 9.1788834
+        },
+        {
+          "latitude": 47.6508999,
+          "longitude": 9.1800528
+        },
+        {
+          "latitude": 47.6512034,
+          "longitude": 9.180718
+        },
+        {
+          "latitude": 47.6517961,
+          "longitude": 9.1813403
+        },
+        {
+          "latitude": 47.6533138,
+          "longitude": 9.1822737
+        },
+        {
+          "latitude": 47.6545425,
+          "longitude": 9.1831213
+        },
+        {
+          "latitude": 47.6574765,
+          "longitude": 9.181469
+        },
+        {
+          "latitude": 47.6618267,
+          "longitude": 9.1822415
+        },
+        {
+          "latitude": 47.6647603,
+          "longitude": 9.1817909
+        },
+        {
+          "latitude": 47.6654251,
+          "longitude": 9.1800206
+        },
+        {
+          "latitude": 47.6661391,
+          "longitude": 9.1784421
+        }
+      ],
+      "completed": true,
+      "areaId": ""
+    },
+    {
+      "id": "quest_imperia",
+      "title": "Imperia",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6609095,
+        "longitude": 9.1811346
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_rheintorturm",
+      "title": "Rheintorturm",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6660868,
+        "longitude": 9.1773137
+      },
+      "completed": true,
+      "areaId": ""
+    },
+    {
+      "id": "quest_hussenstein",
+      "title": "Hussenstein",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6611241,
+        "longitude": 9.1642554
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_lago",
+      "title": "Lago",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6563954,
+        "longitude": 9.1762821
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_lorettokapelle",
+      "title": "Lorettokapelle",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6771355,
+        "longitude": 9.2022516
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_uni_strand",
+      "title": "Uni Strand",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6955179,
+        "longitude": 9.1932492
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_br_cke_nach_egg",
+      "title": "Brücke nach Egg",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6934454,
+        "longitude": 9.1884964
+      },
+      "completed": false,
+      "areaId": ""
+    },
+    {
+      "id": "quest_spielplatz",
+      "title": "Spielplatz",
+      "type": "sub",
+      "coordinates": {
+        "latitude": 47.6923639,
+        "longitude": 9.1920623
+      },
+      "completed": false,
+      "areaId": ""
+    }
+  ],
+  "generatedAt": "2025-06-28T13:09:05.376Z"
+}

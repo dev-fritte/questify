@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { questAreas } from '@/data/questAreas';
+// import { questAreas } from '@/data/questAreas';
+import mockData from '@/data/mockData.json';
 import { QuestArea } from '@/types/QuestArea';
 
 interface QuestContextType {
@@ -37,8 +38,30 @@ interface QuestProviderProps {
   children: ReactNode;
 }
 
+const allowedDifficulties = ['Einfach', 'Mittel', 'Schwer'];
+
+function mapMockQuestAreas(areas: any[]): QuestArea[] {
+  return areas.map(area => ({
+    ...area,
+    unlocked: false,
+    mainQuest: {
+      ...area.mainQuest,
+      difficulty: allowedDifficulties.includes(area.mainQuest.difficulty)
+        ? area.mainQuest.difficulty
+        : 'Einfach',
+    },
+    questList: area.questList.map((q: any) => ({
+      ...q,
+      difficulty: allowedDifficulties.includes(q.difficulty)
+        ? q.difficulty
+        : 'Einfach',
+    })),
+  }));
+}
+
 export const QuestProvider: React.FC<QuestProviderProps> = ({ children }) => {
-  const [areas, setAreas] = useState<QuestArea[]>(questAreas);
+  // Use questAreas from mockData.json, mapped to correct types
+  const [areas, setAreas] = useState<QuestArea[]>(mapMockQuestAreas(mockData.questAreas));
   const [selectedQuest, setSelectedQuest] = useState<any | null>(null);
   const [hasNewAchievementBadge, setHasNewAchievementBadge] = useState(false);
   const [lastCompletedQuestsCount, setLastCompletedQuestsCount] = useState(0);

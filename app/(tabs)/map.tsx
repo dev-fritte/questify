@@ -316,10 +316,41 @@ export default function MapScreen() {
     return 'rgba(0, 0, 0, 0.3)'; // Dark overlay for locked
   };
 
-  // Create holes in the fog for unlocked areas
-  const createFogOfWarHoles = () => {
+  // Create fog-like texture with multiple overlapping layers
+  const createFogLayers = () => {
+    const baseCoordinates = getFogOfWarCoordinates();
     const unlockedAreas = areas.filter(area => area.unlocked);
-    return unlockedAreas.map(area => area.coordinates);
+    const holes = unlockedAreas.map(area => area.coordinates);
+    
+    // Create multiple layers with slight variations for fog texture effect
+    const layers = [
+      {
+        coordinates: baseCoordinates.map(coord => ({
+          latitude: coord.latitude + (Math.random() - 0.5) * 0.001,
+          longitude: coord.longitude + (Math.random() - 0.5) * 0.001,
+        })),
+        fillColor: "rgba(0, 0, 0, 0.4)",
+        holes: holes
+      },
+      {
+        coordinates: baseCoordinates.map(coord => ({
+          latitude: coord.latitude + (Math.random() - 0.5) * 0.002,
+          longitude: coord.longitude + (Math.random() - 0.5) * 0.002,
+        })),
+        fillColor: "rgba(0, 0, 0, 0.3)",
+        holes: holes
+      },
+      {
+        coordinates: baseCoordinates.map(coord => ({
+          latitude: coord.latitude + (Math.random() - 0.5) * 0.003,
+          longitude: coord.longitude + (Math.random() - 0.5) * 0.003,
+        })),
+        fillColor: "rgba(0, 0, 0, 0.2)",
+        holes: holes
+      }
+    ];
+    
+    return layers;
   };
 
   return (
@@ -417,13 +448,16 @@ export default function MapScreen() {
             ]}
             ref={(ref) => setMapRef(ref)}
           >
-            {/* Fog of War Overlay */}
-            <Polygon
-              coordinates={getFogOfWarCoordinates()}
-              fillColor="rgba(0, 0, 0, 0.7)"
-              strokeColor="transparent"
-              holes={createFogOfWarHoles()}
-            />
+            {/* Fog of War Overlay with Texture */}
+            {createFogLayers().map((layer, index) => (
+              <Polygon
+                key={`fog-layer-${index}`}
+                coordinates={layer.coordinates}
+                fillColor={layer.fillColor}
+                strokeColor="transparent"
+                holes={layer.holes}
+              />
+            ))}
 
             {/* Quest Area Overlays */}
             {areas.map(area => (
