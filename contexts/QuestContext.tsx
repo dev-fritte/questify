@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 // import { questAreas } from '@/data/questAreas';
-import mockData from '@/data/mockData.json';
+import mockData from '@/data/mock_data.json';
 import { QuestArea } from '@/types/QuestArea';
 
 interface QuestContextType {

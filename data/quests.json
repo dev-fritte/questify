@@ -1,0 +1,993 @@
+{
+  "quests": [
+    {
+      "id": "quest_grillstelle",
+      "title": "Grillstelle",
+      "description": "Löse das Rätsel und finde den geheimen Pfad.",
+      "reward": "250 XP",
+      "completed": false,
+      "progress": 7,
+      "totalSteps": 2,
+      "coordinates": {
+        "latitude": 47.6918365,
+        "longitude": 9.1601481
+      },
+      "parentArea": "Wollmatingen"
+    },
+    {
+      "id": "quest_kneipe",
+      "title": "Kneipe",
+      "description": "Löse das Rätsel und finde den geheimen Pfad.",
+      "reward": "150 XP",
+      "completed": false,
+      "progress": 76,
+      "totalSteps": 1,
+      "coordinates": {
+        "latitude": 47.6934777,
+        "longitude": 9.1446294
+      },
+      "parentArea": "Wollmatingen"
+    },
+    {
+      "id": "quest_kampfmittel_verseuchtes_sperrgebiet",
+      "title": "Kampfmittel verseuchtes Sperrgebiet",
+      "description": "Löse das Rätsel und finde den geheimen Pfad.",
+      "reward": "50 XP",
+      "completed": false,
+      "progress": 76,
+      "totalSteps": 4,
+      "solutionWord": "lösung_kampfmittel_verseuchtes_sperrgebiet",
+      "coordinates": {
+        "latitude": 47.7024472,
+        "longitude": 9.1530709
+      },
+      "parentArea": "Wollmatingen"
+    },
+    {
+      "id": "quest_kirche",
+      "title": "Kirche",
+      "description": "Erkunde die historischen Stätten und sammle Hinweise.",
+      "reward": "250 XP",
+      "completed": false,
+      "progress": 84,
+      "totalSteps": 4,
+      "solutionWord": "lösung_kirche",
+      "coordinates": {
+        "latitude": 47.6925896,
+        "longitude": 9.1470063
+      },
+      "parentArea": "Wollmatingen"
+    },
+    {
+      "id": "quest_sportger_te",
+      "title": "Sportgeräte",
+      "description": "Finde die versteckten Symbole und entschlüssle die Botschaft.",
+      "reward": "200 XP",
+      "completed": false,
+      "progress": 99,
+      "totalSteps": 5,
+      "solutionWord": "lösung_sportger_te",
+      "coordinates": {
+        "latitude": 47.6850221,
+        "longitude": 9.1454798
+      },
+      "parentArea": "Wollmatingen"
+    },
+    {
+      "id": "quest_ewiges_auto",
+      "title": "Ewiges Auto",
+      "description": "Löse das Rätsel und finde den geheimen Pfad.",
+      "reward": "50 XP",
+      "completed": false,
+      "progress": 13,
+      "totalSteps": 4,
+      "coordinates": {
+        "latitude": 47.6881446,
+        "longitude": 9.1855196
+      },
+      "parentArea": "Universität"
+    },
+    {
+      "id": "quest_botanischer_garten",
+      "title": "Botanischer Garten",
+      "description": "Erkunde die historischen Stätten und sammle Hinweise.",
+      "reward": "50 XP",
+      "completed": false,
+      "progress": 15,
+      "totalSteps": 3,
+      "solutionWord": "lösung_botanischer_garten",
+      "coordinates": {
+        "latitude": 47.6921162,
+        "longitude": 9.1786306
+      },
+      "parentArea": "Universität"
+    },
+    {
+      "id": "quest_ist_das_kunst_oder_kann_das_weg_",
+      "title": "Ist das Kunst oder kann das weg?",
+      "description": "Löse das Rätsel und finde den geheimen Pfad.",
+      "reward": "200 XP",
+      "completed": false,
+      "progress": 11,
+      "totalSteps": 2,
+      "solutionWord": "lösung_ist_das_kunst_oder_kann_das_weg_",
+      "coordinates": {
+        "latitude": 47.6873954,
+        "longitude": 9.1897472
+      },
+      "parentArea": "Universität"
+    },
+    {
+      "id": "quest_uni_zoo___sos_affenalarm",
+      "title": "Uni Zoo - SOS Affenalarm",
+      "description": "Finde die versteckten Symbole und entschlüssle die Botschaft.",
+      "reward": "150 XP",
+      "completed": false,
+      "progress": 85,
+      "totalSteps": 2,
+      "solutionWord": "lösung_uni_zoo___sos_affenalarm",
+      "coordinates": {
+        "latitude": 47.6906521,
+        "longitude": 9.1878361
+      },
+      "parentArea": "Universität"
+    },
+    {
+      "id": "quest_schmugglerbucht",
+      "title": "Schmugglerbucht",
+      "description": "Entdecke die lokalen Legenden und Geschichten.",
+      "reward": "200 XP",
+      "completed": false,
+      "progress": 21,
+      "totalSteps": 1,
+      "solutionWord": "Staad",
+      "coordinates": {
+        "latitude": 47.6657401,
+        "longitude": 9.1965306
+      },
+      "parentArea": null
+    },
+    {
+      "id": "quest_bodenseestadion",
+      "title": "Bodenseestadion",
+      "description": "Entdecke die lokalen Legenden und Geschichten.",
+      "reward": "200 XP",
+      "completed": false,
+      "progress": 26,
+      "totalSteps": 3,
+      "solutionWord": "lösung_bodenseestadion",
+      "coordinates": {
+        "latitude": 47.6682544,
+        "longitude": 9.2133964
+      },
+      "parentArea": "Staad"
+    },
+    {
+      "id": "quest_lorettowald",
+      "title": "Lorettowald",
+      "description": "Löse das Rätsel und finde den geheimen Pfad.",
+      "reward": "150 XP",
+      "completed": false,
+      "progress": 73,
+      "totalSteps": 1,
+      "solutionWord": "lösung_lorettowald",
+      "coordinates": {
+        "latitude": 47.6694682,
+        "longitude": 9.2036645
+      },
+      "parentArea": "Staad"
+    },
+    {
+      "id": "quest_f_hre_konstanz_meersburg",
+      "title": "Fähre Konstanz-Meersburg",
+      "description": "Erkunde die historischen Stätten und sammle Hinweise.",
+      "reward": "100 XP",
+      "completed": false,
+      "progress": 51,
+      "totalSteps": 5,
+      "solutionWord": "lösung_f_hre_konstanz_meersburg",
+      "coordinates": {
+        "latitude": 47.6824091,
+        "longitude": 9.2113034
+      },
+      "parentArea": "Staad"
+    },
+    {
+      "id": "quest_therme",
+      "title": "Therme",
+      "description": "Finde die versteckten Symbole und entschlüssle die Botschaft.",
+      "reward": "200 XP",
+      "completed": false,
+      "progress": 60,
+      "totalSteps": 1,
+      "solutionWord": "lösung_therme",
+      "coordinates": {
+        "latitude": 47.6643193,
+        "longitude": 9.2085139
+      },
+      "parentArea": "Staad"
+    },
+    {
+      "id": "quest_geheimes_schl_sschen",
+      "title": "Geheimes Schlüsschen",
+      "description": "Finde die versteckten Symbole und entschlüssle die Botschaft.",
+      "reward": "50 XP",
+      "completed": false,
+      "progress": 6,
+      "totalSteps": 4,
+      "solutionWord": "lösung_geheimes_schl_sschen",
+      "coordinates": {
+        "latitude": 47.6657428,
+        "longitude": 9.2117781
+      },
+      "parentArea": "Staad"
+    },
+    {
+      "id": "quest_taubenhaus",
+      "title": "Taubenhaus",
+      "description": "Finde die versteckten Symbole und entschlüssle die Botschaft.",
+      "reward": "150 XP",
+      "completed": false,
+      "progress": 90,
+      "totalSteps": 5,
+      "coordinates": {
+        "latitude": 47.6689087,
+        "longitude": 9.1697241
+      },
+      "parentArea": "Staad"
+    },
+    {
+      "id": "quest_bewegungspark",
+      "title": "Bewegungspark",
+      "description": "Finde die versteckten Symbole und entschlüssle die Botschaft.",
+      "reward": "200 XP",
+      "completed": false,
+      "progress": 74,
+      "totalSteps": 3,
+      "coordinates": {
+        "latitude": 47.668071,
+        "longitude": 9.1643228
+      },
+      "parentArea": "Staad"
+    },
+    {
+      "id": "quest_seestra_e",
+      "title": "Seestraße",
+      "description": "Finde die versteckten Symbole und entschlüssle die Botschaft.",
+      "reward": "100 XP",
+      "completed": false,
+      "progress": 65,
+      "totalSteps": 2,
+      "solutionWord": "lösung_seestra_e",
+      "coordinates": {
+        "latitude": 47.6667012,
+        "longitude": 9.1843009
+      },
+      "parentArea": "Petershausen"
+    },
+    {
+      "id": "quest_arch_ologisches_landesmuseum",
+      "title": "Archäologisches Landesmuseum",
+      "description": "Erkunde die historischen Stätten und sammle Hinweise.",
+      "reward": "50 XP",
+      "completed": false,
+      "progress": 16,
+      "totalSteps": 3,
+      "solutionWord": "lösung_arch_ologisches_landesmuseum",
+      "coordinates": {
+        "latitude": 47.6680595,
+        "longitude": 9.1792368
+      },
+      "parentArea": "Petershausen"
+    },
+    {
+      "id": "quest_keira_knightley_spot",
+      "title": "Keira Knightley Spot",
+      "description": "Entdecke die lokalen Legenden und Geschichten.",
+      "reward": "250 XP",
+      "completed": false,
+      "progress": 79,
+      "totalSteps": 1,
+      "coordinates": {
+        "latitude": 47.6664834,
+        "longitude": 9.1831304
+      },
+      "parentArea": "Petershausen"
+    },
+    {
+      "id": "quest_yachthafen",
+      "title": "Yachthafen",
+      "description": "Erkunde die historischen Stätten und sammle Hinweise.",
+      "reward": "50 XP",
+      "completed": false,
+      "progress": 23,
+      "totalSteps": 3,
+      "solutionWord": "lösung_yachthafen",
+      "coordinates": {
+        "latitude": 47.6666976,
+        "longitude": 9.1895299
+      },
+      "parentArea": "Petershausen"
+    },
+    {
+      "id": "quest_destille",
+      "title": "Destille",
+      "description": "Löse das Rätsel und finde den geheimen Pfad.",
+      "reward": "50 XP",
+      "completed": false,
+      "progress": 33,
+      "totalSteps": 4,
+      "coordinates": {
+        "latitude": 47.6681597,
+        "longitude": 9.1808344
+      },
+      "parentArea": "Petershausen"
+    },
+    {
+      "id": "quest_kreativ_werkst_tte",
+      "title": "Kreativ Werkstätte",
+      "description": "Entdecke die lokalen Legenden und Geschichten.",
+      "reward": "100 XP",
+      "completed": false,
+      "progress": 72,
+      "totalSteps": 2,
+      "solutionWord": "lösung_kreativ_werkst_tte",
+      "coordinates": {
+        "latitude": 47.669727,
+        "longitude": 9.1820354
+      },
+      "parentArea": "Petershausen"
+    },
+    {
+      "id": "quest_moschee",
+      "title": "Moschee",
+      "description": "Finde die versteckten Symbole und entschlüssle die Botschaft.",
+      "reward": "200 XP",
+      "completed": false,
+      "progress": 31,
+      "totalSteps": 1,
+      "coordinates": {
+        "latitude": 47.6717983,
+        "longitude": 9.1696927
+      },
+      "parentArea": "Petershausen"
+    },
+    {
+      "id": "quest_constanzer_wirtshaus",
+      "title": "Constanzer Wirtshaus",
+      "description": "Entdecke die versteckten Schätze dieser Gegend.",
+      "reward": "100 XP",
+      "completed": false,
+      "progress": 24,
+      "totalSteps": 3,
+      "coordinates": {
+        "latitude": 47.667915,
+        "longitude": 9.1775631
+      },
+      "parentArea": "Petershausen"
+    },
+    {
+      "id": "quest_bodensee_kebap",
+      "title": "Bodensee Kebap",
+      "description": "Erkunde die historischen Stätten und sammle Hinweise.",
+      "reward": "150 XP",
+      "completed": false,
+      "progress": 74,
+      "totalSteps": 3,
+      "solutionWord": "lösung_bodensee_kebap",
+      "coordinates": {
+        "latitude": 47.6713184,
+        "longitude": 9.175722
+      },
+      "parentArea": "Petershausen"
+    },
+    {
+      "id": "quest_fahrradbr_cke",
+      "title": "Fahrradbrücke",
+      "description": "Finde die versteckten Symbole und entschlüssle die Botschaft.",
+      "reward": "150 XP",
+      "completed": false,
+      "progress": 21,
+      "totalSteps": 3,
+      "coordinates": {
+        "latitude": 47.6686175,
+        "longitude": 9.1741877
+      },
+      "parentArea": "Petershausen"
+    },
+    {
+      "id": "quest_grey___club",
+      "title": "Grey - Club",
+      "description": "Entdecke die lokalen Legenden und Geschichten.",
+      "reward": "100 XP",
+      "completed": false,
+      "progress": 6,
+      "totalSteps": 3,
+      "coordinates": {
+        "latitude": 47.6762114,
+        "longitude": 9.1579554
+      },
+      "parentArea": "Industriegebiet"
+    },
+    {
+      "id": "quest_geheimtipp",
+      "title": "Geheimtipp",
+      "description": "Löse das Rätsel und finde den geheimen Pfad.",
+      "reward": "50 XP",
+      "completed": false,
+      "progress": 68,
+      "totalSteps": 2,
+      "solutionWord": "lösung_geheimtipp",
+      "coordinates": {
+        "latitude": 47.6658901,
+        "longitude": 9.135363
+      },
+      "parentArea": "Industriegebiet"
+    },
+    {
+      "id": "quest_segelflugplatz",
+      "title": "Segelflugplatz",
+      "description": "Erkunde die historischen Stätten und sammle Hinweise.",
+      "reward": "100 XP",
+      "completed": false,
+      "progress": 43,
+      "totalSteps": 2,
+      "solutionWord": "Industriegebiet",
+      "coordinates": {
+        "latitude": 47.6818168,
+        "longitude": 9.1383216
+      },
+      "parentArea": null
+    },
+    {
+      "id": "quest_sch_ne_badestelle",
+      "title": "schöne Badestelle",
+      "description": "Entdecke die versteckten Schätze dieser Gegend.",
+      "reward": "250 XP",
+      "completed": false,
+      "progress": 1,
+      "totalSteps": 2,
+      "solutionWord": "Industriegebiet",
+      "coordinates": {
+        "latitude": 47.669867,
+        "longitude": 9.153701
+      },
+      "parentArea": null
+    },
+    {
+      "id": "quest_naturschutzgebiet___sch_ne_aussicht",
+      "title": "Naturschutzgebiet - schöne Aussicht",
+      "description": "Finde die versteckten Symbole und entschlüssle die Botschaft.",
+      "reward": "100 XP",
+      "completed": false,
+      "progress": 52,
+      "totalSteps": 3,
+      "coordinates": {
+        "latitude": 47.6722769,
+        "longitude": 9.1402124
+      },
+      "parentArea": "Industriegebiet"
+    },
+    {
+      "id": "quest_bouldern",
+      "title": "Bouldern",
+      "description": "Entdecke die lokalen Legenden und Geschichten.",
+      "reward": "100 XP",
+      "completed": false,
+      "progress": 5,
+      "totalSteps": 4,
+      "solutionWord": "lösung_bouldern",
+      "coordinates": {
+        "latitude": 47.6752171,
+        "longitude": 9.143687
+      },
+      "parentArea": "Industriegebiet"
+    },
+    {
+      "id": "quest_heimathafen",
+      "title": "Heimathafen",
+      "description": "Löse das Rätsel und finde den geheimen Pfad.",
+      "reward": "200 XP",
+      "completed": false,
+      "progress": 82,
+      "totalSteps": 1,
+      "coordinates": {
+        "latitude": 47.6788099,
+        "longitude": 9.1626903
+      },
+      "parentArea": "Fürstenberg"
+    },
+    {
+      "id": "quest_urige_bikerkneipe",
+      "title": "Urige Bikerkneipe",
+      "description": "Finde die versteckten Symbole und entschlüssle die Botschaft.",
+      "reward": "250 XP",
+      "completed": false,
+      "progress": 10,
+      "totalSteps": 5,
+      "solutionWord": "lösung_urige_bikerkneipe",
+      "coordinates": {
+        "latitude": 47.6808781,
+        "longitude": 9.1629248
+      },
+      "parentArea": "Fürstenberg"
+    },
+    {
+      "id": "quest_contrast___jk_e_v_",
+      "title": "contrast - JK e.V.",
+      "description": "Entdecke die lokalen Legenden und Geschichten.",
+      "reward": "100 XP",
+      "completed": false,
+      "progress": 15,
+      "totalSteps": 4,
+      "solutionWord": "lösung_contrast___jk_e_v_",
+      "coordinates": {
+        "latitude": 47.6791674,
+        "longitude": 9.1634934
+      },
+      "parentArea": "Fürstenberg"
+    },
+    {
+      "id": "quest_kula",
+      "title": "KuLa",
+      "description": "Finde die versteckten Symbole und entschlüssle die Botschaft.",
+      "reward": "200 XP",
+      "completed": false,
+      "progress": 98,
+      "totalSteps": 3,
+      "solutionWord": "lösung_kula",
+      "coordinates": {
+        "latitude": 47.678999,
+        "longitude": 9.1632598
+      },
+      "parentArea": "Fürstenberg"
+    },
+    {
+      "id": "quest_j_discher_friedhof",
+      "title": "Jüdischer Friedhof",
+      "description": "Entdecke die lokalen Legenden und Geschichten.",
+      "reward": "50 XP",
+      "completed": false,
+      "progress": 98,
+      "totalSteps": 3,
+      "coordinates": {
+        "latitude": 47.6807402,
+        "longitude": 9.1720151
+      },
+      "parentArea": "Fürstenberg"
+    },
+    {
+      "id": "quest_hillsong_church",
+      "title": "Hillsong Church",
+      "description": "Entdecke die lokalen Legenden und Geschichten.",
+      "reward": "100 XP",
+      "completed": false,
+      "progress": 15,
+      "totalSteps": 5,
+      "coordinates": {
+        "latitude": 47.6759842,
+        "longitude": 9.1717989
+      },
+      "parentArea": "Fürstenberg"
+    },
+    {
+      "id": "quest_kleingartensiedlung",
+      "title": "Kleingartensiedlung",
+      "description": "Erkunde die historischen Stätten und sammle Hinweise.",
+      "reward": "100 XP",
+      "completed": false,
+      "progress": 12,
+      "totalSteps": 5,
+      "solutionWord": "lösung_kleingartensiedlung",
+      "coordinates": {
+        "latitude": 47.6822508,
+        "longitude": 9.166413
+      },
+      "parentArea": "Fürstenberg"
+    },
+    {
+      "id": "quest_zebra_kino",
+      "title": "Zebra Kino",
+      "description": "Zeigt das Zebrakino nur schwarzweiß-Filme?",
+      "reward": "150 XP",
+      "completed": false,
+      "progress": 80,
+      "totalSteps": 1,
+      "solutionWord": "Nein",
+      "coordinates": {
+        "latitude": 47.6788749,
+        "longitude": 9.1630218
+      },
+      "parentArea": "Fürstenberg"
+    },
+    {
+      "id": "quest_hackathon",
+      "title": "Hackathon",
+      "description": "\"Wie viele Teilnehmer hat der Hackathon 2025? Alternativ",
+      "reward": "150 XP",
+      "completed": false,
+      "progress": 89,
+      "totalSteps": 4,
+      "solutionWord": "wie viele Pflanzen?\"",
+      "coordinates": {
+        "latitude": 47.6764861,
+        "longitude": 9.169071
+      },
+      "parentArea": "180"
+    },
+    {
+      "id": "quest_skatepark___fun_fun_fun",
+      "title": "Skatepark - Fun Fun Fun",
+      "description": "Finde die versteckten Symbole und entschlüssle die Botschaft.",
+      "reward": "150 XP",
+      "completed": false,
+      "progress": 46,
+      "totalSteps": 5,
+      "coordinates": {
+        "latitude": 47.6826681,
+        "longitude": 9.1479716
+      },
+      "parentArea": "Fürstenberg"
+    },
+    {
+      "id": "quest_kunstgrenze",
+      "title": "Kunstgrenze",
+      "description": "Wie heißt die Künstlerin?",
+      "reward": "250 XP",
+      "completed": false,
+      "progress": 17,
+      "totalSteps": 5,
+      "solutionWord": "Hertha",
+      "coordinates": {
+        "latitude": 47.6552957,
+        "longitude": 9.1792725
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_zoll",
+      "title": "Zoll",
+      "description": "In welches Land würde man hier reisen?",
+      "reward": "200 XP",
+      "completed": false,
+      "progress": 2,
+      "totalSteps": 2,
+      "solutionWord": "Schweiz",
+      "coordinates": {
+        "latitude": 47.6561775,
+        "longitude": 9.1695218
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_hafen",
+      "title": "Hafen",
+      "description": "Wie viele Anlegeplätze hat der Hafen?",
+      "reward": "150 XP",
+      "completed": false,
+      "progress": 47,
+      "totalSteps": 2,
+      "solutionWord": "Sieben",
+      "coordinates": {
+        "latitude": 47.6571999,
+        "longitude": 9.1790016
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_schnetztor",
+      "title": "Schnetztor",
+      "description": "Was für eine Wetterfahne weht auf dem Giebel?",
+      "reward": "250 XP",
+      "completed": false,
+      "progress": 56,
+      "totalSteps": 2,
+      "solutionWord": "Blätzlebub",
+      "coordinates": {
+        "latitude": 47.6587246,
+        "longitude": 9.1709458
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_zoll",
+      "title": "Zoll",
+      "description": "In welches Land würde man hier reisen?",
+      "reward": "50 XP",
+      "completed": false,
+      "progress": 6,
+      "totalSteps": 1,
+      "solutionWord": "Schweiz",
+      "coordinates": {
+        "latitude": 47.6617848,
+        "longitude": 9.1613817
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_rathaus",
+      "title": "Rathaus",
+      "description": "Mache ein Bild von dir vor dem Rathaus.",
+      "reward": "50 XP",
+      "completed": false,
+      "progress": 19,
+      "totalSteps": 4,
+      "solutionWord": "1",
+      "coordinates": {
+        "latitude": 47.6605035,
+        "longitude": 9.1736475
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_zoll",
+      "title": "Zoll",
+      "description": "In welches Land würde man hier reisen?",
+      "reward": "50 XP",
+      "completed": false,
+      "progress": 50,
+      "totalSteps": 4,
+      "solutionWord": "Schweiz",
+      "coordinates": {
+        "latitude": 47.6556289,
+        "longitude": 9.1734221
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_vogelfoliere",
+      "title": "Vogelfoliere",
+      "description": "Krasses Easteregg-Audioquiz",
+      "reward": "250 XP",
+      "completed": false,
+      "progress": 72,
+      "totalSteps": 2,
+      "solutionWord": "1",
+      "coordinates": {
+        "latitude": 47.6629564,
+        "longitude": 9.179164
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_gradmann_cafe",
+      "title": "Gradmann Cafe",
+      "description": "Wie heißt das Cafe eigentlich?",
+      "reward": "250 XP",
+      "completed": false,
+      "progress": 96,
+      "totalSteps": 4,
+      "solutionWord": "Arome",
+      "coordinates": {
+        "latitude": 47.6604439,
+        "longitude": 9.1725934
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_kaiserbrunnen",
+      "title": "Kaiserbrunnen",
+      "description": "Welcher Kaiser ist hier nicht mehr zu sehen?",
+      "reward": "50 XP",
+      "completed": false,
+      "progress": 73,
+      "totalSteps": 1,
+      "solutionWord": "Wilhelm",
+      "coordinates": {
+        "latitude": 47.6603535,
+        "longitude": 9.1749135
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_konzertmuschel",
+      "title": "Konzertmuschel",
+      "description": "Welcher Konzertmuschel ist diese Muschel nachempfunden?",
+      "reward": "100 XP",
+      "completed": false,
+      "progress": 17,
+      "totalSteps": 3,
+      "solutionWord": "keiner",
+      "coordinates": {
+        "latitude": 47.6624072,
+        "longitude": 9.1789581
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_hundestatue",
+      "title": "Hundestatue",
+      "description": "Woher kommt der Hund?",
+      "reward": "250 XP",
+      "completed": false,
+      "progress": 80,
+      "totalSteps": 5,
+      "solutionWord": "Partnerstadt",
+      "coordinates": {
+        "latitude": 47.6599814,
+        "longitude": 9.1732856
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_konzilgeb_ude",
+      "title": "Konzilgebäude",
+      "description": "Wann begann das Konzil?",
+      "reward": "150 XP",
+      "completed": false,
+      "progress": 85,
+      "totalSteps": 4,
+      "solutionWord": "1414",
+      "coordinates": {
+        "latitude": 47.6610278,
+        "longitude": 9.1782306
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_graf_zeppelin_denkmal",
+      "title": "Graf Zeppelin Denkmal",
+      "description": "Wo hat Graf Zeppelin gewirkt?",
+      "reward": "150 XP",
+      "completed": false,
+      "progress": 35,
+      "totalSteps": 4,
+      "solutionWord": "Friedrichshafen",
+      "coordinates": {
+        "latitude": 47.6611362,
+        "longitude": 9.1793679
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_palmenhaus",
+      "title": "Palmenhaus",
+      "description": "Aus welchem Material besteht das Dach?",
+      "reward": "100 XP",
+      "completed": false,
+      "progress": 84,
+      "totalSteps": 5,
+      "solutionWord": "Glas",
+      "coordinates": {
+        "latitude": 47.6604898,
+        "longitude": 9.1645943
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_ziegen",
+      "title": "Ziegen",
+      "description": "Sollte man die Ziegen füttern?",
+      "reward": "250 XP",
+      "completed": false,
+      "progress": 11,
+      "totalSteps": 2,
+      "solutionWord": "Nein",
+      "coordinates": {
+        "latitude": 47.6626936,
+        "longitude": 9.1619796
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_imperia",
+      "title": "Imperia",
+      "description": "Wie lange benötigt die Imperia für eine volle Umdrehung (in ganzen Minuten)?",
+      "reward": "50 XP",
+      "completed": false,
+      "progress": 14,
+      "totalSteps": 5,
+      "solutionWord": "Vier",
+      "coordinates": {
+        "latitude": 47.6609095,
+        "longitude": 9.1811346
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_rheintorturm",
+      "title": "Rheintorturm",
+      "description": "Wie viele Fenster sieht man von der Stra?enseite aus?",
+      "reward": "250 XP",
+      "completed": false,
+      "progress": 35,
+      "totalSteps": 4,
+      "solutionWord": "Neun",
+      "coordinates": {
+        "latitude": 47.6660868,
+        "longitude": 9.1773137
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_hussenstein",
+      "title": "Hussenstein",
+      "description": "Was ist der Vorname des hier verbrannten Ketzers?",
+      "reward": "150 XP",
+      "completed": false,
+      "progress": 27,
+      "totalSteps": 2,
+      "solutionWord": "Jan",
+      "coordinates": {
+        "latitude": 47.6611241,
+        "longitude": 9.1642554
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_lago",
+      "title": "Lago",
+      "description": "Welche Farbe hat der Lago Schriftzug?",
+      "reward": "250 XP",
+      "completed": false,
+      "progress": 44,
+      "totalSteps": 2,
+      "solutionWord": "rot",
+      "coordinates": {
+        "latitude": 47.6563954,
+        "longitude": 9.1762821
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_lorettokapelle",
+      "title": "Lorettokapelle",
+      "description": "Ist die Lorettokapelle der höchste Aussichtspunkt?",
+      "reward": "250 XP",
+      "completed": false,
+      "progress": 23,
+      "totalSteps": 1,
+      "solutionWord": "Ja",
+      "coordinates": {
+        "latitude": 47.6771355,
+        "longitude": 9.2022516
+      },
+      "parentArea": "Egg"
+    },
+    {
+      "id": "quest_uni_strand",
+      "title": "Uni Strand",
+      "description": "Wie viele Volleyballplätze gibt es hier?",
+      "reward": "250 XP",
+      "completed": false,
+      "progress": 98,
+      "totalSteps": 2,
+      "solutionWord": "Zwei",
+      "coordinates": {
+        "latitude": 47.6955179,
+        "longitude": 9.1932492
+      },
+      "parentArea": "Egg"
+    },
+    {
+      "id": "quest_br_cke_nach_egg",
+      "title": "Brücke nach Egg",
+      "description": "Entdecke die lokalen Legenden und Geschichten.",
+      "reward": "250 XP",
+      "completed": false,
+      "progress": 90,
+      "totalSteps": 4,
+      "solutionWord": "Universität",
+      "coordinates": {
+        "latitude": 47.6934454,
+        "longitude": 9.1884964
+      },
+      "parentArea": null
+    },
+    {
+      "id": "quest_spielplatz",
+      "title": "Spielplatz",
+      "description": "Erkunde die historischen Stätten und sammle Hinweise.",
+      "reward": "200 XP",
+      "completed": false,
+      "progress": 32,
+      "totalSteps": 2,
+      "coordinates": {
+        "latitude": 47.6923639,
+        "longitude": 9.1920623
+      },
+      "parentArea": "Egg"
+    }
+  ],
+  "generatedAt": "2025-06-28T15:12:33.609Z"
+}

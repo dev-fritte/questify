@@ -1,0 +1,170 @@
+{
+  "mainQuests": [
+    {
+      "id": "quest_geheimer_aussichtspunkt",
+      "title": "geheimer Aussichtspunkt",
+      "description": "Welcher Baum findet man hier besonders häufig?",
+      "reward": "100 XP",
+      "completed": false,
+      "progress": 52,
+      "totalSteps": 5,
+      "solutionWord": "Eiche",
+      "coordinates": {
+        "latitude": 47.694714,
+        "longitude": 9.1461848
+      },
+      "parentArea": "Wollmatingen"
+    },
+    {
+      "id": "quest_aussicht_bei_der_mensa",
+      "title": "Aussicht bei der Mensa",
+      "description": "Welche Insel sieht man von der Uni-Mensa aus am besten?",
+      "reward": "200 XP",
+      "completed": false,
+      "progress": 12,
+      "totalSteps": 3,
+      "solutionWord": "Mainau",
+      "coordinates": {
+        "latitude": 47.6904132,
+        "longitude": 9.189375
+      },
+      "parentArea": null
+    },
+    {
+      "id": "quest_h_rnle",
+      "title": "Hörnle",
+      "description": "\"Nenne einen Berg",
+      "reward": "200 XP",
+      "completed": false,
+      "progress": 52,
+      "totalSteps": 3,
+      "solutionWord": "den man vom Hörnle aus sieht.\"",
+      "coordinates": {
+        "latitude": 47.6666504,
+        "longitude": 9.2151988
+      },
+      "parentArea": "Säntis"
+    },
+    {
+      "id": "quest_bismarckturm",
+      "title": "Bismarckturm",
+      "description": "Wie viele Feuerstellen gibt es am Bismarckturm?",
+      "reward": "100 XP",
+      "completed": false,
+      "progress": 68,
+      "totalSteps": 2,
+      "solutionWord": "Zwei",
+      "coordinates": {
+        "latitude": 47.6814337,
+        "longitude": 9.1743326
+      },
+      "parentArea": "Königsbau"
+    },
+    {
+      "id": "quest_heros_",
+      "title": "Herosé",
+      "description": "Welches Nagetier mag den Herosépark fast genau so gerne wie Studis?",
+      "reward": "250 XP",
+      "completed": false,
+      "progress": 78,
+      "totalSteps": 3,
+      "solutionWord": "Ratten",
+      "coordinates": {
+        "latitude": 47.6695712,
+        "longitude": 9.174059
+      },
+      "parentArea": "Petershausen"
+    },
+    {
+      "id": "quest_f_rstenberg___aussichtspunkt",
+      "title": "Fürstenberg - Aussichtspunkt",
+      "description": "\"Was ist der kleinste Vogel",
+      "reward": "100 XP",
+      "completed": false,
+      "progress": 99,
+      "totalSteps": 1,
+      "solutionWord": "der auf der Infotafel beschrieben wird?\"",
+      "coordinates": {
+        "latitude": 47.6820375,
+        "longitude": 9.1608917
+      },
+      "parentArea": "Kolibri"
+    },
+    {
+      "id": "quest_paradieskapelle",
+      "title": "Paradieskapelle",
+      "description": "Wie heißt sie?",
+      "reward": "200 XP",
+      "completed": false,
+      "progress": 92,
+      "totalSteps": 1,
+      "solutionWord": "Martinskapelle",
+      "coordinates": {
+        "latitude": 47.6656168,
+        "longitude": 9.1607992
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_htwg",
+      "title": "HTWG",
+      "description": "Was stand früher auf dem Gelände der Bib?",
+      "reward": "250 XP",
+      "completed": false,
+      "progress": 51,
+      "totalSteps": 3,
+      "solutionWord": "Schlachthof",
+      "coordinates": {
+        "latitude": 47.668512,
+        "longitude": 9.1698093
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_m_nster",
+      "title": "Münster",
+      "description": "Wie viele Stufen muss man bis zum Turm erklimmen?",
+      "reward": "200 XP",
+      "completed": false,
+      "progress": 80,
+      "totalSteps": 5,
+      "solutionWord": "200",
+      "coordinates": {
+        "latitude": 47.6634334,
+        "longitude": 9.1755182
+      },
+      "parentArea": "Altstadt"
+    },
+    {
+      "id": "quest_katholische_kirche",
+      "title": "Katholische Kirche",
+      "description": "Welche Bushaltestelle ist hier nebenan?",
+      "reward": "200 XP",
+      "completed": false,
+      "progress": 27,
+      "totalSteps": 4,
+      "solutionWord": "Tannenhof",
+      "coordinates": {
+        "latitude": 47.6745787,
+        "longitude": 9.1984314
+      },
+      "parentArea": "Allmannsdorf"
+    },
+    {
+      "id": "quest_europabr_cke",
+      "title": "Europabrücke",
+      "description": "Welcher Turm steht hier bald?",
+      "reward": "250 XP",
+      "completed": false,
+      "progress": 52,
+      "totalSteps": 2,
+      "solutionWord": "Asisi-Panorama",
+      "coordinates": {
+        "latitude": 47.6734055,
+        "longitude": 9.1580483
+      },
+      "parentArea": "Industriegebiet"
+    }
+  ],
+  "generatedAt": "2025-06-28T15:12:33.608Z"
+}
