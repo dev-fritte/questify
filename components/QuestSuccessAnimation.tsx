@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 import { Text as ThemedText } from '@/components/Themed';
+import { useColorScheme } from '@/components/useColorScheme';
+import Colors from '@/constants/Colors';
 
 interface QuestSuccessAnimationProps {
   isVisible: boolean;
@@ -15,6 +17,8 @@ export const QuestSuccessAnimation: React.FC<QuestSuccessAnimationProps> = ({
   questTitle,
   reward,
 }) => {
+  const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme as keyof typeof Colors];
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const scaleAnim = useRef(new Animated.Value(0.5)).current;
   const slideAnim = useRef(new Animated.Value(50)).current;
@@ -76,6 +80,9 @@ export const QuestSuccessAnimation: React.FC<QuestSuccessAnimationProps> = ({
         style={[
           styles.container,
           {
+            backgroundColor: colors.cardBackground,
+            shadowColor: colors.shadowColor,
+            borderColor: colors.borderColor,
             opacity: fadeAnim,
             transform: [
               { scale: scaleAnim },
@@ -87,11 +94,11 @@ export const QuestSuccessAnimation: React.FC<QuestSuccessAnimationProps> = ({
         <View style={styles.iconContainer}>
           <Text style={styles.icon}>🎉</Text>
         </View>
-        <ThemedText style={styles.title}>Quest abgeschlossen!</ThemedText>
-        <Text style={styles.questTitle}>{questTitle}</Text>
-        <Text style={styles.reward}>Belohnung: {reward}</Text>
-        <View style={styles.progressBar}>
-          <View style={styles.progressFill} />
+        <ThemedText style={[styles.title, { color: colors.successColor }]}>Quest abgeschlossen!</ThemedText>
+        <Text style={[styles.questTitle, { color: colors.text }]}>{questTitle}</Text>
+        <Text style={[styles.reward, { color: colors.warningColor }]}>Belohnung: {reward}</Text>
+        <View style={[styles.progressBar, { backgroundColor: colors.borderColor }]}>
+          <View style={[styles.progressFill, { backgroundColor: colors.successColor }]} />
         </View>
       </Animated.View>
     </View>

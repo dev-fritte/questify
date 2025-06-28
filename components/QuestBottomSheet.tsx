@@ -2,6 +2,8 @@ import React, { useCallback, useMemo, useRef } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Pressable } from 'react-native';
 import { Text as ThemedText } from '@/components/Themed';
 import BottomSheet, { BottomSheetView, BottomSheetTextInput, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
+import { useColorScheme } from '@/components/useColorScheme';
+import Colors from '@/constants/Colors';
 
 interface QuestBottomSheetProps {
   isVisible: boolean;
@@ -33,6 +35,8 @@ export const QuestBottomSheet: React.FC<QuestBottomSheetProps> = ({
   showCancelButton = true,
 }) => {
   const bottomSheetRef = useRef<BottomSheet>(null);
+  const colorScheme = useColorScheme();
+  const colors = Colors[colorScheme as keyof typeof Colors];
 
   // Variables
   const snapPoints = useMemo(() => ['25%', '50%', '75%'], []);
@@ -79,46 +83,46 @@ export const QuestBottomSheet: React.FC<QuestBottomSheetProps> = ({
       snapPoints={snapPoints}
       onChange={handleSheetChanges}
       enablePanDownToClose={true}
-      backgroundStyle={styles.bottomSheetBackground}
-      handleIndicatorStyle={styles.indicator}
+      backgroundStyle={[styles.bottomSheetBackground, { backgroundColor: colors.cardBackground }]}
+      handleIndicatorStyle={[styles.indicator, { backgroundColor: colors.borderColor }]}
       backdropComponent={renderBackdrop}
+      style={styles.bottomSheet}
     >
       <BottomSheetView style={styles.contentContainer}>
-        <ThemedText style={styles.title}>{quest.title}</ThemedText>
-        <Text style={styles.description}>{quest.description}</Text>
+        <ThemedText style={[styles.title, { color: colors.text }]}>{quest.title}</ThemedText>
+        <Text style={[styles.description, { color: colors.text }]}>{quest.description}</Text>
         
-        <Text style={styles.reward}>Belohnung: {quest.reward}</Text>
+        <Text style={[styles.reward, { color: colors.warningColor }]}>Belohnung: {quest.reward}</Text>
         
         {showSolutionInput && (
           <View style={styles.inputContainer}>
             <BottomSheetTextInput
-              style={styles.input}
+              style={[styles.input, { 
+                borderColor: colors.borderColor,
+                backgroundColor: colors.background,
+                color: colors.text
+              }]}
               placeholder="Lösungswort eingeben"
+              placeholderTextColor={colors.text}
               value={solutionInput}
               onChangeText={onSolutionInputChange}
               onSubmitEditing={onSolutionSubmit}
               autoCapitalize="none"
               autoCorrect={false}
             />
-            {solutionError && <Text style={styles.error}>{solutionError}</Text>}
+            {solutionError && <Text style={[styles.error, { color: colors.errorColor }]}>{solutionError}</Text>}
           </View>
         )}
         
         <View style={styles.buttonContainer}>
-          {onSolutionSubmit && showSolutionInput && (
-            <TouchableOpacity style={styles.button} onPress={onSolutionSubmit}>
-              <Text style={styles.buttonText}>Abschließen</Text>
-            </TouchableOpacity>
-          )}
-          
           {onStartQuest && (
-            <TouchableOpacity style={[styles.button, styles.startButton]} onPress={onStartQuest}>
+            <TouchableOpacity style={[styles.button, styles.startButton, { backgroundColor: colors.warningColor }]} onPress={onStartQuest}>
               <Text style={styles.buttonText}>Auf Karte starten</Text>
             </TouchableOpacity>
           )}
           
           {showCancelButton && (
-            <TouchableOpacity style={[styles.button, styles.confirmButton]} onPress={onSolutionSubmit}>
+            <TouchableOpacity style={[styles.button, styles.confirmButton, { backgroundColor: colors.successColor }]} onPress={onSolutionSubmit}>
               <Text style={styles.buttonText}>Bestätigen</Text>
             </TouchableOpacity>
           )}
@@ -129,6 +133,9 @@ export const QuestBottomSheet: React.FC<QuestBottomSheetProps> = ({
 };
 
 const styles = StyleSheet.create({
+  bottomSheet: {
+    zIndex: 3000, // Higher than legend (2000)
+  },
   bottomSheetBackground: {
     backgroundColor: '#ffffff',
   },

@@ -18,7 +18,7 @@ export default function ProfileScreen() {
     onAchievementUnlocked
   } = useQuestContext();
   const colorScheme = useColorScheme();
-  const colors = Colors[colorScheme ?? 'light'];
+  const colors = Colors[colorScheme as keyof typeof Colors];
   const scrollViewRef = useRef<ScrollView>(null);
   const achievementsSectionRef = useRef<View>(null);
 
@@ -131,11 +131,13 @@ export default function ProfileScreen() {
         contentContainerStyle={styles.scrollContent}
       >
         {/* Header Section */}
-        <View style={styles.header}>
+        <View style={[styles.header, { 
+          borderBottomColor: colors.borderColor 
+        }]}>
           <View style={styles.avatarContainer}>
             <Image
               source={{ uri: user.avatar }}
-              style={styles.avatar}
+              style={[styles.avatar, { borderColor: colors.tint }]}
               defaultSource={require('@/assets/images/icon.png')}
             />
             <View style={[styles.levelBadge, { backgroundColor: colors.tint }]}>
@@ -144,9 +146,9 @@ export default function ProfileScreen() {
           </View>
           
           <ThemedText style={styles.userName}>{user.name}</ThemedText>
-          <Text style={styles.userEmail}>{user.email}</Text>
+          <Text style={[styles.userEmail, { color: colors.text }]}>{user.email}</Text>
           
-          <TouchableOpacity style={styles.editButton} onPress={handleEditProfile}>
+          <TouchableOpacity style={[styles.editButton, { backgroundColor: colors.tint }]} onPress={handleEditProfile}>
             <Text style={styles.editButtonText}>Profil bearbeiten</Text>
           </TouchableOpacity>
         </View>
@@ -156,24 +158,40 @@ export default function ProfileScreen() {
           <ThemedText style={styles.sectionTitle}>Statistiken</ThemedText>
           
           <View style={styles.statsGrid}>
-            <View style={styles.statCard}>
-              <Text style={styles.statNumber}>{completedQuests}</Text>
-              <Text style={styles.statLabel}>Abgeschlossene Quests</Text>
+            <View style={[styles.statCard, { 
+              backgroundColor: colors.cardBackground, 
+              shadowColor: colors.shadowColor,
+              borderColor: colors.borderColor 
+            }]}>
+              <Text style={[styles.statNumber, { color: colors.tint }]}>{completedQuests}</Text>
+              <Text style={[styles.statLabel, { color: colors.text }]}>Abgeschlossene Quests</Text>
             </View>
             
-            <View style={styles.statCard}>
-              <Text style={styles.statNumber}>{totalQuests}</Text>
-              <Text style={styles.statLabel}>Gesamte Quests</Text>
+            <View style={[styles.statCard, { 
+              backgroundColor: colors.cardBackground, 
+              shadowColor: colors.shadowColor,
+              borderColor: colors.borderColor 
+            }]}>
+              <Text style={[styles.statNumber, { color: colors.tint }]}>{totalQuests}</Text>
+              <Text style={[styles.statLabel, { color: colors.text }]}>Gesamte Quests</Text>
             </View>
             
-            <View style={styles.statCard}>
-              <Text style={styles.statNumber}>{completionRate}%</Text>
-              <Text style={styles.statLabel}>Abschlussrate</Text>
+            <View style={[styles.statCard, { 
+              backgroundColor: colors.cardBackground, 
+              shadowColor: colors.shadowColor,
+              borderColor: colors.borderColor 
+            }]}>
+              <Text style={[styles.statNumber, { color: colors.tint }]}>{completionRate}%</Text>
+              <Text style={[styles.statLabel, { color: colors.text }]}>Abschlussrate</Text>
             </View>
             
-            <View style={styles.statCard}>
-              <Text style={styles.statNumber}>{totalPoints}</Text>
-              <Text style={styles.statLabel}>Gesamtpunkte</Text>
+            <View style={[styles.statCard, { 
+              backgroundColor: colors.cardBackground, 
+              shadowColor: colors.shadowColor,
+              borderColor: colors.borderColor 
+            }]}>
+              <Text style={[styles.statNumber, { color: colors.tint }]}>{totalPoints}</Text>
+              <Text style={[styles.statLabel, { color: colors.text }]}>Gesamtpunkte</Text>
             </View>
           </View>
         </View>
@@ -182,19 +200,26 @@ export default function ProfileScreen() {
         <View style={styles.experienceSection}>
           <ThemedText style={styles.sectionTitle}>Erfahrung</ThemedText>
           
-          <View style={styles.experienceBar}>
+          <View style={[styles.experienceBar, { 
+            backgroundColor: colors.cardBackground, 
+            shadowColor: colors.shadowColor,
+            borderColor: colors.borderColor 
+          }]}>
             <View style={styles.experienceInfo}>
-              <Text style={styles.experienceText}>
+              <Text style={[styles.experienceText, { color: colors.text }]}>
                 Level {currentLevel} • {currentXP}/{xpToNextLevel} XP
               </Text>
             </View>
-            <View style={styles.progressBar}>
+            <View style={[styles.progressBar, { 
+              backgroundColor: colors.borderColor,
+              borderColor: colors.shadowColor 
+            }]}>
               <View 
                 style={[
                   styles.progressFill, 
                   { 
                     width: `${experienceProgress}%`,
-                    backgroundColor: '#4CAF50'
+                    backgroundColor: colors.successColor
                   }
                 ]} 
               />
@@ -206,7 +231,11 @@ export default function ProfileScreen() {
         <View ref={achievementsSectionRef} style={styles.achievementsSection}>
           <ThemedText style={styles.sectionTitle}>Erfolge</ThemedText>
           
-          <View style={styles.achievementsList}>
+          <View style={[styles.achievementsList, { 
+            backgroundColor: colors.cardBackground, 
+            shadowColor: colors.shadowColor,
+            borderColor: colors.borderColor 
+          }]}>
             <View style={styles.achievementItem}>
               <Animated.View 
                 style={[
@@ -276,25 +305,37 @@ export default function ProfileScreen() {
         <View style={styles.settingsSection}>
           <ThemedText style={styles.sectionTitle}>Einstellungen</ThemedText>
           
-          <TouchableOpacity style={styles.settingItem} onPress={handleSettings}>
-            <Text style={styles.settingText}>Benachrichtigungen</Text>
-            <Text style={styles.settingArrow}>›</Text>
+          <TouchableOpacity style={[styles.settingItem, { 
+            backgroundColor: colors.cardBackground,
+            shadowColor: colors.shadowColor,
+            borderColor: colors.borderColor 
+          }]} onPress={handleSettings}>
+            <Text style={[styles.settingText, { color: colors.text }]}>Benachrichtigungen</Text>
+            <Text style={[styles.settingArrow, { color: colors.text }]}>›</Text>
           </TouchableOpacity>
           
-          <TouchableOpacity style={styles.settingItem} onPress={handleSettings}>
-            <Text style={styles.settingText}>Datenschutz</Text>
-            <Text style={styles.settingArrow}>›</Text>
+          <TouchableOpacity style={[styles.settingItem, { 
+            backgroundColor: colors.cardBackground,
+            shadowColor: colors.shadowColor,
+            borderColor: colors.borderColor 
+          }]} onPress={handleSettings}>
+            <Text style={[styles.settingText, { color: colors.text }]}>Datenschutz</Text>
+            <Text style={[styles.settingArrow, { color: colors.text }]}>›</Text>
           </TouchableOpacity>
           
-          <TouchableOpacity style={styles.settingItem} onPress={handleSettings}>
-            <Text style={styles.settingText}>Über Questify</Text>
-            <Text style={styles.settingArrow}>›</Text>
+          <TouchableOpacity style={[styles.settingItem, { 
+            backgroundColor: colors.cardBackground,
+            shadowColor: colors.shadowColor,
+            borderColor: colors.borderColor 
+          }]} onPress={handleSettings}>
+            <Text style={[styles.settingText, { color: colors.text }]}>Über Questify</Text>
+            <Text style={[styles.settingArrow, { color: colors.text }]}>›</Text>
           </TouchableOpacity>
         </View>
 
         {/* Account Info */}
         <View style={styles.accountInfo}>
-          <Text style={styles.accountText}>
+          <Text style={[styles.accountText, { color: colors.text }]}>
             Mitglied seit: {user.joinDate}
           </Text>
         </View>
@@ -354,7 +395,6 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   editButton: {
-    backgroundColor: '#4A90E2',
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 20,
@@ -378,13 +418,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   statCard: {
-    backgroundColor: '#FFFFFF',
     padding: 16,
     borderRadius: 12,
     width: '48%',
     marginBottom: 12,
     alignItems: 'center',
-    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -392,26 +430,23 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 3.84,
     elevation: 5,
+    borderWidth: 1,
   },
   statNumber: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#4A90E2',
     marginBottom: 4,
   },
   statLabel: {
     fontSize: 12,
-    color: '#666',
     textAlign: 'center',
   },
   experienceSection: {
     padding: 20,
   },
   experienceBar: {
-    backgroundColor: '#FFFFFF',
     padding: 16,
     borderRadius: 12,
-    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -419,20 +454,18 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 3.84,
     elevation: 5,
+    borderWidth: 1,
   },
   experienceInfo: {
     marginBottom: 8,
   },
   experienceText: {
     fontSize: 14,
-    color: '#666',
   },
   progressBar: {
     height: 8,
-    backgroundColor: '#E0E0E0',
     borderRadius: 4,
     borderWidth: 1,
-    borderColor: '#D0D0D0',
     overflow: 'hidden',
   },
   progressFill: {
@@ -443,9 +476,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   achievementsList: {
-    backgroundColor: '#FFFFFF',
     borderRadius: 12,
-    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -453,6 +484,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 3.84,
     elevation: 5,
+    borderWidth: 1,
   },
   achievementItem: {
     flexDirection: 'row',
@@ -480,7 +512,6 @@ const styles = StyleSheet.create({
   },
   achievementDesc: {
     fontSize: 14,
-    color: '#666',
   },
   achievementStatus: {
     width: 24,
@@ -501,11 +532,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
     padding: 16,
     borderRadius: 12,
     marginBottom: 8,
-    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 1,
@@ -513,14 +542,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2.22,
     elevation: 3,
+    borderWidth: 1,
   },
   settingText: {
     fontSize: 16,
-    color: '#333',
   },
   settingArrow: {
     fontSize: 18,
-    color: '#666',
   },
   accountInfo: {
     padding: 20,
@@ -528,6 +556,5 @@ const styles = StyleSheet.create({
   },
   accountText: {
     fontSize: 14,
-    color: '#999',
   },
 }); 

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Alert, Dimensions, Text, ScrollView, Modal, TextInput, TouchableOpacity, Image } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, StyleSheet, Alert, Dimensions, Text, ScrollView, Modal, TextInput, TouchableOpacity, Image, Animated } from 'react-native';
 import MapView, { Marker, Polygon } from 'react-native-maps';
 import { Text as ThemedText, View as ThemedView } from '@/components/Themed';
 import { useColorScheme } from '@/components/useColorScheme';
@@ -10,8 +10,21 @@ import { QuestMarkerIcon } from '@/components/QuestMarkerIcons';
 import { QuestBottomSheet } from '@/components/QuestBottomSheet';
 import { QuestSuccessAnimation } from '@/components/QuestSuccessAnimation';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 const { width, height } = Dimensions.get('window');
+
+// Lock icon component
+const LockIcon = ({ isUnlocked, color }: { isUnlocked: boolean; color: string }) => {
+  return (
+    <FontAwesome 
+      name={isUnlocked ? "unlock" : "lock"} 
+      size={12} 
+      color={color} 
+      style={{ marginRight: 4 }}
+    />
+  );
+};
 
 export default function MapScreen() {
   const { areas, completeMainQuest, completeSubQuest, selectedQuest, clearSelectedQuest } = useQuestContext();
@@ -25,7 +38,27 @@ export default function MapScreen() {
   const [showSuccessAnimation, setShowSuccessAnimation] = useState(false);
   const [successQuestData, setSuccessQuestData] = useState<{ title: string; reward: string } | null>(null);
   const colorScheme = useColorScheme();
-  const colors = Colors[colorScheme ?? 'light'];
+  const colors = Colors[colorScheme as keyof typeof Colors];
+  
+  // Animation for legend
+  const legendSlideAnim = useRef(new Animated.Value(0)).current;
+
+  // Animation functions for legend
+  const animateLegendOut = () => {
+    Animated.timing(legendSlideAnim, {
+      toValue: 1,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const animateLegendIn = () => {
+    Animated.timing(legendSlideAnim, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
 
   // Konstanz center coordinates
   const initialRegion = {
@@ -72,6 +105,7 @@ export default function MapScreen() {
       setSolutionInput('');
       setSolutionError('');
       setBottomSheetVisible(true);
+      animateLegendOut(); // Animate legend out
     }
   };
 
@@ -127,6 +161,7 @@ export default function MapScreen() {
           setSolutionInput('');
           setSolutionError('');
           setBottomSheetVisible(true);
+          animateLegendOut(); // Animate legend out
         }
       }, 1100); // Wait for the zoom animation to finish
     }
@@ -180,6 +215,7 @@ export default function MapScreen() {
     setCurrentArea(null);
     setSolutionInput('');
     setSolutionError('');
+    animateLegendIn(); // Animate legend in
   };
 
   const updateQuestMarkers = () => {
@@ -251,6 +287,7 @@ export default function MapScreen() {
         setSolutionInput('');
         setSolutionError('');
         setBottomSheetVisible(true);
+        animateLegendOut(); // Animate legend out
       }
     } else {
       // For sub quests, extract the quest ID from the marker ID (remove 'sub-' prefix)
@@ -267,6 +304,7 @@ export default function MapScreen() {
         setSolutionInput('');
         setSolutionError('');
         setBottomSheetVisible(true);
+        animateLegendOut(); // Animate legend out
       }
     }
   };
@@ -287,148 +325,162 @@ export default function MapScreen() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemedView style={styles.container}>
-        <MapView
-          style={styles.map}
-          initialRegion={initialRegion}
-          showsUserLocation={true}
-          showsMyLocationButton={true}
-          onRegionChange={handleRegionChange}
-          showsPointsOfInterest={false}
-          showsBuildings={false}
-          showsTraffic={false}
-          showsIndoors={false}
-          showsIndoorLevelPicker={false}
-          showsCompass={false}
-          showsScale={false}
-          mapType="standard"
-          customMapStyle={[
-            {
-              "featureType": "poi",
-              "elementType": "labels",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "poi.business",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "poi.attraction",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "poi.government",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "poi.medical",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "poi.park",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "poi.place_of_worship",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "poi.school",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            },
-            {
-              "featureType": "poi.sports_complex",
-              "stylers": [
-                {
-                  "visibility": "off"
-                }
-              ]
-            }
-          ]}
-          ref={(ref) => setMapRef(ref)}
-        >
-          {/* Fog of War Overlay */}
-          <Polygon
-            coordinates={getFogOfWarCoordinates()}
-            fillColor="rgba(0, 0, 0, 0.7)"
-            strokeColor="transparent"
-            holes={createFogOfWarHoles()}
-          />
-
-          {/* Quest Area Overlays */}
-          {areas.map(area => (
+        <View style={styles.mapContainer}>
+          <MapView
+            style={styles.map}
+            initialRegion={initialRegion}
+            showsUserLocation={true}
+            showsMyLocationButton={true}
+            onRegionChange={handleRegionChange}
+            showsPointsOfInterest={false}
+            showsBuildings={false}
+            showsTraffic={false}
+            showsIndoors={false}
+            showsIndoorLevelPicker={false}
+            showsCompass={false}
+            showsScale={false}
+            mapType="standard"
+            customMapStyle={[
+              {
+                "featureType": "poi",
+                "elementType": "labels",
+                "stylers": [
+                  {
+                    "visibility": "off"
+                  }
+                ]
+              },
+              {
+                "featureType": "poi.business",
+                "stylers": [
+                  {
+                    "visibility": "off"
+                  }
+                ]
+              },
+              {
+                "featureType": "poi.attraction",
+                "stylers": [
+                  {
+                    "visibility": "off"
+                  }
+                ]
+              },
+              {
+                "featureType": "poi.government",
+                "stylers": [
+                  {
+                    "visibility": "off"
+                  }
+                ]
+              },
+              {
+                "featureType": "poi.medical",
+                "stylers": [
+                  {
+                    "visibility": "off"
+                  }
+                ]
+              },
+              {
+                "featureType": "poi.park",
+                "stylers": [
+                  {
+                    "visibility": "off"
+                  }
+                ]
+              },
+              {
+                "featureType": "poi.place_of_worship",
+                "stylers": [
+                  {
+                    "visibility": "off"
+                  }
+                ]
+              },
+              {
+                "featureType": "poi.school",
+                "stylers": [
+                  {
+                    "visibility": "off"
+                  }
+                ]
+              },
+              {
+                "featureType": "poi.sports_complex",
+                "stylers": [
+                  {
+                    "visibility": "off"
+                  }
+                ]
+              }
+            ]}
+            ref={(ref) => setMapRef(ref)}
+          >
+            {/* Fog of War Overlay */}
             <Polygon
-              key={area.id}
-              coordinates={area.coordinates}
-              fillColor={getAreaOverlayColor(area)}
-              strokeColor={area.unlocked ? '#4CAF50' : '#666'}
-              strokeWidth={2}
-              onPress={() => handleAreaPress(area)}
+              coordinates={getFogOfWarCoordinates()}
+              fillColor="rgba(0, 0, 0, 0.7)"
+              strokeColor="transparent"
+              holes={createFogOfWarHoles()}
             />
-          ))}
 
-          {/* Quest Markers */}
-          {questMarkers.map(marker => {
-            console.log('Rendering marker on map:', marker.id, marker.coordinates);
-            console.log('Marker type:', marker.type, 'completed:', marker.completed);
-            return (
-              <Marker
-                key={marker.id}
-                coordinate={marker.coordinates}
-                tracksViewChanges={false}
-                onPress={() => handleQuestPress(marker)}
-                pinColor={marker.type === 'main' ? 'orange' : 'blue'}
+            {/* Quest Area Overlays */}
+            {areas.map(area => (
+              <Polygon
+                key={area.id}
+                coordinates={area.coordinates}
+                fillColor={getAreaOverlayColor(area)}
+                strokeColor={area.unlocked ? '#4CAF50' : '#666'}
+                strokeWidth={2}
+                onPress={() => handleAreaPress(area)}
               />
-            );
-          })}
-        </MapView>
+            ))}
 
-        {/* Legend */}
-        <View style={styles.legend}>
-          <ThemedText style={styles.legendTitle}>Legende</ThemedText>
-          <View style={styles.legendItem}>
-            <QuestMarkerIcon type="main" size={20} />
-            <ThemedText style={styles.legendLabel}>Hauptquest</ThemedText>
-          </View>
-          <View style={styles.legendItem}>
-            <QuestMarkerIcon type="sub" size={20} />
-            <ThemedText style={styles.legendLabel}>Unterquest</ThemedText>
-          </View>
-          <View style={styles.legendItem}>
-            <QuestMarkerIcon type="completed" size={20} />
-            <ThemedText style={styles.legendLabel}>Abgeschlossen</ThemedText>
-          </View>
+            {/* Quest Markers */}
+            {questMarkers.map(marker => {
+              console.log('Rendering marker on map:', marker.id, marker.coordinates);
+              console.log('Marker type:', marker.type, 'completed:', marker.completed);
+              return (
+                <Marker
+                  key={marker.id}
+                  coordinate={marker.coordinates}
+                  tracksViewChanges={false}
+                  onPress={() => handleQuestPress(marker)}
+                  pinColor={marker.type === 'main' ? 'orange' : 'blue'}
+                />
+              );
+            })}
+          </MapView>
+
+          {/* Legend - positioned as overlay within map area */}
+          <Animated.View style={[styles.legend, { 
+            backgroundColor: colors.cardBackground,
+            shadowColor: colors.shadowColor,
+            borderColor: colors.borderColor,
+            transform: [
+              {
+                translateX: legendSlideAnim.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [0, -200], // Slide left out of screen
+                }),
+              },
+            ],
+          }]}>
+            <ThemedText style={[styles.legendTitle, { color: colors.text }]}>Legende</ThemedText>
+            <View style={styles.legendItem}>
+              <QuestMarkerIcon type="main" size={20} />
+              <ThemedText style={[styles.legendLabel, { color: colors.text }]}>Hauptquest</ThemedText>
+            </View>
+            <View style={styles.legendItem}>
+              <QuestMarkerIcon type="sub" size={20} />
+              <ThemedText style={[styles.legendLabel, { color: colors.text }]}>Unterquest</ThemedText>
+            </View>
+            <View style={styles.legendItem}>
+              <QuestMarkerIcon type="completed" size={20} />
+              <ThemedText style={[styles.legendLabel, { color: colors.text }]}>Abgeschlossen</ThemedText>
+            </View>
+          </Animated.View>
         </View>
 
         {/* Area Info Panel */}
@@ -436,14 +488,21 @@ export default function MapScreen() {
           {areas.map(area => (
             <TouchableOpacity 
               key={area.id} 
-              style={styles.areaCard}
+              style={[styles.areaCard, { 
+                backgroundColor: colors.cardBackground,
+                shadowColor: colors.shadowColor,
+                borderColor: colors.borderColor 
+              }]}
               onPress={() => handleAreaPress(area)}
             >
-              <ThemedText style={styles.areaName}>{area.name}</ThemedText>
-              <Text style={styles.areaStatus}>
-                {area.unlocked ? '🔓 Freigeschaltet' : '🔒 Gesperrt'}
-              </Text>
-              <Text style={styles.areaProgress}>
+              <ThemedText style={[styles.areaName, { color: colors.text }]}>{area.name}</ThemedText>
+              <View style={[styles.areaStatus, { flexDirection: 'row', alignItems: 'center' }]}>
+                <LockIcon isUnlocked={area.unlocked} color={colors.text} />
+                <Text style={{ color: colors.text, fontSize: 12 }}>
+                  {area.unlocked ? 'Freigeschaltet' : 'Gesperrt'}
+                </Text>
+              </View>
+              <Text style={[styles.areaProgress, { color: colors.text }]}>
                 {area.progress}/{area.totalQuests} Quests
               </Text>
             </TouchableOpacity>
@@ -478,6 +537,11 @@ export default function MapScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  mapContainer: {
+    position: 'relative',
+    width: width,
+    height: height * 0.7,
   },
   map: {
     width: width,
@@ -518,8 +582,8 @@ const styles = StyleSheet.create({
   },
   legend: {
     position: 'absolute',
-    top: 20,
-    right: 10,
+    bottom: 5,
+    left: 5,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
     padding: 10,
     borderRadius: 8,
@@ -531,6 +595,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    zIndex: 100,
   },
   legendTitle: {
     fontSize: 14,
@@ -554,7 +619,7 @@ const styles = StyleSheet.create({
     bottom: 20,
     left: 10,
     right: 10,
-    maxHeight: 100,
+    maxHeight: 80,
   },
   areaCard: {
     backgroundColor: 'rgba(255, 255, 255, 0.9)',

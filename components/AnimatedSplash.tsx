@@ -44,7 +44,7 @@ export default function AnimatedSplash({ onFinish }: { onFinish?: () => void }) 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fcf4ec', // Spezifizierte Hintergrundfarbe
+    backgroundColor: '#ffdfaa', // Grundfarbe der Farbpalette für nahtlose Integration
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',

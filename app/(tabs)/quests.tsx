@@ -11,7 +11,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const QuestItem = ({ quest, onPress }: { quest: any; onPress: () => void }) => {
   const colorScheme = useColorScheme();
-  const colors = Colors[colorScheme ?? 'light'];
+  const colors = Colors[colorScheme as keyof typeof Colors];
 
   // Calculate progress percentage based on actual progress data
   const progressPercentage = quest.totalSteps > 0 ? (quest.progress / quest.totalSteps) * 100 : 0;
@@ -21,38 +21,42 @@ const QuestItem = ({ quest, onPress }: { quest: any; onPress: () => void }) => {
   const displayTotal = quest.totalSteps;
 
   return (
-    <TouchableOpacity onPress={onPress} style={styles.questItem}>
+    <TouchableOpacity onPress={onPress} style={[styles.questItem, { 
+      backgroundColor: colors.cardBackground,
+      shadowColor: colors.shadowColor,
+      borderColor: colors.borderColor 
+    }]}>
       <View style={styles.questHeader}>
-        <Text style={styles.questTitle}>{quest.title}</Text>
+        <Text style={[styles.questTitle, { color: colors.text }]}>{quest.title}</Text>
       </View>
       
-      <ThemedText style={styles.questDescription}>{quest.description}</ThemedText>
+      <ThemedText style={[styles.questDescription, { color: colors.text }]}>{quest.description}</ThemedText>
       
       <View style={styles.questFooter}>
         <View style={styles.progressContainer}>
-          <View style={styles.progressBar}>
+          <View style={[styles.progressBar, { backgroundColor: colors.borderColor }]}>
             <View 
               style={[
                 styles.progressFill, 
                 { 
                   width: `${progressPercentage}%`,
-                  backgroundColor: quest.completed ? '#4CAF50' : colors.tint
+                  backgroundColor: quest.completed ? colors.successColor : colors.tint
                 }
               ]} 
             />
           </View>
-          <Text style={styles.progressText}>
+          <Text style={[styles.progressText, { color: colors.text }]}>
             {displayProgress}/{displayTotal}
           </Text>
         </View>
         
         <View style={styles.rewardContainer}>
-          <Text style={styles.rewardText}>🏆 {quest.reward}</Text>
+          <Text style={[styles.rewardText, { color: colors.warningColor }]}>🏆 {quest.reward}</Text>
         </View>
       </View>
       
       {quest.completed && (
-        <View style={styles.completedBadge}>
+        <View style={[styles.completedBadge, { backgroundColor: colors.successColor }]}>
           <Text style={styles.completedText}>✓ Abgeschlossen</Text>
         </View>
       )}
@@ -69,7 +73,7 @@ export default function QuestsScreen() {
   const [showSuccessAnimation, setShowSuccessAnimation] = useState(false);
   const [successQuestData, setSuccessQuestData] = useState<{ title: string; reward: string } | null>(null);
   const colorScheme = useColorScheme();
-  const colors = Colors[colorScheme ?? 'light'];
+  const colors = Colors[colorScheme as keyof typeof Colors];
 
   // Flatten all quests from unlocked areas only
   const unlockedQuests = areas
@@ -156,9 +160,12 @@ export default function QuestsScreen() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemedView style={styles.container}>
-        <View style={styles.header}>
+        <View style={[styles.header, { 
+          backgroundColor: colors.navigationBackground,
+          borderBottomColor: colors.borderColor 
+        }]}>
           <View style={styles.statsContainer}>
-            <Text style={styles.statsText}>
+            <Text style={[styles.statsText, { color: colors.text }]}>
               {completedQuests}/{totalQuests} abgeschlossen
             </Text>
           </View>
