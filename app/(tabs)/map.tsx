@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Alert, Dimensions, Text, ScrollView, Modal, TextInput, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Alert, Dimensions, Text, ScrollView, Modal, TextInput, TouchableOpacity, Image } from 'react-native';
 import MapView, { Marker, Polygon } from 'react-native-maps';
 import { Text as ThemedText, View as ThemedView } from '@/components/Themed';
 import { useColorScheme } from '@/components/useColorScheme';
@@ -12,25 +12,6 @@ import { QuestSuccessAnimation } from '@/components/QuestSuccessAnimation';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const { width, height } = Dimensions.get('window');
-
-// Quest marker component using SVG icons
-const QuestMarker = ({ type, completed, title }: { type: 'main' | 'sub'; completed: boolean; title: string }) => {
-  const getMarkerType = () => {
-    if (completed) {
-      return 'completed';
-    }
-    return type;
-  };
-
-  return (
-    <View style={styles.markerContainer}>
-      <View style={styles.markerIconContainer}>
-        <QuestMarkerIcon type={getMarkerType()} />
-      </View>
-      <ThemedText style={styles.markerTitle}>{title}</ThemedText>
-    </View>
-  );
-};
 
 export default function MapScreen() {
   const { areas, completeMainQuest, completeSubQuest, selectedQuest, clearSelectedQuest } = useQuestContext();
@@ -418,19 +399,19 @@ export default function MapScreen() {
           ))}
 
           {/* Quest Markers */}
-          {questMarkers.map(marker => (
-            <Marker
-              key={marker.id}
-              coordinate={marker.coordinates}
-              onPress={() => handleQuestPress(marker)}
-            >
-              <QuestMarker
-                type={marker.type}
-                completed={marker.completed}
-                title={marker.title}
+          {questMarkers.map(marker => {
+            console.log('Rendering marker on map:', marker.id, marker.coordinates);
+            console.log('Marker type:', marker.type, 'completed:', marker.completed);
+            return (
+              <Marker
+                key={marker.id}
+                coordinate={marker.coordinates}
+                tracksViewChanges={false}
+                onPress={() => handleQuestPress(marker)}
+                pinColor={marker.type === 'main' ? 'orange' : 'blue'}
               />
-            </Marker>
-          ))}
+            );
+          })}
         </MapView>
 
         {/* Legend */}
@@ -507,6 +488,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 8,
     paddingVertical: 4,
+    zIndex: 1000,
+    elevation: 10,
   },
   markerIconContainer: {
     alignItems: 'center',
@@ -518,7 +501,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
+    elevation: 10,
+    zIndex: 1000,
   },
   markerTitle: {
     fontSize: 10,
@@ -527,6 +511,10 @@ const styles = StyleSheet.create({
     marginTop: 4,
     maxWidth: 80,
     color: '#000000',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    paddingHorizontal: 4,
+    paddingVertical: 2,
+    borderRadius: 4,
   },
   legend: {
     position: 'absolute',
